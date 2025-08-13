@@ -14,10 +14,16 @@ const Navbar = () => {
           <span className="font-semibold tracking-tight">Murban Engineering</span>
         </Link>
         <div className="flex items-center gap-3">
-          <Link to="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+          <Link 
+            to="/" 
+            className="px-3 py-2 text-sm rounded-lg border border-border bg-background/80 text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-all duration-200"
+          >
             Home
           </Link>
-          <Link to="/admin" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+          <Link 
+            to="/admin" 
+            className="px-3 py-2 text-sm rounded-lg border border-border bg-background/80 text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-all duration-200"
+          >
             Admin
           </Link>
           {/* Theme toggle removed - light mode only */}
