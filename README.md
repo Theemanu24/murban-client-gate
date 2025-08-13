@@ -1,73 +1,63 @@
-# Welcome to your Lovable project
+# Murban Engineering Client Portal
 
-## Project info
+Production-ready client portal UI for Murban Engineering Limited. This repository implements a polished, brand-aligned frontend with search, client gates, and client hub embeds. Backend security (passkey hashing, sessions, rate limiting, admin CRUD) is wired to be enabled via Supabase integration in Lovable.
 
-**URL**: https://lovable.dev/projects/a744e67a-cde3-4b63-a2e2-673e4e3c6b3d
+Note: This project uses React + Vite + Tailwind + shadcn/ui. To enable authentication, database, and APIs, connect Supabase in Lovable (recommended). Once connected, we’ll wire secure passkey auth, sessions, headers, rate limiting, and admin CRUD.
 
-## How can I edit this code?
+## Tech Stack
+- React + Vite + TypeScript
+- Tailwind CSS + shadcn/ui + lucide-react
+- next-themes (light/dark)
+- Zod (validation, ready for server endpoints)
+- Fuse.js (client-side fuzzy search)
+- Framer Motion (micro-animations)
+- Supabase (recommended backend integration in Lovable)
 
-There are several ways of editing your application.
+## Quickstart
+1) Node 18+ and pnpm recommended
+2) Install: pnpm i
+3) Start: pnpm dev
 
-**Use Lovable**
+## Features
+- Home with brand hero and Fuse-powered search
+- Client page with passkey gate UI (backend-ready), client hub with sandboxed iframe + origin allowlist
+- Admin page scaffold (to be secured with Supabase auth and env-based admin pass)
+- Light/Dark theme, motion, accessible components
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a744e67a-cde3-4b63-a2e2-673e4e3c6b3d) and start prompting.
+## Environments (.env.example)
+Copy .env.example to .env and adjust:
+- SESSION_SECRET=generate_32_bytes_random
+- APP_ORIGIN_ALLOWLIST=https://swahili-beach-tank-calculator.vercel.app,https://tank-volume-genesis.vercel.app
+- ENABLE_CAPTCHA=false
+- MURBAN_PORTAL_ADMIN_PASS=change-me
+- DATABASE_URL=postgres://... (prod)
+- REDIS_URL=redis://... (prod)
+- VITE_SUPABASE_URL=auto (Lovable)
+- VITE_SUPABASE_PUBLISHABLE_KEY=auto (Lovable)
+- VITE_SUPABASE_PROJECT_ID=auto (Lovable)
 
-Changes made via Lovable will be committed automatically to this repo.
+## How to add/change clients & passkeys
+- For now, clients are defined in src/data/clients.ts for the demo UI.
+- After connecting Supabase, we will implement Admin CRUD and secure passkey hashing (argon2id) server-side. Passkeys will never be stored/plain on the client.
 
-**Use your preferred IDE**
+## Rotate SESSION_SECRET
+- Update SESSION_SECRET in env and redeploy. Active sessions will be invalidated; inform users accordingly.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Change the allowlist
+- Update APP_ORIGIN_ALLOWLIST. Only these origins can load in the Client Hub iframe. This enforces a strict frame-src policy in production headers.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Disable/enable captcha & rate limits
+- Toggle ENABLE_CAPTCHA to enable Turnstile/CAPTCHA on repeated failures.
+- Rate limits will run on Redis-backed sliding windows on server endpoints once Supabase edge functions are enabled.
 
-Follow these steps:
+## Move from SQLite (local) to Postgres (prod)
+- Local dev can use mock data. Production should use managed Postgres (Supabase). Provide DATABASE_URL in env. Migrations will be handled once backend is connected.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## Run tests and CI locally
+- Unit/Integration/E2E test scaffolds will be added alongside backend endpoints. Recommended: Vitest + Playwright.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Deployment
+- Vercel (recommended). This SPA can be deployed, but full security requires backend (Supabase in Lovable). Configure envs and headers (CSP, HSTS, etc.) once backend is active.
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/a744e67a-cde3-4b63-a2e2-673e4e3c6b3d) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## License
+MIT

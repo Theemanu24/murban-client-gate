@@ -1,13 +1,41 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useNavigate } from "react-router-dom";
+import { SearchBar } from "@/components/SearchBar";
+import { ClientCard } from "@/components/ClientCard";
+import { initialClients } from "@/data/clients";
 
 const Index = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <main>
+      <section className="container mx-auto py-20 text-center">
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Secure Client Portal</h1>
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+          Search your company, enter your passkey, and launch your Murban app securely.
+        </p>
+        <SearchBar onSelect={(c) => navigate(`/c/${c.slug}`)} />
+      </section>
+
+      <section className="container mx-auto pb-16">
+        <h2 className="text-xl font-semibold tracking-tight mb-4">Featured clients</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {initialClients.map((c) => (
+            <ClientCard key={c.id} client={c} onClick={() => navigate(`/c/${c.slug}`)} />
+          ))}
+        </div>
+      </section>
+
+      <section className="border-t py-12">
+        <div className="container mx-auto grid md:grid-cols-4 gap-6 text-left">
+          {["Search", "Select", "Enter Passkey", "Launch"].map((step, i) => (
+            <div key={step} className="rounded-2xl border p-5">
+              <div className="text-sm text-muted-foreground">Step {i + 1}</div>
+              <div className="font-semibold mt-1">{step}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </main>
   );
 };
 
