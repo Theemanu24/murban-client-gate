@@ -17,16 +17,16 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 4%;
 
-    --primary: 0 100% 45%;
+    --primary: 0 100% 35%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 0 85% 85%;
+    --secondary: 0 80% 75%;
     --secondary-foreground: 0 90% 15%;
 
-    --muted: 0 60% 90%;
-    --muted-foreground: 0 70% 25%;
+    --muted: 0 50% 80%;
+    --muted-foreground: 0 60% 25%;
 
-    --accent: 0 100% 45%;
+    --accent: 0 100% 35%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84% 60%;
@@ -34,22 +34,22 @@ All colors MUST be HSL.
 
     --border: 220 14% 91%;
     --input: 220 14% 91%;
-    --ring: 0 100% 35%;
+    --ring: 0 100% 30%;
 
     --radius: 1rem;
 
-    --sidebar-background: 0 30% 96%;
+    --sidebar-background: 0 20% 94%;
     --sidebar-foreground: 240 5% 26%;
-    --sidebar-primary: 0 100% 35%;
+    --sidebar-primary: 0 100% 30%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 0 70% 90%;
+    --sidebar-accent: 0 60% 80%;
     --sidebar-accent-foreground: 0 80% 20%;
-    --sidebar-border: 0 40% 85%;
-    --sidebar-ring: 0 100% 35%;
+    --sidebar-border: 0 30% 75%;
+    --sidebar-ring: 0 100% 30%;
 
     /* Extras */
-    --gradient-primary: linear-gradient(135deg, hsl(0 100% 50%), hsl(0 100% 40%));
-    --shadow-elegant: 0 10px 30px -10px hsl(0 100% 45% / 0.6);
+    --gradient-primary: linear-gradient(135deg, hsl(0 100% 40%), hsl(0 100% 30%));
+    --shadow-elegant: 0 10px 30px -10px hsl(0 100% 35% / 0.6);
   }
 
   body {
