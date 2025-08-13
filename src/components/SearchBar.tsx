@@ -21,7 +21,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
 
   const results = useMemo(() => {
     const q = query.trim();
-    if (q.length < 2) return [];
+    if (q.length < 5) return [];
     return fuse.search(q).map(r => r.item).filter(c => c.active).slice(0, 8);
   }, [query, fuse]);
 
@@ -74,7 +74,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
               </CommandItem>
             ))}
             {!results.length && (
-              <div className="p-4 text-muted-foreground">{query.trim().length < 2 ? "Start typing to search your company." : "No matches. Contact support."}</div>
+              <div className="p-4 text-muted-foreground">{query.trim().length < 5 ? "Type at least 5 letters to search your company." : "No matches. Contact support."}</div>
             )}
           </CommandGroup>
         </CommandList>

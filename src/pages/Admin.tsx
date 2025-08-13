@@ -1,19 +1,29 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { AdminAuth } from "@/components/AdminAuth";
+import { AdminDashboard } from "@/components/AdminDashboard";
+import type { User } from "@supabase/supabase-js";
 
 const Admin = () => {
+  const [user, setUser] = useState<User | null>(null);
+
+  if (!user) {
+    return <AdminAuth onAuthenticated={setUser} />;
+  }
+
   return (
-    <main className="container mx-auto py-16 max-w-2xl">
-      <h1 className="text-3xl font-bold tracking-tight mb-3">Admin (MVP)</h1>
-      <p className="text-muted-foreground">
-        Connect Supabase to enable secure admin login and CRUD for clients. This page will host passkey management and auditing.
-      </p>
-      <div className="mt-6">
-        <Button asChild variant="secondary">
-          <Link to="/">Back to Home</Link>
-        </Button>
+    <div className="min-h-screen bg-background">
+      <div className="border-b bg-card/50">
+        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+          <h1 className="text-lg font-semibold">Boba Cafe Admin</h1>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/">← Back to Home</Link>
+          </Button>
+        </div>
       </div>
-    </main>
+      <AdminDashboard user={user} />
+    </div>
   );
 };
 

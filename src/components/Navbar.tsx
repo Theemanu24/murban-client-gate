@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { ThemeToggle } from "./ThemeToggle";
 
 const Navbar = () => {
   return (
@@ -21,7 +20,7 @@ const Navbar = () => {
           <Link to="/admin" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
             Admin
           </Link>
-          <ThemeToggle />
+          {/* Theme toggle removed - light mode only */}
         </div>
       </nav>
     </header>

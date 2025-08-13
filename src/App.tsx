@@ -8,7 +8,7 @@ import NotFound from "./pages/NotFound";
 import Client from "./pages/Client";
 import Admin from "./pages/Admin";
 import Navbar from "@/components/Navbar";
-import { ThemeProvider } from "@/components/ThemeProvider";
+
 
 const queryClient = new QueryClient();
 
@@ -18,7 +18,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <ThemeProvider>
+        <div className="min-h-screen bg-background">
           <Navbar />
           <Routes>
             <Route path="/" element={<Index />} />
@@ -27,7 +27,7 @@ const App = () => (
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </ThemeProvider>
+        </div>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
