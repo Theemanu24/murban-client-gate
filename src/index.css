@@ -52,7 +52,6 @@ All colors MUST be HSL.
     --shadow-elegant: 0 10px 30px -10px hsl(12 100% 65% / 0.3);
   }
 
-...
   body {
     @apply bg-background text-foreground;
     font-family: "Inter", "Geist Variable", "SF Pro Text", system-ui, sans-serif;
