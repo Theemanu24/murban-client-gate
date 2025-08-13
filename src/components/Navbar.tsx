@@ -26,6 +26,14 @@ const Navbar = () => {
           >
             Admin
           </Link>
+          <a 
+            href="https://murban-eng.com/contact-us/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="px-3 py-2 text-sm rounded-lg border border-border bg-background/80 text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-all duration-200"
+          >
+            Contact Us
+          </a>
           {/* Theme toggle removed - light mode only */}
         </div>
       </nav>
