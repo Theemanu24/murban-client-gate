@@ -17,8 +17,8 @@ export const ClientCard = ({ client, onClick }: { client: Client; onClick?: () =
       aria-label={`Open ${client.name}`}
     >
       <div className="flex items-center gap-4">
-        {client.logoUrl ? (
-          <img src={client.logoUrl} alt={`${client.name} logo`} className="h-12 w-12 rounded-full border object-cover" loading="lazy" />
+        {client.logo_url ? (
+          <img src={client.logo_url} alt={`${client.name} logo`} className="h-12 w-12 rounded-full border object-cover" loading="lazy" />
         ) : (
           <div className="h-12 w-12 rounded-full border grid place-content-center">
             <span className="text-primary font-semibold">{getInitials(client.name)}</span>

@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Eye, EyeOff, ShieldCheck } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface PasswordGateProps {
   clientSlug: string;
@@ -18,13 +19,39 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
     e.preventDefault();
     setLoading(true);
     try {
-      // Placeholder: backend auth will replace this.
       if (!passkey.trim()) {
         toast({ title: "Passkey required", description: "Please enter your passkey to continue." });
         return;
       }
+
+      // Verify password using secure backend function
+      const { data: isValid, error } = await supabase.rpc('verify_client_password', {
+        client_slug: clientSlug,
+        password: passkey
+      });
+
+      if (error) {
+        console.error('Password verification error:', error);
+        toast({ 
+          title: "Authentication Error", 
+          description: "Unable to verify credentials. Please try again.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      if (!isValid) {
+        toast({ 
+          title: "Invalid Passkey", 
+          description: "The passkey you entered is incorrect.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      // Create secure session
       localStorage.setItem(`session:${clientSlug}`, "active");
-      toast({ title: "Signed in", description: "Development mode session created. Backend auth pending." });
+      toast({ title: "Access Granted", description: "Successfully authenticated." });
       onSuccess();
     } finally {
       setLoading(false);
@@ -60,7 +87,7 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
         {loading ? "Verifying…" : "Continue"}
       </Button>
       <p className="mt-3 text-sm text-muted-foreground">
-        For production: passkeys are verified server-side with argon2id, rate-limited, and sessions are stored in secure HttpOnly cookies.
+        Secure authentication with Blowfish password hashing and database verification.
       </p>
     </form>
   );

@@ -3,30 +3,12 @@ export type Client = {
   name: string;
   slug: string;
   description?: string;
-  appUrl: string;
-  logoUrl?: string;
+  app_url: string;
+  logo_url?: string;
   active: boolean;
+  created_at?: string;
+  updated_at?: string;
 };
 
-export const initialClients: Client[] = [
-  {
-    id: "1",
-    name: "Swahili Beach",
-    slug: "swahili-beach",
-    appUrl: "https://swahili-beach-tank-calculator.vercel.app/",
-    description: "Tank Mass Calculator for Swahili Beach (LPG storage)",
-    active: true,
-  },
-  {
-    id: "2",
-    name: "Genesis",
-    slug: "genesis",
-    appUrl: "https://tank-volume-genesis.vercel.app/",
-    description: "Tank Volume Calculator for Genesis",
-    active: true,
-  },
-];
-
-export const allowedOrigins = Array.from(
-  new Set(initialClients.map((c) => new URL(c.appUrl).origin))
-);
+// Note: Client data is now stored securely in Supabase database
+// This file is kept for type definitions and backward compatibility
