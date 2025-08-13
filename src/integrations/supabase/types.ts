@@ -32,6 +32,45 @@ export type Database = {
         }
         Relationships: []
       }
+      clients: {
+        Row: {
+          active: boolean
+          app_url: string
+          created_at: string
+          description: string | null
+          id: string
+          logo_url: string | null
+          name: string
+          password_hash: string
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          app_url: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          logo_url?: string | null
+          name: string
+          password_hash: string
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          app_url?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          logo_url?: string | null
+          name?: string
+          password_hash?: string
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       orders: {
         Row: {
           cashier_id: string
@@ -155,7 +194,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      hash_password: {
+        Args: { password: string }
+        Returns: string
+      }
+      verify_client_password: {
+        Args: { client_slug: string; password: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
