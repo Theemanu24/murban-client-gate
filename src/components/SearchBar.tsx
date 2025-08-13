@@ -20,8 +20,9 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
   }), []);
 
   const results = useMemo(() => {
-    if (!query.trim()) return initialClients.filter(c => c.active).slice(0, 5);
-    return fuse.search(query).map(r => r.item).filter(c => c.active).slice(0, 8);
+    const q = query.trim();
+    if (q.length < 2) return [];
+    return fuse.search(q).map(r => r.item).filter(c => c.active).slice(0, 8);
   }, [query, fuse]);
 
   useEffect(() => { setActiveIndex(0); }, [query]);
@@ -48,8 +49,9 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Search company name..."
+          placeholder="Type your company name..."
           aria-label="Search company"
+          autoComplete="off"
           className="pl-10 h-12 text-base"
         />
         {query && (
@@ -69,11 +71,10 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
                 className={idx === activeIndex ? "bg-accent/60" : ""}
               >
                 <span className="font-medium">{client.name}</span>
-                <span className="ml-2 text-muted-foreground text-sm">/{client.slug}</span>
               </CommandItem>
             ))}
             {!results.length && (
-              <div className="p-4 text-muted-foreground">No results. Contact support.</div>
+              <div className="p-4 text-muted-foreground">{query.trim().length < 2 ? "Start typing to search your company." : "No matches. Contact support."}</div>
             )}
           </CommandGroup>
         </CommandList>

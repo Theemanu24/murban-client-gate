@@ -1,0 +1,40 @@
+/* Smooth scrolling and font clarity */
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+
+/* Glossy card surface using design tokens */
+.glossy-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--card)) 70%, hsl(var(--primary) / 0.06) 100%);
+  box-shadow: var(--shadow-elegant);
+  transition: var(--transition-smooth, all 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+}
+.glossy-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, hsla(0, 0%, 100%, 0.22) 0%, hsla(0, 0%, 100%, 0.06) 35%, transparent 60%);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+/* Dark mode tuning for better legibility */
+.dark .glossy-card {
+  background: linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--card)) 60%, hsl(var(--primary) / 0.12) 100%);
+  box-shadow: 0 10px 30px -12px hsl(var(--primary) / 0.25);
+}
+.dark .glossy-card::before {
+  background: linear-gradient(135deg, hsla(0, 0%, 100%, 0.08) 0%, transparent 50%);
+}
+
+/* Hover scale utility */
+.hover-scale {
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.hover-scale:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hover-scale, .hover-scale:hover { transition: none; transform: none; }
+}

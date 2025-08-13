@@ -13,7 +13,7 @@ export const ClientCard = ({ client, onClick }: { client: Client; onClick?: () =
   return (
     <button
       onClick={onClick}
-      className="group w-full text-left rounded-2xl border p-5 transition-transform hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="group w-full text-left rounded-2xl border p-5 glossy-card transition-all hover:-translate-y-0.5 hover:shadow-lg hover-scale focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       aria-label={`Open ${client.name}`}
     >
       <div className="flex items-center gap-4">
