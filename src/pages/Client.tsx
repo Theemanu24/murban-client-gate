@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { Client } from "@/data/clients";
+import { getClientBySlug } from "@/lib/clients";
+import { Client } from "@/types/firebase";
 import { PasswordGate } from "@/components/PasswordGate";
 import { ClientHub } from "@/components/ClientHub";
 
@@ -19,19 +19,14 @@ const ClientPage = () => {
         return;
       }
       
-      const { data, error } = await supabase
-        .from('clients')
-        .select('*')
-        .eq('slug', slug)
-        .eq('active', true)
-        .single();
-
-      if (error) {
-        console.error('Error fetching client:', error);
+      const client = await getClientBySlug(slug);
+      
+      if (!client) {
+        console.error('Client not found');
         setClient(null);
       } else {
-        setClient(data);
-        document.title = `${data.name} • Murban Portal`;
+        setClient(client);
+        document.title = `${client.name} • Murban Portal`;
       }
       setLoading(false);
     };

@@ -1,26 +1,30 @@
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { signOut } from "@/lib/auth";
+import { getProducts, deleteProduct } from "@/lib/products";
+import { getCategories, deleteCategory } from "@/lib/categories";
+import { getOrders } from "@/lib/orders";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { ProductForm } from "./ProductForm";
 import { CategoryForm } from "./CategoryForm";
-import type { User } from "@supabase/supabase-js";
+import { User } from "firebase/auth";
+import { Product, Category, Order } from "@/types/firebase";
 
 interface AdminDashboardProps {
   user: User;
 }
 
 export const AdminDashboard = ({ user }: AdminDashboardProps) => {
-  const [products, setProducts] = useState<any[]>([]);
-  const [categories, setCategories] = useState<any[]>([]);
-  const [orders, setOrders] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [activeTab, setActiveTab] = useState<"products" | "categories" | "orders">("products");
   const [showProductForm, setShowProductForm] = useState(false);
   const [showCategoryForm, setShowCategoryForm] = useState(false);
-  const [editingProduct, setEditingProduct] = useState<any>(null);
-  const [editingCategory, setEditingCategory] = useState<any>(null);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -29,15 +33,15 @@ export const AdminDashboard = ({ user }: AdminDashboardProps) => {
 
   const fetchData = async () => {
     try {
-      const [productsRes, categoriesRes, ordersRes] = await Promise.all([
-        supabase.from("products").select("*, categories(name)"),
-        supabase.from("categories").select("*"),
-        supabase.from("orders").select("*").order("created_at", { ascending: false })
+      const [productsData, categoriesData, ordersData] = await Promise.all([
+        getProducts(),
+        getCategories(),
+        getOrders()
       ]);
 
-      if (productsRes.data) setProducts(productsRes.data);
-      if (categoriesRes.data) setCategories(categoriesRes.data);
-      if (ordersRes.data) setOrders(ordersRes.data);
+      setProducts(productsData);
+      setCategories(categoriesData);
+      setOrders(ordersData);
     } catch (error) {
       toast({
         title: "Error",
@@ -48,35 +52,40 @@ export const AdminDashboard = ({ user }: AdminDashboardProps) => {
   };
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    await signOut();
   };
 
-  const deleteProduct = async (id: string) => {
-    const { error } = await supabase.from("products").delete().eq("id", id);
-    if (error) {
+  const handleDeleteProduct = async (id: string) => {
+    const success = await deleteProduct(id);
+    if (success) {
+      toast({ title: "Success", description: "Product deleted successfully" });
+      fetchData();
+    } else {
       toast({
         title: "Error",
         description: "Failed to delete product",
         variant: "destructive",
       });
-    } else {
-      toast({ title: "Success", description: "Product deleted successfully" });
-      fetchData();
     }
   };
 
-  const deleteCategory = async (id: string) => {
-    const { error } = await supabase.from("categories").delete().eq("id", id);
-    if (error) {
+  const handleDeleteCategory = async (id: string) => {
+    const success = await deleteCategory(id);
+    if (success) {
+      toast({ title: "Success", description: "Category deleted successfully" });
+      fetchData();
+    } else {
       toast({
         title: "Error",
         description: "Failed to delete category",
         variant: "destructive",
       });
-    } else {
-      toast({ title: "Success", description: "Category deleted successfully" });
-      fetchData();
     }
+  };
+
+  const getCategoryName = (categoryId: string) => {
+    const category = categories.find(cat => cat.id === categoryId);
+    return category?.name || 'Unknown';
   };
 
   return (
@@ -122,7 +131,7 @@ export const AdminDashboard = ({ user }: AdminDashboardProps) => {
                     <div>
                       <h3 className="font-semibold">{product.name}</h3>
                       <p className="text-sm text-muted-foreground">
-                        Category: {product.categories?.name}
+                        Category: {getCategoryName(product.category_id)}
                       </p>
                       <Badge variant={product.status === "active" ? "default" : "secondary"}>
                         {product.status}
@@ -142,7 +151,7 @@ export const AdminDashboard = ({ user }: AdminDashboardProps) => {
                       <Button 
                         size="sm" 
                         variant="destructive"
-                        onClick={() => deleteProduct(product.id)}
+                        onClick={() => handleDeleteProduct(product.id)}
                       >
                         Delete
                       </Button>
@@ -182,7 +191,7 @@ export const AdminDashboard = ({ user }: AdminDashboardProps) => {
                       <Button 
                         size="sm" 
                         variant="destructive"
-                        onClick={() => deleteCategory(category.id)}
+                        onClick={() => handleDeleteCategory(category.id)}
                       >
                         Delete
                       </Button>
@@ -209,7 +218,7 @@ export const AdminDashboard = ({ user }: AdminDashboardProps) => {
                         Total: ${order.total_amount} • {order.payment_method}
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        {new Date(order.created_at).toLocaleString()}
+                        {order.created_at.toLocaleString()}
                       </p>
                     </div>
                     <Badge variant={order.status === "completed" ? "default" : "secondary"}>

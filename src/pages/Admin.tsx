@@ -3,13 +3,17 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { AdminAuth } from "@/components/AdminAuth";
 import { AdminDashboard } from "@/components/AdminDashboard";
-import type { User } from "@supabase/supabase-js";
+import { User } from "firebase/auth";
 
 const Admin = () => {
   const [user, setUser] = useState<User | null>(null);
 
+  const handleAuthenticated = (authenticatedUser: User) => {
+    setUser(authenticatedUser);
+  };
+
   if (!user) {
-    return <AdminAuth onAuthenticated={setUser} />;
+    return <AdminAuth onAuthenticated={handleAuthenticated} />;
   }
 
   return (

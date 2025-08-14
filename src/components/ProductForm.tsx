@@ -1,15 +1,16 @@
-import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useState } from "react";
+import { createProduct, updateProduct } from "@/lib/products";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
+import { Product, Category } from "@/types/firebase";
 
 interface ProductFormProps {
-  categories: any[];
-  product?: any;
+  categories: Category[];
+  product?: Product;
   onClose: () => void;
   onSave: () => void;
 }
@@ -19,7 +20,7 @@ export const ProductForm = ({ categories, product, onClose, onSave }: ProductFor
   const [categoryId, setCategoryId] = useState(product?.category_id || "");
   const [sizes, setSizes] = useState(JSON.stringify(product?.sizes || {}, null, 2));
   const [toppings, setToppings] = useState(product?.available_toppings?.join(", ") || "");
-  const [status, setStatus] = useState(product?.status || "active");
+  const [status, setStatus] = useState<'active' | 'inactive'>(product?.status || "active");
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
@@ -36,17 +37,20 @@ export const ProductForm = ({ categories, product, onClose, onSave }: ProductFor
         category_id: categoryId,
         sizes: sizesData,
         available_toppings: toppingsArray,
-        status,
+        status: status as 'active' | 'inactive',
       };
 
-      let error;
+      let success;
       if (product) {
-        ({ error } = await supabase.from("products").update(productData).eq("id", product.id));
+        success = await updateProduct(product.id, productData);
       } else {
-        ({ error } = await supabase.from("products").insert([productData]));
+        const id = await createProduct(productData);
+        success = !!id;
       }
 
-      if (error) throw error;
+      if (!success) {
+        throw new Error("Failed to save product");
+      }
 
       toast({
         title: "Success",
@@ -122,7 +126,7 @@ export const ProductForm = ({ categories, product, onClose, onSave }: ProductFor
 
           <div>
             <Label htmlFor="status">Status</Label>
-            <Select value={status} onValueChange={setStatus}>
+            <Select value={status} onValueChange={(value) => setStatus(value as 'active' | 'inactive')}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>

@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { signIn } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import type { User } from "@supabase/supabase-js";
+import { User } from "firebase/auth";
+import { useAuth } from "@/hooks/useAuth";
 
 interface AdminAuthProps {
   onAuthenticated: (user: User) => void;
@@ -15,43 +16,40 @@ export const AdminAuth = ({ onAuthenticated }: AdminAuthProps) => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const { user, loading: authLoading } = useAuth();
 
   useEffect(() => {
-    // Check if user is already logged in
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session?.user) {
-        onAuthenticated(session.user);
-      }
-    });
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session?.user) {
-        onAuthenticated(session.user);
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [onAuthenticated]);
+    if (user && !authLoading) {
+      onAuthenticated(user);
+    }
+  }, [user, authLoading, onAuthenticated]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const { user, error } = await signIn(email, password);
 
     if (error) {
       toast({
         title: "Login Failed",
-        description: error.message,
+        description: error,
         variant: "destructive",
       });
+    } else if (user) {
+      onAuthenticated(user);
     }
 
     setLoading(false);
   };
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin w-8 h-8 border-2 border-primary border-t-transparent rounded-full" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-primary/10 to-transparent">

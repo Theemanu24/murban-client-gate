@@ -1,7 +1,7 @@
 import { useMemo, useState, useEffect } from "react";
 import Fuse from "fuse.js";
-import { Client } from "@/data/clients";
-import { supabase } from "@/integrations/supabase/client";
+import { Client } from "@/types/firebase";
+import { getClients } from "@/lib/clients";
 import { Input } from "@/components/ui/input";
 import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";
 import { Search, X } from "lucide-react";
@@ -16,19 +16,10 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
   const [clients, setClients] = useState<Client[]>([]);
 
   useEffect(() => {
-    // Fetch clients from Supabase
+    // Fetch clients from Firebase
     const fetchClients = async () => {
-      const { data, error } = await supabase
-        .from('clients')
-        .select('*')
-        .eq('active', true);
-
-      if (error) {
-        console.error('Error fetching clients:', error);
-        return;
-      }
-
-      setClients(data);
+      const clients = await getClients();
+      setClients(clients);
     };
 
     fetchClients();

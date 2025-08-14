@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Eye, EyeOff, ShieldCheck } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+import { verifyClientPassword } from "@/lib/clients";
 
 interface PasswordGateProps {
   clientSlug: string;
@@ -24,21 +24,8 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
         return;
       }
 
-      // Verify password using secure backend function
-      const { data: isValid, error } = await supabase.rpc('verify_client_password', {
-        client_slug: clientSlug,
-        password: passkey
-      });
-
-      if (error) {
-        console.error('Password verification error:', error);
-        toast({ 
-          title: "Authentication Error", 
-          description: "Unable to verify credentials. Please try again.",
-          variant: "destructive"
-        });
-        return;
-      }
+      // Verify password using Firebase
+      const isValid = await verifyClientPassword(clientSlug, passkey);
 
       if (!isValid) {
         toast({ 

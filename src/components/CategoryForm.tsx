@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { createCategory, updateCategory } from "@/lib/categories";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
+import { Category } from "@/types/firebase";
 
 interface CategoryFormProps {
-  category?: any;
+  category?: Category;
   onClose: () => void;
   onSave: () => void;
 }
@@ -22,16 +23,17 @@ export const CategoryForm = ({ category, onClose, onSave }: CategoryFormProps) =
     setLoading(true);
 
     try {
-      const categoryData = { name };
-
-      let error;
+      let success;
       if (category) {
-        ({ error } = await supabase.from("categories").update(categoryData).eq("id", category.id));
+        success = await updateCategory(category.id, { name });
       } else {
-        ({ error } = await supabase.from("categories").insert([categoryData]));
+        const id = await createCategory({ name, created_at: new Date() });
+        success = !!id;
       }
 
-      if (error) throw error;
+      if (!success) {
+        throw new Error("Failed to save category");
+      }
 
       toast({
         title: "Success",
