@@ -29,7 +29,7 @@ const Home = () => {
             <Button 
               asChild 
               size="lg" 
-              className="bg-primary/90 hover:bg-primary text-primary-foreground px-8 py-4 text-lg font-semibold rounded-xl shadow-2xl hover:shadow-primary/25 transition-all duration-300"
+              className="bg-slate-800/90 hover:bg-slate-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-2xl hover:shadow-slate-800/25 transition-all duration-300"
             >
               <Link to="/resources">
                 Access Resources
