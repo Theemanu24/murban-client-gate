@@ -78,19 +78,23 @@ const ClientPage = () => {
   return (
     <main className="flex-1 overflow-hidden bg-gradient-to-b from-[#304259] to-[#1e2a3a]">
       <div className="container mx-auto py-10 h-full overflow-y-auto">
-        <section className="max-w-3xl mx-auto mb-8">
-          <article className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-6">
-            <h1 className="text-2xl font-bold tracking-tight text-white">{client.name}</h1>
+        <section className="max-w-3xl mx-auto mb-8 animate-fade-in">
+          <article className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-6 hover:bg-white/15 transition-all duration-300 hover:scale-[1.02]">
+            <h1 className="text-2xl font-bold tracking-tight text-white animate-fade-in" style={{ animationDelay: '0.1s' }}>{client.name}</h1>
             {client.description && (
-              <p className="text-white/80 mt-2">{client.description}</p>
+              <p className="text-white/80 mt-2 animate-fade-in" style={{ animationDelay: '0.2s' }}>{client.description}</p>
             )}
           </article>
         </section>
 
         {!authed ? (
-          <PasswordGate clientSlug={client.slug} onSuccess={() => setAuthed(true)} />
+          <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
+            <PasswordGate clientSlug={client.slug} onSuccess={() => setAuthed(true)} />
+          </div>
         ) : (
-          <ClientHub appUrl={client.app_url} />
+          <div className="animate-fade-in" style={{ animationDelay: '0.1s' }}>
+            <ClientHub appUrl={client.app_url} />
+          </div>
         )}
       </div>
     </main>

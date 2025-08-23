@@ -72,34 +72,34 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
   };
 
   return (
-    <form onSubmit={submit} className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-6 max-w-md w-full mx-auto">
-      <div className="flex items-center gap-2 mb-4">
-        <ShieldCheck className="text-red-400" />
+    <form onSubmit={submit} className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-6 max-w-md w-full mx-auto animate-fade-in animate-scale-in">
+      <div className="flex items-center gap-2 mb-4 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+        <ShieldCheck className="text-red-400 animate-pulse" />
         <h2 className="text-xl font-semibold tracking-tight text-white">Enter passkey</h2>
       </div>
-      <div className="relative">
+      <div className="relative animate-fade-in" style={{ animationDelay: '0.2s' }}>
         <Input
           type={show ? "text" : "password"}
           placeholder="Your passkey"
           value={passkey}
           onChange={(e) => setPasskey(e.target.value)}
           aria-label="Passkey"
-          className="pr-12 h-12"
+          className="pr-12 h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:bg-white/20 focus:border-white/40 transition-all duration-300 hover:bg-white/15"
           autoComplete="one-time-code"
         />
         <button
           type="button"
           aria-label={show ? "Hide passkey" : "Show passkey"}
           onClick={() => setShow((s) => !s)}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white/80"
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white/80 transition-colors duration-200 hover:scale-110"
         >
           {show ? <EyeOff /> : <Eye />}
         </button>
       </div>
-      <Button className="mt-4 w-full h-11" type="submit" disabled={loading}>
+      <Button className="mt-4 w-full h-11 hover:scale-[1.02] transition-transform duration-200 animate-fade-in" type="submit" disabled={loading} style={{ animationDelay: '0.3s' }}>
         {loading ? "Verifying…" : "Continue"}
       </Button>
-      <p className="mt-3 text-sm text-white/60">
+      <p className="mt-3 text-sm text-white/60 animate-fade-in" style={{ animationDelay: '0.4s' }}>
         Secure authentication with Blowfish password hashing and database verification.
       </p>
     </form>
