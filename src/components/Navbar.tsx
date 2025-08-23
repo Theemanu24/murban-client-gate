@@ -8,7 +8,7 @@ const Navbar = () => {
           <img
             src="/lovable-uploads/006291be-d3c5-4c9f-bd0a-2330a1bae9ab.png"
             alt="Murban Engineering logo"
-            className="h-8 w-8 rounded-full object-contain ring-1 ring-white/20 bg-white/10"
+            className="h-8 w-8 rounded-full object-contain ring-1 ring-white/20 bg-transparent backdrop-blur-sm"
             loading="lazy"
           />
           <span className="font-semibold tracking-tight text-white">Murban Engineering</span>
