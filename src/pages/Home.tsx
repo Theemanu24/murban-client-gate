@@ -29,7 +29,7 @@ const Home = () => {
             <Button 
               asChild 
               size="lg" 
-              className="bg-slate-800/90 hover:bg-slate-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-2xl hover:shadow-slate-800/25 transition-all duration-300"
+              className="bg-slate-800/90 hover:bg-slate-700 hover:scale-105 hover:shadow-2xl hover:shadow-slate-800/40 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-2xl transition-all duration-300 transform active:scale-95"
             >
               <Link to="/resources">
                 Access Resources
@@ -40,7 +40,7 @@ const Home = () => {
               asChild 
               variant="outline" 
               size="lg"
-              className="border-2 border-white/30 bg-white/10 hover:bg-white/20 text-white hover:text-white px-8 py-4 text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-300"
+              className="border-2 border-white/30 bg-white/10 hover:bg-white/25 hover:border-white/50 hover:scale-105 hover:shadow-xl hover:shadow-white/20 text-white hover:text-white px-8 py-4 text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-300 transform active:scale-95"
             >
               <a 
                 href="https://murban-eng.com/" 

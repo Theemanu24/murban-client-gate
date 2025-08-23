@@ -1,6 +1,18 @@
 /* Smooth scrolling and font clarity */
-html { scroll-behavior: smooth; }
-body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+html { 
+  scroll-behavior: smooth; 
+  scroll-padding-top: 80px; /* Account for sticky header */
+}
+body { 
+  -webkit-font-smoothing: antialiased; 
+  -moz-osx-font-smoothing: grayscale; 
+  text-rendering: optimizeLegibility; 
+}
+
+/* Enhanced smooth scrolling for all elements */
+* {
+  scroll-behavior: smooth;
+}
 
 /* Glossy card surface using design tokens */
 .glossy-card {

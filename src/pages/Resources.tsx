@@ -33,7 +33,7 @@ const Resources = () => {
           {["Search", "Select", "Enter Passkey", "Launch"].map((step, i) => (
             <div 
               key={step} 
-              className="group rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-6 transition-all duration-300 hover:bg-white/20 hover:border-white/30 hover:scale-105 hover:shadow-2xl hover:shadow-white/10"
+              className="group cursor-pointer rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-6 transition-all duration-500 hover:bg-white/25 hover:border-white/40 hover:scale-110 hover:rotate-1 hover:shadow-2xl hover:shadow-white/20 active:scale-95 transform"
             >
               <div className="text-sm text-white/70 group-hover:text-white/90 transition-colors duration-300">
                 Step {i + 1}
