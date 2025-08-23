@@ -2,21 +2,16 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-slate-900/80 backdrop-blur-md transition-all duration-500">
+    <header className="sticky top-0 z-40 w-full bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-transparent backdrop-blur-md transition-all duration-500 after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-gradient-to-r after:from-transparent after:via-white/20 after:to-transparent">
       <nav className="container mx-auto flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2" aria-label="Go home">
           <img
             src="/lovable-uploads/dd007f0e-e440-4bf0-a8a5-ee5dade1ccc7.png"
             alt="Murban Engineering logo"
-            className="h-8 w-8 object-contain bg-transparent"
-            style={{ 
-              background: 'transparent', 
-              mixBlendMode: 'multiply',
-              filter: 'brightness(1.2) contrast(1.1)'
-            }}
+            className="h-10 w-10 object-contain drop-shadow-sm"
             loading="lazy"
           />
-          <span className="font-semibold tracking-tight text-white">Murban Engineering</span>
+          <span className="font-display font-semibold text-lg tracking-tight text-white drop-shadow-sm">Murban Engineering</span>
         </Link>
         <div className="flex items-center gap-3">
           <Link 
