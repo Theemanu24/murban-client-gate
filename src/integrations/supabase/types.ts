@@ -14,24 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      categories: {
-        Row: {
-          created_at: string
-          id: string
-          name: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          name: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          name?: string
-        }
-        Relationships: []
-      }
       clients: {
         Row: {
           active: boolean
@@ -71,91 +53,6 @@ export type Database = {
         }
         Relationships: []
       }
-      orders: {
-        Row: {
-          cashier_id: string
-          created_at: string
-          id: string
-          items: Json
-          order_number: string
-          payment_method: string
-          payment_phone: string | null
-          status: string
-          total_amount: number
-        }
-        Insert: {
-          cashier_id: string
-          created_at?: string
-          id?: string
-          items: Json
-          order_number: string
-          payment_method: string
-          payment_phone?: string | null
-          status?: string
-          total_amount: number
-        }
-        Update: {
-          cashier_id?: string
-          created_at?: string
-          id?: string
-          items?: Json
-          order_number?: string
-          payment_method?: string
-          payment_phone?: string | null
-          status?: string
-          total_amount?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "orders_cashier_id_fkey"
-            columns: ["cashier_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["user_id"]
-          },
-        ]
-      }
-      products: {
-        Row: {
-          available_toppings: string[] | null
-          category_id: string
-          created_at: string
-          id: string
-          name: string
-          sizes: Json
-          status: string
-          updated_at: string
-        }
-        Insert: {
-          available_toppings?: string[] | null
-          category_id: string
-          created_at?: string
-          id?: string
-          name: string
-          sizes: Json
-          status?: string
-          updated_at?: string
-        }
-        Update: {
-          available_toppings?: string[] | null
-          category_id?: string
-          created_at?: string
-          id?: string
-          name?: string
-          sizes?: Json
-          status?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "products_category_id_fkey"
-            columns: ["category_id"]
-            isOneToOne: false
-            referencedRelation: "categories"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       profiles: {
         Row: {
           created_at: string
@@ -173,7 +70,7 @@ export type Database = {
           first_name?: string | null
           id?: string
           last_name?: string | null
-          role: string
+          role?: string
           updated_at?: string
           user_id: string
         }
