@@ -70,7 +70,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
   return (
     <div className="w-full max-w-2xl mx-auto animate-fade-in">
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -78,10 +78,10 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
           placeholder="Type your company name..."
           aria-label="Search company"
           autoComplete="off"
-          className="pl-10 h-12 text-base"
+          className="pl-10 h-12 text-base bg-white border-gray-300 text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500"
         />
         {query && (
-          <button aria-label="Clear" className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" onClick={() => setQuery("") }>
+          <button aria-label="Clear" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700" onClick={() => setQuery("") }>
             <X />
           </button>
         )}
