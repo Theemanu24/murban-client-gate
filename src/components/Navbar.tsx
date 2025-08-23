@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <header className="sticky top-0 z-40 w-full bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-transparent backdrop-blur-md transition-all duration-500 after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-gradient-to-r after:from-transparent after:via-white/20 after:to-transparent">
+    <header className="sticky top-0 z-40 w-full bg-transparent backdrop-blur-sm transition-all duration-500">
       <nav className="container mx-auto flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2" aria-label="Go home">
           <img
