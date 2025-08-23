@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -18,28 +19,32 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    
     try {
       if (!passkey.trim()) {
         toast({ title: "Passkey required", description: "Please enter your passkey to continue." });
         return;
       }
 
-      // Verify password using Firebase
-    const { data: isValid, error } = await supabase.rpc('verify_client_password', {
-      client_slug: clientSlug,
-      password: passkey
-    });
-    
-    if (error) {
-      console.error('Error verifying password:', error);
-      toast({
-        title: "Error",
-        description: "Failed to verify password. Please try again.",
-        variant: "destructive",
+      console.log('Verifying password for client:', clientSlug, 'with password:', passkey);
+
+      // Verify password using Supabase RPC function
+      const { data: isValid, error } = await supabase.rpc('verify_client_password', {
+        client_slug: clientSlug,
+        password: passkey
       });
-      setLoading(false);
-      return;
-    }
+      
+      console.log('Password verification result:', { isValid, error });
+      
+      if (error) {
+        console.error('Error verifying password:', error);
+        toast({
+          title: "Error",
+          description: "Failed to verify password. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
 
       if (!isValid) {
         toast({ 
@@ -54,6 +59,13 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
       localStorage.setItem(`session:${clientSlug}`, "active");
       toast({ title: "Access Granted", description: "Successfully authenticated." });
       onSuccess();
+    } catch (err) {
+      console.error('Password verification failed:', err);
+      toast({
+        title: "Error",
+        description: "Failed to verify password. Please try again.",
+        variant: "destructive",
+      });
     } finally {
       setLoading(false);
     }

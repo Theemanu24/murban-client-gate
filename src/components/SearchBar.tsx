@@ -1,3 +1,4 @@
+
 import { useMemo, useState, useEffect } from "react";
 import Fuse from "fuse.js";
 import { supabase } from "@/integrations/supabase/client";
@@ -45,7 +46,8 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
 
   const results = useMemo(() => {
     const q = query.trim();
-    if (q.length < 2) return [];
+    // Changed from 2 to 5 characters minimum
+    if (q.length < 5) return [];
     return fuse.search(q).map(r => r.item).filter(c => c.active).slice(0, 8);
   }, [query, fuse]);
 
@@ -98,7 +100,9 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
               </CommandItem>
             ))}
             {!results.length && (
-              <div className="p-4 text-muted-foreground">{query.trim().length < 2 ? "Type at least 2 letters to search your company." : "No matches. Contact support."}</div>
+              <div className="p-4 text-muted-foreground">
+                {query.trim().length < 5 ? "Type at least 5 letters to search your company." : "No matches. Contact support."}
+              </div>
             )}
           </CommandGroup>
         </CommandList>
