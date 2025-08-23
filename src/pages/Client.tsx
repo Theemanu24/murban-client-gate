@@ -52,7 +52,7 @@ const ClientPage = () => {
 
   if (loading) {
     return (
-      <main className="flex-1 overflow-hidden bg-transparent flex items-center justify-center">
+      <main className="flex-1 overflow-hidden bg-white flex items-center justify-center">
         <div className="container mx-auto py-16">
           <div className="text-center">
             <div className="animate-spin w-8 h-8 border-2 border-primary border-t-transparent rounded-full mx-auto" />
@@ -65,7 +65,7 @@ const ClientPage = () => {
 
   if (!client) {
     return (
-      <main className="flex-1 overflow-hidden bg-transparent flex items-center justify-center">
+      <main className="flex-1 overflow-hidden bg-white flex items-center justify-center">
         <div className="container mx-auto py-16">
           <h1 className="text-2xl font-bold mb-2">Client not found</h1>
           <p className="text-muted-foreground mb-6">We couldn't find that client. Please check the link or search again.</p>
@@ -76,7 +76,7 @@ const ClientPage = () => {
   }
 
   return (
-    <main className="flex-1 overflow-hidden bg-transparent">
+    <main className="flex-1 overflow-hidden bg-white">
       <div className="container mx-auto py-10 h-full overflow-y-auto">
         <section className="max-w-3xl mx-auto mb-8">
           <article className="rounded-2xl border p-6">
