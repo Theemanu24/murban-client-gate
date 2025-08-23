@@ -5,14 +5,12 @@ const Navbar = () => {
     <header className="sticky top-0 z-40 w-full backdrop-blur-sm transition-all duration-500" style={{backgroundColor: '#304259'}}>
       <nav className="container mx-auto flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2 hover:scale-105 transition-transform duration-300" aria-label="Go home">
-          <div className="rounded-lg bg-white/10 p-1.5 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300">
-            <img
-              src="/lovable-uploads/dd007f0e-e440-4bf0-a8a5-ee5dade1ccc7.png"
-              alt="Murban Engineering logo"
-              className="h-7 w-7 object-contain"
-              loading="lazy"
-            />
-          </div>
+          <img
+            src="/lovable-uploads/dd007f0e-e440-4bf0-a8a5-ee5dade1ccc7.png"
+            alt="Murban Engineering logo"
+            className="h-10 w-10 object-contain"
+            loading="lazy"
+          />
           <span className="font-display font-semibold text-lg tracking-tight text-white drop-shadow-sm">Murban Engineering</span>
         </Link>
         <div className="flex items-center gap-3">

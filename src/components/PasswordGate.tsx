@@ -74,7 +74,7 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
   return (
     <form onSubmit={submit} className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-6 max-w-md w-full mx-auto animate-fade-in animate-scale-in hover:bg-white/15 hover:border-white/30 hover:shadow-2xl hover:shadow-white/10 transition-all duration-500 group">
       <div className="flex items-center gap-2 mb-4 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-        <ShieldCheck className="text-red-400 animate-pulse group-hover:text-red-300 transition-colors duration-300" />
+        <ShieldCheck className="text-white/80 animate-pulse group-hover:text-white transition-colors duration-300" />
         <h2 className="text-xl font-semibold tracking-tight text-white group-hover:text-white/90 transition-colors duration-300">Enter passkey</h2>
       </div>
       <div className="relative animate-fade-in" style={{ animationDelay: '0.2s' }}>
@@ -84,7 +84,7 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
           value={passkey}
           onChange={(e) => setPasskey(e.target.value)}
           aria-label="Passkey"
-          className="pr-12 h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:bg-white/20 focus:border-white/40 transition-all duration-300 hover:bg-white/15 focus:scale-[1.02] focus:shadow-lg focus:shadow-white/10"
+          className="pr-12 h-12 bg-white/20 border-white/30 text-white font-medium placeholder:text-white/60 focus:bg-white/30 focus:border-white/50 transition-all duration-300 hover:bg-white/25 focus:scale-[1.02] focus:shadow-lg focus:shadow-white/10"
           autoComplete="one-time-code"
         />
         <button
@@ -96,7 +96,7 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
           {show ? <EyeOff className="animate-pulse" /> : <Eye />}
         </button>
       </div>
-      <Button className="mt-4 w-full h-11 hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 animate-fade-in hover:shadow-lg hover:shadow-white/20 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400" type="submit" disabled={loading} style={{ animationDelay: '0.3s' }}>
+      <Button className="mt-4 w-full h-11 hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 animate-fade-in hover:shadow-lg hover:shadow-white/20 bg-white/20 hover:bg-white/30 text-white font-semibold border border-white/30 hover:border-white/40" type="submit" disabled={loading} style={{ animationDelay: '0.3s' }}>
         {loading ? (
           <span className="flex items-center gap-2">
             <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
