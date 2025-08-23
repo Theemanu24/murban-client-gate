@@ -1,33 +1,21 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { AdminAuth } from "@/components/AdminAuth";
-import { AdminDashboard } from "@/components/AdminDashboard";
-import { User } from "firebase/auth";
 
 const Admin = () => {
-  const [user, setUser] = useState<User | null>(null);
-
-  const handleAuthenticated = (authenticatedUser: User) => {
-    setUser(authenticatedUser);
-  };
-
-  if (!user) {
-    return <AdminAuth onAuthenticated={handleAuthenticated} />;
-  }
-
   return (
-    <div className="min-h-screen bg-background">
-      <div className="border-b bg-card/50">
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <h1 className="text-lg font-semibold">Boba Cafe Admin</h1>
-          <Button asChild variant="outline" size="sm">
-            <Link to="/">← Back to Home</Link>
-          </Button>
-        </div>
+    <main className="container mx-auto py-16">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold mb-4">Admin Panel</h1>
+        <p className="text-muted-foreground mb-8">
+          Admin functionality is not available in this client portal version.
+        </p>
+        <Button asChild>
+          <Link to="/">
+            Back to Portal
+          </Link>
+        </Button>
       </div>
-      <AdminDashboard user={user} />
-    </div>
+    </main>
   );
 };
 

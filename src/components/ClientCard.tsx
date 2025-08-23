@@ -1,4 +1,6 @@
-import { Client } from "@/data/clients";
+import type { Database } from "@/integrations/supabase/types";
+
+type Client = Database['public']['Tables']['clients']['Row'];
 
 function getInitials(name: string) {
   return name

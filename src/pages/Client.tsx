@@ -1,9 +1,11 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getClientBySlug } from "@/lib/clients";
-import { Client } from "@/types/firebase";
+import { supabase } from "@/integrations/supabase/client";
+import type { Database } from "@/integrations/supabase/types";
 import { PasswordGate } from "@/components/PasswordGate";
 import { ClientHub } from "@/components/ClientHub";
+
+type Client = Database['public']['Tables']['clients']['Row'];
 
 const ClientPage = () => {
   const { slug } = useParams();
@@ -19,9 +21,17 @@ const ClientPage = () => {
         return;
       }
       
-      const client = await getClientBySlug(slug);
+      const { data: client, error } = await supabase
+        .from('clients')
+        .select('*')
+        .eq('slug', slug)
+        .eq('active', true)
+        .maybeSingle();
       
-      if (!client) {
+      if (error) {
+        console.error('Error fetching client:', error);
+        setClient(null);
+      } else if (!client) {
         console.error('Client not found');
         setClient(null);
       } else {

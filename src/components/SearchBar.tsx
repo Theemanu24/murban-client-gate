@@ -1,10 +1,12 @@
 import { useMemo, useState, useEffect } from "react";
 import Fuse from "fuse.js";
-import { Client } from "@/types/firebase";
-import { getClients } from "@/lib/clients";
+import { supabase } from "@/integrations/supabase/client";
+import type { Database } from "@/integrations/supabase/types";
 import { Input } from "@/components/ui/input";
 import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";
 import { Search, X } from "lucide-react";
+
+type Client = Database['public']['Tables']['clients']['Row'];
 
 interface SearchBarProps {
   onSelect: (client: Client) => void;
@@ -16,10 +18,20 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
   const [clients, setClients] = useState<Client[]>([]);
 
   useEffect(() => {
-    // Fetch clients from Firebase
+    // Fetch clients from Supabase
     const fetchClients = async () => {
-      const clients = await getClients();
-      setClients(clients);
+      const { data: clients, error } = await supabase
+        .from('clients')
+        .select('*')
+        .eq('active', true)
+        .order('name');
+        
+      if (error) {
+        console.error('Error fetching clients:', error);
+        return;
+      }
+      
+      setClients(clients || []);
     };
 
     fetchClients();
@@ -33,7 +45,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
 
   const results = useMemo(() => {
     const q = query.trim();
-    if (q.length < 5) return [];
+    if (q.length < 2) return [];
     return fuse.search(q).map(r => r.item).filter(c => c.active).slice(0, 8);
   }, [query, fuse]);
 
@@ -86,7 +98,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
               </CommandItem>
             ))}
             {!results.length && (
-              <div className="p-4 text-muted-foreground">{query.trim().length < 5 ? "Type at least 5 letters to search your company." : "No matches. Contact support."}</div>
+              <div className="p-4 text-muted-foreground">{query.trim().length < 2 ? "Type at least 2 letters to search your company." : "No matches. Contact support."}</div>
             )}
           </CommandGroup>
         </CommandList>

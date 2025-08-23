@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import { useMemo, useState, useEffect } from "react";
-import { getClients } from "@/lib/clients";
+import { supabase } from "@/integrations/supabase/client";
 
 export const ClientHub = ({ appUrl }: { appUrl: string }) => {
   const origin = useMemo(() => new URL(appUrl).origin, [appUrl]);
@@ -11,8 +11,17 @@ export const ClientHub = ({ appUrl }: { appUrl: string }) => {
   useEffect(() => {
     // Fetch allowed origins from clients collection
     const fetchOrigins = async () => {
-      const clients = await getClients();
-      const origins = clients.map(client => new URL(client.app_url).origin);
+      const { data: clients, error } = await supabase
+        .from('clients')
+        .select('app_url')
+        .eq('active', true);
+        
+      if (error) {
+        console.error('Error fetching clients:', error);
+        return;
+      }
+      
+      const origins = clients?.map(client => new URL(client.app_url).origin) || [];
       setAllowedOrigins(origins);
     };
 
