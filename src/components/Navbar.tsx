@@ -6,10 +6,14 @@ const Navbar = () => {
       <nav className="container mx-auto flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2" aria-label="Go home">
           <img
-            src="/lovable-uploads/ea559331-8aa9-4084-9acf-dafad3295a77.png"
+            src="/lovable-uploads/dd007f0e-e440-4bf0-a8a5-ee5dade1ccc7.png"
             alt="Murban Engineering logo"
-            className="h-8 w-8 object-contain bg-transparent mix-blend-normal"
-            style={{ background: 'transparent', mixBlendMode: 'multiply' }}
+            className="h-8 w-8 object-contain bg-transparent"
+            style={{ 
+              background: 'transparent', 
+              mixBlendMode: 'multiply',
+              filter: 'brightness(1.2) contrast(1.1)'
+            }}
             loading="lazy"
           />
           <span className="font-semibold tracking-tight text-white">Murban Engineering</span>
