@@ -72,10 +72,10 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
   };
 
   return (
-    <form onSubmit={submit} className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-6 max-w-md w-full mx-auto animate-fade-in animate-scale-in">
+    <form onSubmit={submit} className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-6 max-w-md w-full mx-auto animate-fade-in animate-scale-in hover:bg-white/15 hover:border-white/30 hover:shadow-2xl hover:shadow-white/10 transition-all duration-500 group">
       <div className="flex items-center gap-2 mb-4 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-        <ShieldCheck className="text-red-400 animate-pulse" />
-        <h2 className="text-xl font-semibold tracking-tight text-white">Enter passkey</h2>
+        <ShieldCheck className="text-red-400 animate-pulse group-hover:text-red-300 transition-colors duration-300" />
+        <h2 className="text-xl font-semibold tracking-tight text-white group-hover:text-white/90 transition-colors duration-300">Enter passkey</h2>
       </div>
       <div className="relative animate-fade-in" style={{ animationDelay: '0.2s' }}>
         <Input
@@ -84,22 +84,29 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
           value={passkey}
           onChange={(e) => setPasskey(e.target.value)}
           aria-label="Passkey"
-          className="pr-12 h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:bg-white/20 focus:border-white/40 transition-all duration-300 hover:bg-white/15"
+          className="pr-12 h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:bg-white/20 focus:border-white/40 transition-all duration-300 hover:bg-white/15 focus:scale-[1.02] focus:shadow-lg focus:shadow-white/10"
           autoComplete="one-time-code"
         />
         <button
           type="button"
           aria-label={show ? "Hide passkey" : "Show passkey"}
           onClick={() => setShow((s) => !s)}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white/80 transition-colors duration-200 hover:scale-110"
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white/80 transition-all duration-200 hover:scale-125 active:scale-95"
         >
-          {show ? <EyeOff /> : <Eye />}
+          {show ? <EyeOff className="animate-pulse" /> : <Eye />}
         </button>
       </div>
-      <Button className="mt-4 w-full h-11 hover:scale-[1.02] transition-transform duration-200 animate-fade-in" type="submit" disabled={loading} style={{ animationDelay: '0.3s' }}>
-        {loading ? "Verifying…" : "Continue"}
+      <Button className="mt-4 w-full h-11 hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 animate-fade-in hover:shadow-lg hover:shadow-white/20 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400" type="submit" disabled={loading} style={{ animationDelay: '0.3s' }}>
+        {loading ? (
+          <span className="flex items-center gap-2">
+            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            Verifying…
+          </span>
+        ) : (
+          "Continue"
+        )}
       </Button>
-      <p className="mt-3 text-sm text-white/60 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+      <p className="mt-3 text-sm text-white/60 animate-fade-in group-hover:text-white/50 transition-colors duration-300" style={{ animationDelay: '0.4s' }}>
         Secure authentication with Blowfish password hashing and database verification.
       </p>
     </form>

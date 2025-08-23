@@ -76,13 +76,21 @@ const ClientPage = () => {
   }
 
   return (
-    <main className="flex-1 overflow-hidden bg-gradient-to-b from-[#304259] to-[#1e2a3a]">
-      <div className="container mx-auto py-10 h-full overflow-y-auto">
+    <main className="flex-1 overflow-hidden bg-gradient-to-br from-[#304259] via-[#2a3b4f] to-[#1e2a3a] relative">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-white/5 rounded-full animate-pulse" style={{ animationDelay: '0s', animationDuration: '4s' }}></div>
+        <div className="absolute top-40 right-20 w-24 h-24 bg-white/3 rounded-full animate-pulse" style={{ animationDelay: '1s', animationDuration: '6s' }}></div>
+        <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-white/2 rounded-full animate-pulse" style={{ animationDelay: '2s', animationDuration: '8s' }}></div>
+        <div className="absolute top-1/3 right-1/3 w-20 h-20 bg-white/4 rounded-full animate-pulse" style={{ animationDelay: '3s', animationDuration: '5s' }}></div>
+      </div>
+      
+      <div className="container mx-auto py-10 h-full overflow-y-auto relative z-10">
         <section className="max-w-3xl mx-auto mb-8 animate-fade-in">
-          <article className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-6 hover:bg-white/15 transition-all duration-300 hover:scale-[1.02]">
-            <h1 className="text-2xl font-bold tracking-tight text-white animate-fade-in" style={{ animationDelay: '0.1s' }}>{client.name}</h1>
+          <article className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-6 hover:bg-white/15 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-white/10 group">
+            <h1 className="text-2xl font-bold tracking-tight text-white animate-fade-in group-hover:text-white/90 transition-colors duration-300" style={{ animationDelay: '0.1s' }}>{client.name}</h1>
             {client.description && (
-              <p className="text-white/80 mt-2 animate-fade-in" style={{ animationDelay: '0.2s' }}>{client.description}</p>
+              <p className="text-white/80 mt-2 animate-fade-in group-hover:text-white/70 transition-colors duration-300" style={{ animationDelay: '0.2s' }}>{client.description}</p>
             )}
           </article>
         </section>
