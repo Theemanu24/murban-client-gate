@@ -10,8 +10,8 @@ const Home = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.8,
-        delayChildren: 0.3
+        staggerChildren: 1.2,
+        delayChildren: 0.8
       }
     }
   };
@@ -19,9 +19,9 @@ const Home = () => {
   const wordVariants = {
     hidden: { 
       opacity: 0, 
-      scale: 1.2, 
-      filter: "blur(8px)",
-      y: 30
+      scale: 1.1, 
+      filter: "blur(6px)",
+      y: 20
     },
     visible: { 
       opacity: 1, 
@@ -29,37 +29,37 @@ const Home = () => {
       filter: "blur(0px)",
       y: 0,
       transition: { 
-        duration: 1.2, 
-        ease: [0.25, 0.46, 0.45, 0.94]
+        duration: 2, 
+        ease: [0.16, 1, 0.3, 1]
       }
     }
   };
 
   const subtitleVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: { 
-        duration: 0.8, 
-        delay: 2.2,
-        ease: "easeOut"
+        duration: 1.5, 
+        delay: 4,
+        ease: [0.16, 1, 0.3, 1]
       }
     }
   };
 
   const buttonsVariants = {
-    hidden: { opacity: 0, y: 100 },
+    hidden: { opacity: 0, y: 80 },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: { 
-        duration: 1, 
-        delay: 3,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        duration: 1.8, 
+        delay: 5.5,
+        ease: [0.16, 1, 0.3, 1],
         type: "spring",
-        damping: 25,
-        stiffness: 120
+        damping: 30,
+        stiffness: 100
       }
     }
   };
