@@ -8,7 +8,8 @@ const Navbar = () => {
           <img
             src="/lovable-uploads/ea559331-8aa9-4084-9acf-dafad3295a77.png"
             alt="Murban Engineering logo"
-            className="h-8 w-8 object-contain"
+            className="h-8 w-8 object-contain bg-transparent mix-blend-normal"
+            style={{ background: 'transparent', mixBlendMode: 'multiply' }}
             loading="lazy"
           />
           <span className="font-semibold tracking-tight text-white">Murban Engineering</span>
