@@ -6,9 +6,9 @@ const Navbar = () => {
       <nav className="container mx-auto flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2" aria-label="Go home">
           <img
-            src="/lovable-uploads/006291be-d3c5-4c9f-bd0a-2330a1bae9ab.png"
+            src="/lovable-uploads/3c3b97c6-0fc2-4361-ba81-914763d240fd.png"
             alt="Murban Engineering logo"
-            className="h-8 w-8 object-contain mix-blend-screen brightness-110 contrast-125"
+            className="h-8 w-8 object-contain"
             loading="lazy"
           />
           <span className="font-semibold tracking-tight text-white">Murban Engineering</span>
