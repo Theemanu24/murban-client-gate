@@ -10,5 +10,6 @@ export type Client = {
   updated_at?: string;
 };
 
-// Note: Client data is now stored securely in Supabase database
+// Note: Client data is now stored securely in Firebase database
 // This file is kept for type definitions and backward compatibility
+// To seed the database, run: import { runSeeding } from '@/lib/seed-data'; runSeeding();
