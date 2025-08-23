@@ -14,23 +14,33 @@ const Resources = () => {
         }}
       />
       
-      {/* Dark overlay for better text contrast */}
-      <div className="absolute inset-0 bg-black/60" />
+      {/* Sophisticated gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-800/70 to-slate-900/90" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/30" />
       
       <section className="relative z-10 container mx-auto py-20 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-white">Secure Client Portal</h1>
-        <p className="text-lg text-white/90 max-w-2xl mx-auto mb-8">
+        <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-white drop-shadow-2xl">
+          Secure Client Portal
+        </h1>
+        <p className="text-xl md:text-2xl text-white/95 max-w-3xl mx-auto mb-12 leading-relaxed font-medium drop-shadow-lg">
           Search your company, enter your passkey, and launch your Murban app securely.
         </p>
         <SearchBar onSelect={(c) => navigate(`/c/${c.slug}`)} />
       </section>
 
-      <section className="border-t py-12">
+      <section className="relative z-10 py-16 bg-gradient-to-b from-transparent via-black/40 to-black/60">
         <div className="container mx-auto grid md:grid-cols-4 gap-6 text-left">
           {["Search", "Select", "Enter Passkey", "Launch"].map((step, i) => (
-            <div key={step} className="rounded-2xl border p-5 glossy-card hover-scale">
-              <div className="text-sm text-muted-foreground">Step {i + 1}</div>
-              <div className="font-semibold mt-1">{step}</div>
+            <div 
+              key={step} 
+              className="group rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-6 transition-all duration-300 hover:bg-white/20 hover:border-white/30 hover:scale-105 hover:shadow-2xl hover:shadow-white/10"
+            >
+              <div className="text-sm text-white/70 group-hover:text-white/90 transition-colors duration-300">
+                Step {i + 1}
+              </div>
+              <div className="font-bold text-lg mt-2 text-white group-hover:text-white transition-colors duration-300">
+                {step}
+              </div>
             </div>
           ))}
         </div>
