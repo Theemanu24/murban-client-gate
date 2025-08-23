@@ -6,7 +6,7 @@ const Navbar = () => {
       <nav className="container mx-auto flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2" aria-label="Go home">
           <img
-            src="/lovable-uploads/b38b9df7-5c1d-45ab-b1ef-7e330c411606.png"
+            src="/lovable-uploads/ea559331-8aa9-4084-9acf-dafad3295a77.png"
             alt="Murban Engineering logo"
             className="h-8 w-8 object-contain"
             loading="lazy"
