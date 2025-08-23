@@ -72,7 +72,7 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
   };
 
   return (
-    <form onSubmit={submit} className="rounded-2xl border p-6 max-w-md w-full mx-auto">
+    <form onSubmit={submit} className="rounded-2xl border p-6 max-w-md w-full mx-auto bg-white">
       <div className="flex items-center gap-2 mb-4">
         <ShieldCheck className="text-primary" />
         <h2 className="text-xl font-semibold tracking-tight">Enter passkey</h2>
