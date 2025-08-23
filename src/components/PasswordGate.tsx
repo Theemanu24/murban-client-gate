@@ -72,10 +72,10 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
   };
 
   return (
-    <form onSubmit={submit} className="rounded-2xl border p-6 max-w-md w-full mx-auto">
+    <form onSubmit={submit} className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-6 max-w-md w-full mx-auto">
       <div className="flex items-center gap-2 mb-4">
-        <ShieldCheck className="text-primary" />
-        <h2 className="text-xl font-semibold tracking-tight">Enter passkey</h2>
+        <ShieldCheck className="text-red-400" />
+        <h2 className="text-xl font-semibold tracking-tight text-white">Enter passkey</h2>
       </div>
       <div className="relative">
         <Input
@@ -91,7 +91,7 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
           type="button"
           aria-label={show ? "Hide passkey" : "Show passkey"}
           onClick={() => setShow((s) => !s)}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white/80"
         >
           {show ? <EyeOff /> : <Eye />}
         </button>
@@ -99,7 +99,7 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
       <Button className="mt-4 w-full h-11" type="submit" disabled={loading}>
         {loading ? "Verifying…" : "Continue"}
       </Button>
-      <p className="mt-3 text-sm text-muted-foreground">
+      <p className="mt-3 text-sm text-white/60">
         Secure authentication with Blowfish password hashing and database verification.
       </p>
     </form>

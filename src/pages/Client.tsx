@@ -52,11 +52,11 @@ const ClientPage = () => {
 
   if (loading) {
     return (
-      <main className="flex-1 overflow-hidden bg-white flex items-center justify-center">
+      <main className="flex-1 overflow-hidden bg-gradient-to-b from-[#304259] to-[#1e2a3a] flex items-center justify-center">
         <div className="container mx-auto py-16">
           <div className="text-center">
-            <div className="animate-spin w-8 h-8 border-2 border-primary border-t-transparent rounded-full mx-auto" />
-            <p className="mt-2 text-muted-foreground">Loading...</p>
+            <div className="animate-spin w-8 h-8 border-2 border-white border-t-transparent rounded-full mx-auto" />
+            <p className="mt-2 text-white/80">Loading...</p>
           </div>
         </div>
       </main>
@@ -65,24 +65,24 @@ const ClientPage = () => {
 
   if (!client) {
     return (
-      <main className="flex-1 overflow-hidden bg-white flex items-center justify-center">
+      <main className="flex-1 overflow-hidden bg-gradient-to-b from-[#304259] to-[#1e2a3a] flex items-center justify-center">
         <div className="container mx-auto py-16">
-          <h1 className="text-2xl font-bold mb-2">Client not found</h1>
-          <p className="text-muted-foreground mb-6">We couldn't find that client. Please check the link or search again.</p>
-          <a className="underline cursor-pointer" onClick={() => navigate('/')}>Go back home</a>
+          <h1 className="text-2xl font-bold mb-2 text-white">Client not found</h1>
+          <p className="text-white/80 mb-6">We couldn't find that client. Please check the link or search again.</p>
+          <a className="underline cursor-pointer text-white hover:text-white/80" onClick={() => navigate('/')}>Go back home</a>
         </div>
       </main>
     );
   }
 
   return (
-    <main className="flex-1 overflow-hidden bg-white">
+    <main className="flex-1 overflow-hidden bg-gradient-to-b from-[#304259] to-[#1e2a3a]">
       <div className="container mx-auto py-10 h-full overflow-y-auto">
         <section className="max-w-3xl mx-auto mb-8">
-          <article className="rounded-2xl border p-6">
-            <h1 className="text-2xl font-bold tracking-tight">{client.name}</h1>
+          <article className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-6">
+            <h1 className="text-2xl font-bold tracking-tight text-white">{client.name}</h1>
             {client.description && (
-              <p className="text-muted-foreground mt-2">{client.description}</p>
+              <p className="text-white/80 mt-2">{client.description}</p>
             )}
           </article>
         </section>
