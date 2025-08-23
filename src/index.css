@@ -52,11 +52,13 @@ All colors MUST be HSL.
     --shadow-elegant: 0 10px 30px -10px hsl(0 100% 35% / 0.6);
   }
 
-  body {
+  html, body {
     @apply bg-background text-foreground font-sans;
     font-family: "Manrope", "Inter", system-ui, sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     font-optical-sizing: auto;
+    height: 100%;
+    overflow-y: hidden;
     background-image: url('/lovable-uploads/6f3cc640-4178-4ee7-a2a8-812716cb074c.png');
     background-size: cover;
     background-position: center;
