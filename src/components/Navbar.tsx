@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <header className="sticky top-0 z-40 w-full bg-transparent backdrop-blur-sm transition-all duration-500">
+    <header className="sticky top-0 z-40 w-full backdrop-blur-sm transition-all duration-500" style={{backgroundColor: '#304259'}}>
       <nav className="container mx-auto flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2" aria-label="Go home">
           <img

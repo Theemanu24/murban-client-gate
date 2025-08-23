@@ -5,7 +5,7 @@ const Resources = () => {
   const navigate = useNavigate();
 
   return (
-    <main className="relative min-h-screen">
+    <main className="relative flex-1 overflow-hidden">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
