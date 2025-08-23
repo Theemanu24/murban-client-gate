@@ -3,7 +3,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import Home from "./pages/Home";
+import Resources from "./pages/Resources";
 import NotFound from "./pages/NotFound";
 import Client from "./pages/Client";
 import Admin from "./pages/Admin";
@@ -21,7 +22,8 @@ const App = () => (
         <div className="min-h-screen bg-background">
           <Navbar />
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/resources" element={<Resources />} />
             <Route path="/c/:slug" element={<Client />} />
             <Route path="/admin" element={<Admin />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
