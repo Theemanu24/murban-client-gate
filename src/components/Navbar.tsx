@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
 
+import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-sm transition-all duration-500" style={{backgroundColor: '#304259'}}>
       <nav className="container mx-auto flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2 hover:scale-105 transition-transform duration-300" aria-label="Go home">
           <img
-            src="/public/murban_logo_final-removebg-preview.png"
+            src="/murban_logo_final-removebg-preview.png"
             alt="Murban Engineering logo"
             className="h-10 w-10 object-contain"
             style={{ background: 'transparent', mixBlendMode: 'screen', filter: 'brightness(1.1)' }}
@@ -35,5 +35,4 @@ const Navbar = () => {
     </header>
   );
 };
-
 export default Navbar;
