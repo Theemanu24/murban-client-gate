@@ -39,7 +39,7 @@ All colors MUST be HSL.
     --shadow-elegant: 0 10px 30px -10px hsl(0 100% 35% / 0.6);
   }
   html, body {
-    font-size: 150%; /* Increase base font size by 50% */
+    font-size: 130%; /* Increase base font size by 30% */
     @apply bg-background text-foreground font-sans;
     font-family: "Manrope", "Inter", system-ui, sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
@@ -52,6 +52,11 @@ All colors MUST be HSL.
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
+  }
+
+  /* Keep navbar at normal font size */
+  header, header * {
+    font-size: 1rem; /* Reset navbar font size to 100% */
   }
   body::before {
     content: '';
