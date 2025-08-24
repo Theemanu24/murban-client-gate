@@ -66,14 +66,6 @@ const Home = () => {
 
   return (
     <main className="relative min-h-screen flex items-center justify-center">
-      {/* Background Image with Animated Overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/lovable-uploads/076c0e82-43a2-43e9-b835-48b5f384368f.png')"
-        }}
-      />
-      
       {/* Animated Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60 animate-gradient-shift" />
       
@@ -120,7 +112,7 @@ const Home = () => {
             variants={subtitleVariants}
             initial="hidden"
             animate="visible"
-            className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed py-1"
+            className="text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed py-1"
           >
             Industrial Engineering Solutions & Client Resources Portal
           </motion.p>
@@ -129,7 +121,7 @@ const Home = () => {
             variants={buttonsVariants}
             initial="hidden"
             animate="visible"
-            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center -mt-2"
           >
             <Button 
               asChild 
