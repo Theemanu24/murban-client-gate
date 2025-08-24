@@ -37,25 +37,41 @@ const Home = () => {
 
   const subtitleVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { 
-        duration: 1.5, 
-        delay: 4,
+      transition: {
+        duration: 1.5,
+        delay: 5,
         ease: [0.16, 1, 0.3, 1]
       }
     }
   };
 
-  const buttonsVariants = {
+  const accessButtonVariants = {
     hidden: { opacity: 0, y: 80 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { 
-        duration: 1.8, 
-        delay: 5.5,
+      transition: {
+        duration: 1.8,
+        delay: 4,
+        ease: [0.16, 1, 0.3, 1],
+        type: "spring",
+        damping: 30,
+        stiffness: 100
+      }
+    }
+  };
+
+  const visitButtonVariants = {
+    hidden: { opacity: 0, y: 80 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1.8,
+        delay: 6,
         ease: [0.16, 1, 0.3, 1],
         type: "spring",
         damping: 30,
@@ -107,7 +123,7 @@ const Home = () => {
                 <motion.span
                   key={index}
                   variants={wordVariants}
-                  className="inline-block mr-2 sm:mr-4 md:mr-6 relative cinematic-text overflow-visible"
+                  className={`block relative cinematic-text overflow-visible ${index === 0 ? "text-5xl sm:text-6xl md:text-8xl" : ""}`}
                   style={{ paddingBottom: '0.1em' }}
                 >
                   {word}
@@ -115,7 +131,22 @@ const Home = () => {
               ))}
             </h1>
           </motion.div>
-          
+
+          <motion.div
+            variants={accessButtonVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex justify-center items-center mb-6"
+          >
+            <Button
+              asChild
+              size="lg"
+              className="cinematic-button bg-slate-800/90 hover:bg-slate-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl shadow-2xl transition-all duration-500 transform hover:scale-110 hover:shadow-glow active:scale-95 w-full sm:w-auto"
+            >
+              <Link to="/resources">Access Resources</Link>
+            </Button>
+          </motion.div>
+
           <motion.p
             variants={subtitleVariants}
             initial="hidden"
@@ -124,32 +155,22 @@ const Home = () => {
           >
             Industrial Engineering Solutions & Client Resources Portal
           </motion.p>
-          
+
           <motion.div
-            variants={buttonsVariants}
+            variants={visitButtonVariants}
             initial="hidden"
             animate="visible"
             className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center"
           >
-            <Button 
-              asChild 
-              size="lg" 
-              className="cinematic-button bg-slate-800/90 hover:bg-slate-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl shadow-2xl transition-all duration-500 transform hover:scale-110 hover:shadow-glow active:scale-95 w-full sm:w-auto"
-            >
-              <Link to="/resources">
-                Access Resources
-              </Link>
-            </Button>
-            
-            <Button 
-              asChild 
-              variant="outline" 
+            <Button
+              asChild
+              variant="outline"
               size="lg"
               className="cinematic-button border-2 border-white/30 bg-white/10 hover:bg-white/25 hover:border-white/50 text-white hover:text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-500 transform hover:scale-110 hover:shadow-glow-white active:scale-95 w-full sm:w-auto"
             >
-              <a 
-                href="https://murban-eng.com/" 
-                target="_blank" 
+              <a
+                href="https://murban-eng.com/"
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 Visit Website
