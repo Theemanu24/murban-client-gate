@@ -54,9 +54,9 @@ All colors MUST be HSL.
     background-repeat: no-repeat;
   }
 
-  /* Keep navbar at normal font size */
+  /* Keep navbar at smaller font size */
   header, header * {
-    font-size: 1rem; /* Reset navbar font size to 100% */
+    font-size: 0.9rem; /* Set navbar font size to 90% */
   }
   body::before {
     content: '';
