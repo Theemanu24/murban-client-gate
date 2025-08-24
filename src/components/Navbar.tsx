@@ -6,7 +6,7 @@ const Navbar = () => {
       <nav className="container mx-auto flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2 hover:scale-105 transition-transform duration-300" aria-label="Go home">
           <img
-            src="/lovable-uploads/12e6503e-b4c6-423a-98cc-2c4b6a8efe38.png"
+            src="/murban_logo_final-removebg-preview.png"
             alt="Murban Engineering logo"
             className="h-10 w-10 object-contain"
             style={{ background: 'transparent', mixBlendMode: 'screen', filter: 'brightness(1.1)' }}
