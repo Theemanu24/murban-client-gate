@@ -65,7 +65,7 @@ const Home = () => {
   };
 
   return (
-    <main className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <main className="relative min-h-screen flex items-center justify-center">
       {/* Background Image with Animated Overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -100,14 +100,15 @@ const Home = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="mb-6"
+            className="mb-6 overflow-visible"
           >
-            <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight relative leading-tight py-2">
+            <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight relative" style={{ lineHeight: '1.3', paddingBottom: '0.25em' }}>
               {titleWords.map((word, index) => (
                 <motion.span
                   key={index}
                   variants={wordVariants}
-                  className="inline-block mr-4 md:mr-6 relative cinematic-text"
+                  className="inline-block mr-4 md:mr-6 relative cinematic-text overflow-visible"
+                  style={{ paddingBottom: '0.1em' }}
                 >
                   {word}
                 </motion.span>
