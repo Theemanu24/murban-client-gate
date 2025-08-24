@@ -102,7 +102,7 @@ const Home = () => {
             animate="visible"
             className="mb-6"
           >
-            <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight relative">
+            <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight relative leading-tight py-2">
               {titleWords.map((word, index) => (
                 <motion.span
                   key={index}
@@ -119,7 +119,7 @@ const Home = () => {
             variants={subtitleVariants}
             initial="hidden"
             animate="visible"
-            className="text-xl md:text-2xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed"
+            className="text-xl md:text-2xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed py-1"
           >
             Industrial Engineering Solutions & Client Resources Portal
           </motion.p>
