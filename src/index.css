@@ -59,6 +59,7 @@ All colors MUST be HSL.
     font-optical-sizing: auto;
     height: 100%;
     overflow-y: hidden;
+    line-height: 1.2;
     background-image: url('/lovable-uploads/6f3cc640-4178-4ee7-a2a8-812716cb074c.png');
     background-size: cover;
     background-position: center;
