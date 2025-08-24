@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <header
       className="sticky top-0 z-40 w-full backdrop-blur-sm transition-all duration-500"
       style={{
         backgroundColor: '#304259',
-        fontSize: '1rem' // Override to keep navbar font size normal
+        fontSize: '0.9rem' // Set navbar font size to 90%
       }}
     >
       <nav className="container mx-auto flex h-16 items-center justify-between">
@@ -17,14 +18,14 @@ const Navbar = () => {
             style={{ background: 'transparent', mixBlendMode: 'screen', filter: 'brightness(1.1)' }}
             loading="lazy"
           />
-          <span className="font-display font-semibold text-lg tracking-tight text-white drop-shadow-sm">
+          <span className="font-display font-semibold text-base tracking-tight text-white drop-shadow-sm">
             Murban Engineering
           </span>
         </Link>
         <div className="flex items-center gap-3">
           <Link 
             to="/" 
-            className="px-4 py-2 text-sm rounded-lg border border-white/20 bg-white/10 text-white/90 hover:text-white hover:bg-white/25 hover:border-white/30 hover:scale-105 hover:shadow-lg hover:shadow-white/10 transition-all duration-300 backdrop-blur-sm transform"
+            className="px-4 py-2 text-xs rounded-lg border border-white/20 bg-white/10 text-white/90 hover:text-white hover:bg-white/25 hover:border-white/30 hover:scale-105 hover:shadow-lg hover:shadow-white/10 transition-all duration-300 backdrop-blur-sm transform"
           >
             Home
           </Link>
@@ -32,7 +33,7 @@ const Navbar = () => {
             href="https://murban-eng.com/contact-us/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="px-4 py-2 text-sm rounded-lg border border-white/20 bg-white/10 text-white/90 hover:text-white hover:bg-white/25 hover:border-white/30 hover:scale-105 hover:shadow-lg hover:shadow-white/10 transition-all duration-300 backdrop-blur-sm transform"
+            className="px-4 py-2 text-xs rounded-lg border border-white/20 bg-white/10 text-white/90 hover:text-white hover:bg-white/25 hover:border-white/30 hover:scale-105 hover:shadow-lg hover:shadow-white/10 transition-all duration-300 backdrop-blur-sm transform"
           >
             Contact Us
           </a>
@@ -42,4 +43,5 @@ const Navbar = () => {
     </header>
   );
 };
+
 export default Navbar;
