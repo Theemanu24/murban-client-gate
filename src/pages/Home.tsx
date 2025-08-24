@@ -94,20 +94,20 @@ const Home = () => {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 text-center px-4 sm:px-6">
+      <div className="relative z-10 text-center px-6">
         <div className="max-w-4xl mx-auto">
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="mb-4 sm:mb-6 overflow-visible"
+            className="mb-6 overflow-visible"
           >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight relative" style={{ lineHeight: '1.3', paddingBottom: '0.25em' }}>
+            <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight relative" style={{ lineHeight: '1.3', paddingBottom: '0.25em' }}>
               {titleWords.map((word, index) => (
                 <motion.span
                   key={index}
                   variants={wordVariants}
-                  className="inline-block mr-2 sm:mr-3 md:mr-4 lg:mr-6 relative cinematic-text overflow-visible"
+                  className="inline-block mr-4 md:mr-6 relative cinematic-text overflow-visible"
                   style={{ paddingBottom: '0.1em' }}
                 >
                   {word}
@@ -120,7 +120,7 @@ const Home = () => {
             variants={subtitleVariants}
             initial="hidden"
             animate="visible"
-            className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed py-1 px-4 sm:px-0"
+            className="text-xl md:text-2xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed py-1"
           >
             Industrial Engineering Solutions & Client Resources Portal
           </motion.p>
@@ -129,12 +129,12 @@ const Home = () => {
             variants={buttonsVariants}
             initial="hidden"
             animate="visible"
-            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4 sm:px-0"
+            className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           >
             <Button 
               asChild 
               size="lg" 
-              className="w-full sm:w-auto cinematic-button bg-slate-800/90 hover:bg-slate-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl shadow-2xl transition-all duration-500 transform hover:scale-110 hover:shadow-glow active:scale-95"
+              className="cinematic-button bg-slate-800/90 hover:bg-slate-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-2xl transition-all duration-500 transform hover:scale-110 hover:shadow-glow active:scale-95"
             >
               <Link to="/resources">
                 Access Resources
@@ -145,7 +145,7 @@ const Home = () => {
               asChild 
               variant="outline" 
               size="lg"
-              className="w-full sm:w-auto cinematic-button border-2 border-white/30 bg-white/10 hover:bg-white/25 hover:border-white/50 text-white hover:text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-500 transform hover:scale-110 hover:shadow-glow-white active:scale-95"
+              className="cinematic-button border-2 border-white/30 bg-white/10 hover:bg-white/25 hover:border-white/50 text-white hover:text-white px-8 py-4 text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-500 transform hover:scale-110 hover:shadow-glow-white active:scale-95"
             >
               <a 
                 href="https://murban-eng.com/" 

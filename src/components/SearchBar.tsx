@@ -70,7 +70,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
   return (
     <div className="w-full max-w-2xl mx-auto animate-fade-in">
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 h-4 w-4 sm:h-5 sm:w-5" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -78,29 +78,29 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
           placeholder="Type your company name..."
           aria-label="Search company"
           autoComplete="off"
-          className="pl-10 sm:pl-12 h-11 sm:h-12 text-sm sm:text-base bg-white border-gray-300 text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 rounded-lg"
+          className="pl-10 h-12 text-base bg-white border-gray-300 text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500"
         />
         {query && (
           <button aria-label="Clear" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700" onClick={() => setQuery("") }>
-            <X className="h-4 w-4 sm:h-5 sm:w-5" />
+            <X />
           </button>
         )}
       </div>
 
-      <Command className="mt-3 border rounded-xl max-h-60 sm:max-h-80 overflow-hidden">
+      <Command className="mt-3 border rounded-xl">
         <CommandList>
           <CommandGroup heading="Results">
             {results.map((client, idx) => (
               <CommandItem
                 key={client.slug}
                 onSelect={() => onSelect(client)}
-                className={`${idx === activeIndex ? "bg-accent/60" : ""} text-sm sm:text-base p-3 sm:p-4`}
+                className={idx === activeIndex ? "bg-accent/60" : ""}
               >
                 <span className="font-medium">{client.name}</span>
               </CommandItem>
             ))}
             {!results.length && (
-              <div className="p-3 sm:p-4 text-muted-foreground text-sm sm:text-base">
+              <div className="p-4 text-muted-foreground">
                 {query.trim().length < 5 ? "Type at least 5 letters to search your company." : "No matches. Contact support."}
               </div>
             )}

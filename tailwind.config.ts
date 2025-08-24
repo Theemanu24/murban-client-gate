@@ -18,9 +18,6 @@ export default {
 			}
 		},
 		extend: {
-			screens: {
-				xs: "480px",
-			},
 			fontFamily: {
 				'sans': ['Manrope', 'Inter', 'system-ui', 'sans-serif'],
 				'display': ['Manrope', 'Inter', 'system-ui', 'sans-serif'],
