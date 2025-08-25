@@ -26,7 +26,6 @@ const Resources = () => {
       
       <section className="relative py-16">
         <div className="relative z-10 container mx-auto">
-        <div className="container mx-auto">
           <div className="grid md:grid-cols-4 gap-6 text-left">
             {["Search", "Select", "Enter Passkey", "Launch"].map((step, i) => (
               <div 
