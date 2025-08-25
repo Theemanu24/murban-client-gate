@@ -12,9 +12,9 @@ const Resources = () => {
         backgroundImage: "url('/lovable-uploads/d56c7b58-bae5-4c68-a39d-ca9a6576e652.png')"
       }}
     >
-      {/* Original blue gradient overlay extended to full page */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-800/70 to-slate-900/90" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/30" />
+      {/* Original blue gradient overlay extended to full scrollable content */}
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-slate-900/80 via-slate-800/70 to-slate-900/90" />
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-black/20 via-transparent to-black/30" />
       
       <section className="relative z-10 container mx-auto py-20 text-center">
         <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-white drop-shadow-2xl">
