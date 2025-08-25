@@ -1,6 +1,6 @@
 /* Smooth scrolling and font clarity */
 html { 
-  scroll-behavior: smooth; 
+  scroll-behavior: auto; 
   scroll-padding-top: 80px; /* Account for sticky header */
 }
 body { 
@@ -11,7 +11,7 @@ body {
 
 /* Enhanced smooth scrolling for all elements */
 * {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 /* Glossy card surface using design tokens */
