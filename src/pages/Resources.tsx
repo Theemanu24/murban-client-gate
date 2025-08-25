@@ -5,15 +5,13 @@ const Resources = () => {
   const navigate = useNavigate();
   
   return (
-    <main className="relative flex-1 overflow-y-auto" style={{ fontSize: '1rem' }}>
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/lovable-uploads/d56c7b58-bae5-4c68-a39d-ca9a6576e652.png')"
-        }}
-      />
-      
+    <main 
+      className="relative flex-1 overflow-y-auto bg-cover bg-center bg-no-repeat min-h-screen" 
+      style={{ 
+        fontSize: '1rem',
+        backgroundImage: "url('/lovable-uploads/d56c7b58-bae5-4c68-a39d-ca9a6576e652.png')"
+      }}
+    >
       {/* Sophisticated gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-800/70 to-slate-900/90" />
       <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/30" />
