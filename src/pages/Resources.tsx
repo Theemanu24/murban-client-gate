@@ -32,12 +32,12 @@ const Resources = () => {
             {["Search", "Select", "Enter Passkey", "Launch"].map((step, i) => (
               <div 
                 key={step} 
-                className="group cursor-pointer rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-6 transition-all duration-500 hover:bg-white/25 hover:border-white/40 hover:scale-110 hover:rotate-1 hover:shadow-2xl hover:shadow-white/20 active:scale-95 transform"
+                className="group cursor-pointer rounded-2xl border border-blue-400/30 bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-md p-6 transition-all duration-500 hover:from-blue-500/30 hover:to-purple-500/30 hover:border-blue-300/50 hover:scale-110 hover:rotate-1 hover:shadow-2xl hover:shadow-blue-500/30 active:scale-95 transform"
               >
-                <div className="text-sm text-white/70 group-hover:text-white/90 transition-colors duration-300">
+                <div className="text-sm text-blue-200 group-hover:text-blue-100 transition-colors duration-300">
                   Step {i + 1}
                 </div>
-                <div className="font-bold text-lg mt-2 text-white group-hover:text-white transition-colors duration-300">
+                <div className="font-bold text-lg mt-2 text-white group-hover:text-blue-50 transition-colors duration-300">
                   {step}
                 </div>
               </div>
