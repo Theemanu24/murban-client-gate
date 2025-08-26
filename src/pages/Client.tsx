@@ -11,7 +11,7 @@ const ClientPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const [client, setClient] = useState<Client | null>(null);
-  const [authed, setAuthed] = useState(false);
+  const [authed, setAuthed] = useState(false); // Always starts as false
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -44,11 +44,8 @@ const ClientPage = () => {
     fetchClient();
   }, [slug]);
 
-  useEffect(() => {
-    if (!client) return;
-    const existing = localStorage.getItem(`session:${client.slug}`);
-    setAuthed(!!existing);
-  }, [client]);
+  // Removed the localStorage check that was auto-authenticating users
+  // Now the password gate will always appear initially
 
   if (loading) {
     return (
