@@ -145,7 +145,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
           placeholder="Type your company name..."
           aria-label="Search company"
           autoComplete="off"
-          className="pl-10 h-12 text-base bg-white border-gray-300 text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:text-gray-900"
+          className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black"
           disabled={!!selectedClient}
         />
         {query && (
@@ -202,7 +202,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
               placeholder="Select terminal location..."
               aria-label="Search terminal"
               autoComplete="off"
-              className="pl-10 h-12 text-base bg-white border-gray-300 text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:text-gray-900"
+              className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black"
             />
             {terminalQuery && (
               <button 
