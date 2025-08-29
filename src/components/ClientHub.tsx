@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { ExternalLink } from "lucide-react";
 import { useMemo, useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -24,7 +22,6 @@ export const ClientHub = ({ appUrl }: { appUrl: string }) => {
       const origins = clients?.map(client => new URL(client.app_url).origin) || [];
       setAllowedOrigins(origins);
     };
-
     fetchOrigins();
   }, []);
 
@@ -32,9 +29,9 @@ export const ClientHub = ({ appUrl }: { appUrl: string }) => {
 
   if (!allowed && allowedOrigins.length > 0) {
     return (
-      <div className="rounded-2xl border p-6">
-        <h3 className="font-semibold mb-2">Origin not allowed</h3>
-        <p className="text-muted-foreground">
+      <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-6 animate-fade-in">
+        <h3 className="font-semibold mb-2 text-white">Origin not allowed</h3>
+        <p className="text-white/60">
           This app's origin is not in the allowlist. Contact administrator.
         </p>
       </div>
@@ -42,26 +39,25 @@ export const ClientHub = ({ appUrl }: { appUrl: string }) => {
   }
 
   return (
-    <section className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h3 className="font-semibold tracking-tight">Client Hub</h3>
-        <Button asChild>
-          <a href={appUrl} target="_blank" rel="noopener noreferrer">
-            Launch App <ExternalLink />
-          </a>
-        </Button>
-      </div>
-      <div className="rounded-2xl border overflow-hidden">
+    <section className="space-y-4 animate-fade-in">
+      {/* Removed the header with Launch App button */}
+      <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm overflow-hidden hover:bg-white/15 transition-all duration-500 hover:shadow-2xl hover:shadow-white/10">
         {!loaded && (
-          <div className="h-[60vh] grid place-content-center text-muted-foreground">Loading app…</div>
+          <div className="h-[80vh] grid place-content-center text-white/60 animate-pulse">
+            <div className="text-center">
+              <div className="w-8 h-8 border-2 border-white/40 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+              Loading app…
+            </div>
+          </div>
         )}
         <iframe
           title="Client App"
           src={appUrl}
-          className="w-full h-[60vh]"
-          sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+          className="w-full h-[80vh] border-0"
+          sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-downloads"
           referrerPolicy="strict-origin-when-cross-origin"
           onLoad={() => setLoaded(true)}
+          allow="fullscreen; clipboard-read; clipboard-write"
         />
       </div>
     </section>
