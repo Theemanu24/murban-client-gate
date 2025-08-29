@@ -145,7 +145,12 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
           placeholder="Type your company name..."
           aria-label="Search company"
           autoComplete="off"
-          className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black"
+          className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black !bg-white !border-gray-300 hover:!border-gray-400 focus:!border-blue-500 focus:!ring-blue-500"
+          style={{ 
+            backgroundColor: 'white !important', 
+            borderColor: '#d1d5db !important',
+            '--tw-ring-color': '#3b82f6'
+          }}
           disabled={!!selectedClient}
         />
         {query && (
@@ -161,14 +166,14 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
 
       {/* Client Results */}
       {!selectedClient && clientResults.length > 0 && (
-        <Command className="mb-4 border rounded-xl">
+        <Command className="mb-4 border rounded-xl !bg-white !border-gray-200">
           <CommandList>
             <CommandGroup heading="Companies">
               {clientResults.map((client, idx) => (
                 <CommandItem
                   key={client.slug}
                   onSelect={() => handleClientSelect(client)}
-                  className={idx === activeIndex ? "bg-accent/60" : ""}
+                  className={`${idx === activeIndex ? "bg-accent/60" : ""} !bg-white hover:!bg-gray-50`}
                 >
                   <span className="font-medium text-gray-900">{client.name}</span>
                 </CommandItem>
@@ -202,7 +207,12 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
               placeholder="Select terminal location..."
               aria-label="Search terminal"
               autoComplete="off"
-              className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black"
+              className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black !bg-white !border-gray-300 hover:!border-gray-400 focus:!border-blue-500 focus:!ring-blue-500"
+              style={{ 
+                backgroundColor: 'white !important', 
+                borderColor: '#d1d5db !important',
+                '--tw-ring-color': '#3b82f6'
+              }}
             />
             {terminalQuery && (
               <button 
@@ -217,14 +227,14 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
 
           {/* Terminal Results */}
           {terminalResults.length > 0 && (
-            <Command className="mt-3 border rounded-xl">
+            <Command className="mt-3 border rounded-xl !bg-white !border-gray-200">
               <CommandList>
                 <CommandGroup heading={`${selectedClient.name} Terminals`}>
                   {terminalResults.map((terminal, idx) => (
                     <CommandItem
                       key={terminal.name}
                       onSelect={() => handleTerminalSelect(terminal)}
-                      className={`${idx === activeIndex ? "bg-accent/60" : ""} flex items-center justify-between`}
+                      className={`${idx === activeIndex ? "bg-accent/60" : ""} flex items-center justify-between !bg-white hover:!bg-gray-50`}
                     >
                       <div className="flex items-center">
                         <MapPin className="w-4 h-4 mr-2 text-gray-500" />
