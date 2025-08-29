@@ -1,17 +1,17 @@
-
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Eye, EyeOff, ShieldCheck } from "lucide-react";
+import { Eye, EyeOff, ShieldCheck, MapPin } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
 interface PasswordGateProps {
   clientSlug: string;
+  terminal?: string;
   onSuccess: () => void;
 }
 
-export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
+export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGateProps) => {
   const [passkey, setPasskey] = useState("");
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -26,9 +26,10 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
         return;
       }
 
-      console.log('Verifying password for client:', clientSlug, 'with password:', passkey);
+      console.log('Verifying password for client:', clientSlug, 'terminal:', terminal, 'with password:', passkey);
 
       // Verify password using Supabase RPC function
+      // You can extend this later to include terminal-specific password verification
       const { data: isValid, error } = await supabase.rpc('verify_client_password', {
         client_slug: clientSlug,
         password: passkey
@@ -55,9 +56,15 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
         return;
       }
 
-      // Create secure session
-      localStorage.setItem(`session:${clientSlug}`, "active");
-      toast({ title: "Access Granted", description: "Successfully authenticated." });
+      // Create secure session with terminal info
+      const sessionKey = terminal ? `session:${clientSlug}:${terminal}` : `session:${clientSlug}`;
+      localStorage.setItem(sessionKey, "active");
+      
+      const successMessage = terminal 
+        ? `Successfully authenticated for ${terminal} terminal.`
+        : "Successfully authenticated.";
+      
+      toast({ title: "Access Granted", description: successMessage });
       onSuccess();
     } catch (err) {
       console.error('Password verification failed:', err);
@@ -75,8 +82,18 @@ export const PasswordGate = ({ clientSlug, onSuccess }: PasswordGateProps) => {
     <form onSubmit={submit} className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-6 max-w-md w-full mx-auto animate-fade-in animate-scale-in hover:bg-white/15 hover:border-white/30 hover:shadow-2xl hover:shadow-white/10 transition-all duration-500 group">
       <div className="flex items-center gap-2 mb-4 animate-fade-in" style={{ animationDelay: '0.1s' }}>
         <ShieldCheck className="text-white/80 animate-pulse group-hover:text-white transition-colors duration-300" />
-        <h2 className="text-xl font-semibold tracking-tight text-white group-hover:text-white/90 transition-colors duration-300">Enter passkey</h2>
+        <h2 className="text-xl font-semibold tracking-tight text-white group-hover:text-white/90 transition-colors duration-300">
+          Enter passkey
+        </h2>
       </div>
+      
+      {terminal && (
+        <div className="flex items-center gap-2 mb-4 animate-fade-in bg-white/5 rounded-lg p-3" style={{ animationDelay: '0.15s' }}>
+          <MapPin className="w-4 h-4 text-white/60" />
+          <span className="text-sm text-white/80">Terminal: <strong className="text-white">{terminal}</strong></span>
+        </div>
+      )}
+      
       <div className="relative animate-fade-in" style={{ animationDelay: '0.2s' }}>
         <Input
           type={show ? "text" : "password"}
