@@ -4,9 +4,14 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 import { Input } from "@/components/ui/input";
 import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";
-import { Search, X, MapPin } from "lucide-react";
+import { Search, X, MapPin, Clock, CheckCircle } from "lucide-react";
 
 type Client = Database['public']['Tables']['clients']['Row'];
+
+interface Terminal {
+  name: string;
+  available: boolean;
+}
 
 interface SearchBarProps {
   onSelect: (client: Client, terminal?: string) => void;
@@ -18,7 +23,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [clients, setClients] = useState<Client[]>([]);
   const [selectedClient, setSelectedClient] = useState<Client | null>(null);
-  const [terminals, setTerminals] = useState<string[]>([]);
+  const [terminals, setTerminals] = useState<Terminal[]>([]);
 
   useEffect(() => {
     // Fetch clients from Supabase
@@ -39,12 +44,16 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
     fetchClients();
   }, []);
 
-  // Mock terminals data - replace this with actual database fetch later
-  const getTerminalsForClient = (clientSlug: string): string[] => {
-    const terminalMap: { [key: string]: string[] } = {
-      'rubis-zambia': ['Lusaka', 'Kitwe', 'Ndola', 'Livingstone'],
-      'total-kenya': ['Nairobi', 'Mombasa', 'Kisumu', 'Nakuru'],
-      // Add more clients and their terminals here
+  // Only show available terminals - no "coming soon" options
+  const getTerminalsForClient = (clientSlug: string): Terminal[] => {
+    const terminalMap: { [key: string]: Terminal[] } = {
+      'rubis-zambia': [
+        { name: 'Lusaka', available: true }
+      ],
+      'total-uganda': [
+        { name: 'Jinja', available: true }
+      ]
+      // Other clients will have no terminals (empty array) until they're ready
     };
     return terminalMap[clientSlug] || [];
   };
@@ -55,7 +64,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
     ignoreLocation: true,
   }), [clients]);
 
-  const terminalFuse = useMemo(() => new Fuse(terminals.map(t => ({ name: t })), {
+  const terminalFuse = useMemo(() => new Fuse(terminals.map(t => ({ name: t.name, available: t.available })), {
     keys: ["name"],
     threshold: 0.3,
     ignoreLocation: true,
@@ -70,7 +79,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
   const terminalResults = useMemo(() => {
     const q = terminalQuery.trim();
     if (q.length < 2 || !selectedClient) return terminals.slice(0, 6);
-    return terminalFuse.search(q).map(r => r.item.name).slice(0, 6);
+    return terminalFuse.search(q).map(r => r.item).slice(0, 6);
   }, [terminalQuery, terminalFuse, terminals, selectedClient]);
 
   useEffect(() => { setActiveIndex(0); }, [query, terminalQuery]);
@@ -88,10 +97,11 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
     }
   };
 
-  const handleTerminalSelect = (terminal: string) => {
-    setTerminalQuery(terminal);
+  const handleTerminalSelect = (terminal: Terminal) => {
+    setTerminalQuery(terminal.name);
     if (selectedClient) {
-      onSelect(selectedClient, terminal);
+      // All shown terminals are available, so no need to check availability
+      onSelect(selectedClient, terminal.name);
     }
   };
 
@@ -108,7 +118,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
     } else if (e.key === "Enter") {
       e.preventDefault();
       if (isTerminal) {
-        handleTerminalSelect(currentResults[activeIndex]);
+        handleTerminalSelect(terminalResults[activeIndex]);
       } else {
         handleClientSelect(clientResults[activeIndex]);
       }
@@ -212,12 +222,20 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
                 <CommandGroup heading={`${selectedClient.name} Terminals`}>
                   {terminalResults.map((terminal, idx) => (
                     <CommandItem
-                      key={terminal}
+                      key={terminal.name}
                       onSelect={() => handleTerminalSelect(terminal)}
-                      className={idx === activeIndex ? "bg-accent/60" : ""}
+                      className={`${idx === activeIndex ? "bg-accent/60" : ""} flex items-center justify-between`}
                     >
-                      <MapPin className="w-4 h-4 mr-2 text-gray-500" />
-                      <span className="font-medium">{terminal}</span>
+                      <div className="flex items-center">
+                        <MapPin className="w-4 h-4 mr-2 text-gray-500" />
+                        <span className="font-medium">{terminal.name}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <CheckCircle className="w-4 h-4 mr-1 text-green-500" />
+                        <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                          Available
+                        </span>
+                      </div>
                     </CommandItem>
                   ))}
                 </CommandGroup>
@@ -237,7 +255,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
         </>
       )}
 
-      {/* No terminals available */}
+      {/* No terminals available - proceed directly */}
       {selectedClient && terminals.length === 0 && (
         <div className="p-4 text-muted-foreground border rounded-xl">
           No terminals configured for {selectedClient.name}. Proceeding with company access...
