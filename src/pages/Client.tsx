@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
@@ -10,6 +10,9 @@ type Client = Database['public']['Tables']['clients']['Row'];
 const ClientPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const selectedTerminal = searchParams.get('terminal');
+  
   const [client, setClient] = useState<Client | null>(null);
   const [authed, setAuthed] = useState(false); // Always starts as false
   const [loading, setLoading] = useState(true);
@@ -36,16 +39,16 @@ const ClientPage = () => {
         setClient(null);
       } else {
         setClient(client);
-        document.title = `${client.name} • Murban Portal`;
+        const title = selectedTerminal 
+          ? `${client.name} - ${selectedTerminal} • Murban Portal`
+          : `${client.name} • Murban Portal`;
+        document.title = title;
       }
       setLoading(false);
     };
 
     fetchClient();
-  }, [slug]);
-
-  // Removed the localStorage check that was auto-authenticating users
-  // Now the password gate will always appear initially
+  }, [slug, selectedTerminal]);
 
   if (loading) {
     return (
@@ -85,20 +88,37 @@ const ClientPage = () => {
       <div className="container mx-auto py-10 h-full overflow-y-auto relative z-10">
         <section className="max-w-3xl mx-auto mb-8 animate-fade-in">
           <article className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-6 hover:bg-white/15 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-white/10 group">
-            <h1 className="text-2xl font-bold tracking-tight text-white animate-fade-in group-hover:text-white/90 transition-colors duration-300" style={{ animationDelay: '0.1s' }}>{client.name}</h1>
+            <h1 className="text-2xl font-bold tracking-tight text-white animate-fade-in group-hover:text-white/90 transition-colors duration-300" style={{ animationDelay: '0.1s' }}>
+              {client.name}
+              {selectedTerminal && (
+                <span className="text-lg font-normal text-white/80 ml-2">- {selectedTerminal}</span>
+              )}
+            </h1>
             {client.description && (
               <p className="text-white/80 mt-2 animate-fade-in group-hover:text-white/70 transition-colors duration-300" style={{ animationDelay: '0.2s' }}>{client.description}</p>
+            )}
+            {selectedTerminal && (
+              <p className="text-white/60 mt-1 text-sm animate-fade-in" style={{ animationDelay: '0.3s' }}>
+                Terminal: {selectedTerminal}
+              </p>
             )}
           </article>
         </section>
 
         {!authed ? (
           <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <PasswordGate clientSlug={client.slug} onSuccess={() => setAuthed(true)} />
+            <PasswordGate 
+              clientSlug={client.slug} 
+              terminal={selectedTerminal}
+              onSuccess={() => setAuthed(true)} 
+            />
           </div>
         ) : (
           <div className="animate-fade-in" style={{ animationDelay: '0.1s' }}>
-            <ClientHub appUrl={client.app_url} />
+            <ClientHub 
+              appUrl={client.app_url} 
+              terminal={selectedTerminal}
+            />
           </div>
         )}
       </div>
