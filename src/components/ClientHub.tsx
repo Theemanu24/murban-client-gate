@@ -1,8 +1,22 @@
 import { useMemo, useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
-export const ClientHub = ({ appUrl }: { appUrl: string }) => {
-  const origin = useMemo(() => new URL(appUrl).origin, [appUrl]);
+export const ClientHub = ({ appUrl, terminal }: { appUrl: string; terminal?: string }) => {
+  // Construct app URL with terminal parameter if provided
+  const finalAppUrl = useMemo(() => {
+    if (!terminal) return appUrl;
+    
+    try {
+      const url = new URL(appUrl);
+      url.searchParams.set('terminal', terminal);
+      return url.toString();
+    } catch {
+      // If URL is invalid, return original
+      return appUrl;
+    }
+  }, [appUrl, terminal]);
+
+  const origin = useMemo(() => new URL(finalAppUrl).origin, [finalAppUrl]);
   const [allowedOrigins, setAllowedOrigins] = useState<string[]>([]);
   const [loaded, setLoaded] = useState(false);
 
