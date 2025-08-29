@@ -39,27 +39,24 @@ export const ClientHub = ({ appUrl }: { appUrl: string }) => {
   }
 
   return (
-    <section className="space-y-4 animate-fade-in">
-      {/* Removed the header with Launch App button */}
-      <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm overflow-hidden hover:bg-white/15 transition-all duration-500 hover:shadow-2xl hover:shadow-white/10">
-        {!loaded && (
-          <div className="h-[80vh] grid place-content-center text-white/60 animate-pulse">
-            <div className="text-center">
-              <div className="w-8 h-8 border-2 border-white/40 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
-              Loading app…
-            </div>
+    <div className="fixed inset-0 z-50 bg-black animate-fade-in">
+      {!loaded && (
+        <div className="absolute inset-0 grid place-content-center text-white/60 animate-pulse bg-gradient-to-br from-[#304259] via-[#2a3b4f] to-[#1e2a3a]">
+          <div className="text-center">
+            <div className="w-8 h-8 border-2 border-white/40 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+            Loading app…
           </div>
-        )}
-        <iframe
-          title="Client App"
-          src={appUrl}
-          className="w-full h-[80vh] border-0"
-          sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-downloads"
-          referrerPolicy="strict-origin-when-cross-origin"
-          onLoad={() => setLoaded(true)}
-          allow="fullscreen; clipboard-read; clipboard-write"
-        />
-      </div>
-    </section>
+        </div>
+      )}
+      <iframe
+        title="Client App"
+        src={appUrl}
+        className="w-full h-full border-0"
+        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-downloads"
+        referrerPolicy="strict-origin-when-cross-origin"
+        onLoad={() => setLoaded(true)}
+        allow="fullscreen; clipboard-read; clipboard-write"
+      />
+    </div>
   );
 };
