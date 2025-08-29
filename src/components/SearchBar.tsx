@@ -50,7 +50,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
       'rubis-zambia': [
         { name: 'Lusaka', available: true }
       ],
-      'total-uganda': [
+      'totaluganda': [
         { name: 'Jinja', available: true }
       ]
       // Other clients will have no terminals (empty array) until they're ready
