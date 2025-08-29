@@ -4,6 +4,16 @@ import { SearchBar } from "@/components/SearchBar";
 const Resources = () => {
   const navigate = useNavigate();
   
+  const handleSelection = (client: any, terminal?: string) => {
+    if (terminal) {
+      // Navigate to client page with terminal parameter
+      navigate(`/c/${client.slug}?terminal=${encodeURIComponent(terminal)}`);
+    } else {
+      // Navigate to client page without terminal
+      navigate(`/c/${client.slug}`);
+    }
+  };
+  
   return (
     <main 
       className="relative flex-1 overflow-y-auto bg-cover bg-center bg-no-repeat min-h-screen" 
@@ -18,24 +28,24 @@ const Resources = () => {
             Secure Client Portal
           </h1>
           <p className="text-xl md:text-2xl text-white/95 max-w-3xl mx-auto mb-12 leading-relaxed font-medium drop-shadow-lg">
-            Search your company, enter your passkey, and launch your Murban app securely.
+            Search your company, select your terminal location, enter your passkey, and launch your Murban app securely.
           </p>
-          <SearchBar onSelect={(c) => navigate(`/c/${c.slug}`)} />
+          <SearchBar onSelect={handleSelection} />
         </div>
       </section>
       
       <section className="relative py-16">
         <div className="relative z-10 container mx-auto">
-          <div className="grid md:grid-cols-4 gap-6 text-left">
-            {["Search", "Select", "Enter Passkey", "Launch"].map((step, i) => (
+          <div className="grid md:grid-cols-5 gap-4 text-left">
+            {["Search Company", "Select Terminal", "Enter Passkey", "Authenticate", "Launch"].map((step, i) => (
               <div 
                 key={step} 
-                className="group cursor-pointer rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-6 transition-all duration-500 hover:bg-white/25 hover:border-white/40 hover:scale-110 hover:rotate-1 hover:shadow-2xl hover:shadow-white/20 active:scale-95 transform"
+                className="group cursor-pointer rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-4 transition-all duration-500 hover:bg-white/25 hover:border-white/40 hover:scale-110 hover:rotate-1 hover:shadow-2xl hover:shadow-white/20 active:scale-95 transform"
               >
-                <div className="text-sm text-white/70 group-hover:text-white/90 transition-colors duration-300">
+                <div className="text-xs text-white/70 group-hover:text-white/90 transition-colors duration-300">
                   Step {i + 1}
                 </div>
-                <div className="font-bold text-lg mt-2 text-white group-hover:text-white transition-colors duration-300">
+                <div className="font-bold text-sm mt-2 text-white group-hover:text-white transition-colors duration-300">
                   {step}
                 </div>
               </div>
