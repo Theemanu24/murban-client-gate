@@ -145,7 +145,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
           placeholder="Type your company name..."
           aria-label="Search company"
           autoComplete="off"
-          className="pl-10 h-12 text-base bg-white border-gray-300 text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500"
+          className="pl-10 h-12 text-base bg-white border-gray-300 text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:text-gray-900"
           disabled={!!selectedClient}
         />
         {query && (
@@ -170,7 +170,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
                   onSelect={() => handleClientSelect(client)}
                   className={idx === activeIndex ? "bg-accent/60" : ""}
                 >
-                  <span className="font-medium">{client.name}</span>
+                  <span className="font-medium text-gray-900">{client.name}</span>
                 </CommandItem>
               ))}
             </CommandGroup>
@@ -179,13 +179,13 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
       )}
 
       {!selectedClient && query.trim().length > 0 && query.trim().length < 5 && (
-        <div className="p-4 text-muted-foreground border rounded-xl">
+        <div className="p-4 text-gray-700 border rounded-xl bg-gray-50">
           Type at least 5 letters to search your company.
         </div>
       )}
 
       {!selectedClient && query.trim().length >= 5 && clientResults.length === 0 && (
-        <div className="p-4 text-muted-foreground border rounded-xl">
+        <div className="p-4 text-gray-700 border rounded-xl bg-gray-50">
           No matches. Contact support.
         </div>
       )}
@@ -202,7 +202,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
               placeholder="Select terminal location..."
               aria-label="Search terminal"
               autoComplete="off"
-              className="pl-10 h-12 text-base bg-white border-gray-300 text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500"
+              className="pl-10 h-12 text-base bg-white border-gray-300 text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:text-gray-900"
             />
             {terminalQuery && (
               <button 
@@ -228,7 +228,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
                     >
                       <div className="flex items-center">
                         <MapPin className="w-4 h-4 mr-2 text-gray-500" />
-                        <span className="font-medium">{terminal.name}</span>
+                        <span className="font-medium text-gray-900">{terminal.name}</span>
                       </div>
                       <div className="flex items-center">
                         <CheckCircle className="w-4 h-4 mr-1 text-green-500" />
@@ -257,7 +257,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
 
       {/* No terminals available - proceed directly */}
       {selectedClient && terminals.length === 0 && (
-        <div className="p-4 text-muted-foreground border rounded-xl">
+        <div className="p-4 text-gray-700 border rounded-xl bg-gray-50">
           No terminals configured for {selectedClient.name}. Proceeding with company access...
         </div>
       )}
