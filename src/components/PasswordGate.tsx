@@ -79,7 +79,10 @@ export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGatePr
   };
 
   return (
-    <form onSubmit={submit} className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-6 max-w-md w-full mx-auto animate-fade-in animate-scale-in hover:bg-white/15 hover:border-white/30 hover:shadow-2xl hover:shadow-white/10 transition-all duration-500 group">
+    <form
+      onSubmit={submit}
+      className="glass p-6 max-w-md w-full mx-auto animate-fade-in animate-scale-in hover:bg-white/15 hover:border-white/30 hover:shadow-2xl hover:shadow-white/10 transition-all duration-500 group"
+    >
       <div className="flex items-center gap-2 mb-4 animate-fade-in" style={{ animationDelay: '0.1s' }}>
         <ShieldCheck className="text-white/80 animate-pulse group-hover:text-white transition-colors duration-300" />
         <h2 className="text-xl font-semibold tracking-tight text-white group-hover:text-white/90 transition-colors duration-300">
