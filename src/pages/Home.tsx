@@ -67,10 +67,10 @@ const Home = () => {
   return (
     <>
       {/* Dark translucent overlay to dim background image */}
-      <div className="fixed inset-0 bg-black/60" style={{ zIndex: -1 }} />
+      <div className="fixed inset-0 bg-black/60 pointer-events-none z-0" />
 
       {/* Floating Particles - also fixed to cover entire viewport */}
-      <div className="fixed inset-0" style={{ zIndex: -1 }}>
+      <div className="fixed inset-0 pointer-events-none z-10">
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
@@ -89,7 +89,7 @@ const Home = () => {
         className="relative min-h-screen flex items-center sm:items-start justify-center pt-16 sm:pt-24 sm:-mt-12"
       >
         {/* Content */}
-        <div className="relative z-10 text-center px-4 sm:px-6 flex flex-col py-8">
+        <div className="relative z-20 text-center px-4 sm:px-6 flex flex-col py-8">
           <div className="max-w-4xl mx-auto flex flex-col justify-center">
             <motion.div
               variants={containerVariants}
