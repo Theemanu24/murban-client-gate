@@ -136,60 +136,62 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
   return (
     <div className="w-full max-w-2xl mx-auto animate-fade-in">
       {/* Client Search */}
-      <div className="relative mb-4 search-container">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-          className="search-icon absolute left-3 top-1/2 -translate-y-1/2"
-        >
-          <circle cx="11" cy="11" r="8" stroke="url(#searchGradient)" />
-          <line x1="22" y1="22" x2="16.65" y2="16.65" stroke="url(#searchLineGradient)" />
-          <defs>
-            <linearGradient id="searchGradient" gradientTransform="rotate(50)">
-              <stop offset="0%" stopColor="#f8e7f8" />
-              <stop offset="50%" stopColor="#b6a9b7" />
-            </linearGradient>
-            <linearGradient id="searchLineGradient">
-              <stop offset="0%" stopColor="#b6a9b7" />
-              <stop offset="50%" stopColor="#837484" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <Input
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={(e) => handleKeyDown(e, false)}
-          placeholder="Type your company name..."
-          aria-label="Search company"
-          autoComplete="off"
-          className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black !bg-white !border-gray-300 hover:!border-gray-400 focus:!border-blue-500 focus:!ring-blue-500"
-          style={{ 
-            backgroundColor: 'white !important', 
-            borderColor: '#d1d5db !important',
-            '--tw-ring-color': '#3b82f6'
-          }}
-          disabled={!!selectedClient}
-        />
-        {query && (
-          <button 
-            aria-label="Clear" 
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700" 
-            onClick={resetSearch}
+      <div className="relative mb-4 search-container group">
+        <div className="relative transition-all duration-300 ease-out group-hover:-translate-y-1 group-hover:shadow-lg">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+            className="search-icon absolute left-3 top-1/2 -translate-y-1/2"
           >
-            <X />
-          </button>
-        )}
+            <circle cx="11" cy="11" r="8" stroke="url(#searchGradient)" />
+            <line x1="22" y1="22" x2="16.65" y2="16.65" stroke="url(#searchLineGradient)" />
+            <defs>
+              <linearGradient id="searchGradient" gradientTransform="rotate(50)">
+                <stop offset="0%" stopColor="#f8e7f8" />
+                <stop offset="50%" stopColor="#b6a9b7" />
+              </linearGradient>
+              <linearGradient id="searchLineGradient">
+                <stop offset="0%" stopColor="#b6a9b7" />
+                <stop offset="50%" stopColor="#837484" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <Input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => handleKeyDown(e, false)}
+            placeholder="Type your company name..."
+            aria-label="Search company"
+            autoComplete="off"
+            className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black !bg-white !border-gray-300 hover:!border-gray-400 focus:!border-blue-500 focus:!ring-blue-500"
+            style={{ 
+              backgroundColor: 'white !important', 
+              borderColor: '#d1d5db !important',
+              '--tw-ring-color': '#3b82f6'
+            }}
+            disabled={!!selectedClient}
+          />
+          {query && (
+            <button 
+              aria-label="Clear" 
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700" 
+              onClick={resetSearch}
+            >
+              <X />
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Client Results */}
       {!selectedClient && clientResults.length > 0 && (
-        <Command className="mb-4 border rounded-xl !bg-white !border-gray-200">
+        <Command className="mb-4 border rounded-xl !bg-white !border-gray-200 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
           <CommandList>
             <CommandGroup heading="Companies">
               {clientResults.map((client, idx) => (
@@ -207,13 +209,13 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
       )}
 
       {!selectedClient && query.trim().length > 0 && query.trim().length < 5 && (
-        <div className="p-4 text-gray-700 border rounded-xl bg-gray-50">
+        <div className="p-4 text-gray-700 border rounded-xl bg-gray-50 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
           Type at least 5 letters to search your company.
         </div>
       )}
 
       {!selectedClient && query.trim().length >= 5 && clientResults.length === 0 && (
-        <div className="p-4 text-gray-700 border rounded-xl bg-gray-50">
+        <div className="p-4 text-gray-700 border rounded-xl bg-gray-50 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
           No matches. Contact support.
         </div>
       )}
@@ -221,36 +223,38 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
       {/* Terminal Search - Only shown after client is selected */}
       {selectedClient && terminals.length > 0 && (
         <>
-          <div className="relative">
-            <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
-            <Input
-              value={terminalQuery}
-              onChange={(e) => setTerminalQuery(e.target.value)}
-              onKeyDown={(e) => handleKeyDown(e, true)}
-              placeholder="Select terminal location..."
-              aria-label="Search terminal"
-              autoComplete="off"
-              className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black !bg-white !border-gray-300 hover:!border-gray-400 focus:!border-blue-500 focus:!ring-blue-500"
-              style={{ 
-                backgroundColor: 'white !important', 
-                borderColor: '#d1d5db !important',
-                '--tw-ring-color': '#3b82f6'
-              }}
-            />
-            {terminalQuery && (
-              <button 
-                aria-label="Clear terminal" 
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700" 
-                onClick={() => setTerminalQuery("")}
-              >
-                <X />
-              </button>
-            )}
+          <div className="relative group">
+            <div className="relative transition-all duration-300 ease-out group-hover:-translate-y-1 group-hover:shadow-lg">
+              <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+              <Input
+                value={terminalQuery}
+                onChange={(e) => setTerminalQuery(e.target.value)}
+                onKeyDown={(e) => handleKeyDown(e, true)}
+                placeholder="Select terminal location..."
+                aria-label="Search terminal"
+                autoComplete="off"
+                className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black !bg-white !border-gray-300 hover:!border-gray-400 focus:!border-blue-500 focus:!ring-blue-500"
+                style={{ 
+                  backgroundColor: 'white !important', 
+                  borderColor: '#d1d5db !important',
+                  '--tw-ring-color': '#3b82f6'
+                }}
+              />
+              {terminalQuery && (
+                <button 
+                  aria-label="Clear terminal" 
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700" 
+                  onClick={() => setTerminalQuery("")}
+                >
+                  <X />
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Terminal Results */}
           {terminalResults.length > 0 && (
-            <Command className="mt-3 border rounded-xl !bg-white !border-gray-200">
+            <Command className="mt-3 border rounded-xl !bg-white !border-gray-200 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
               <CommandList>
                 <CommandGroup heading={`${selectedClient.name} Terminals`}>
                   {terminalResults.map((terminal, idx) => (
@@ -290,7 +294,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
 
       {/* No terminals available - proceed directly */}
       {selectedClient && terminals.length === 0 && (
-        <div className="p-4 text-gray-700 border rounded-xl bg-gray-50">
+        <div className="p-4 text-gray-700 border rounded-xl bg-gray-50 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
           No terminals configured for {selectedClient.name}. Proceeding with company access...
         </div>
       )}
