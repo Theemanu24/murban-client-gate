@@ -15,9 +15,20 @@ interface Terminal {
 
 interface SearchBarProps {
   onSelect: (client: Client, terminal?: string) => void;
+  // Add optional prop to restrict search to specific clients
+  allowedClientSlugs?: string[];
+  // Or add user context to determine allowed clients
+  userContext?: {
+    allowedClients?: string[];
+    restrictedKeywords?: string[];
+  };
 }
 
-export const SearchBar = ({ onSelect }: SearchBarProps) => {
+export const SearchBar = ({ 
+  onSelect, 
+  allowedClientSlugs,
+  userContext 
+}: SearchBarProps) => {
   const [query, setQuery] = useState("");
   const [terminalQuery, setTerminalQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
@@ -26,13 +37,19 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
   const [terminals, setTerminals] = useState<Terminal[]>([]);
 
   useEffect(() => {
-    // Fetch clients from Supabase
+    // Fetch clients from Supabase with proper filtering
     const fetchClients = async () => {
-      const { data: clients, error } = await supabase
+      let query = supabase
         .from('clients')
         .select('*')
-        .eq('active', true)
-        .order('name');
+        .eq('active', true);
+      
+      // If specific clients are allowed, filter to only those
+      if (allowedClientSlugs && allowedClientSlugs.length > 0) {
+        query = query.in('slug', allowedClientSlugs);
+      }
+      
+      const { data: clients, error } = await query.order('name');
         
       if (error) {
         console.error('Error fetching clients:', error);
@@ -42,7 +59,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
       setClients(clients || []);
     };
     fetchClients();
-  }, []);
+  }, [allowedClientSlugs]);
 
   // Only show available terminals - no "coming soon" options
   const getTerminalsForClient = (clientSlug: string): Terminal[] => {
@@ -56,6 +73,37 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
       // Other clients will have no terminals (empty array) until they're ready
     };
     return terminalMap[clientSlug] || [];
+  };
+
+  // Enhanced filtering function to prevent cross-client visibility
+  const isSearchAllowed = (client: Client, searchQuery: string): boolean => {
+    const query = searchQuery.toLowerCase().trim();
+    
+    // If user context provides restrictions, check them
+    if (userContext?.restrictedKeywords) {
+      const hasRestrictedKeyword = userContext.restrictedKeywords.some(keyword => 
+        query.includes(keyword.toLowerCase())
+      );
+      if (hasRestrictedKeyword && !userContext.allowedClients?.includes(client.slug)) {
+        return false;
+      }
+    }
+    
+    // Example: Prevent "tank" searches from showing swahili client
+    // and prevent "swahili/beach" searches from showing tank client
+    const searchKeywordMapping = {
+      'tank': ['tank-client-slug'], // Replace with actual tank client slug
+      'swahili': ['swahili-client-slug'], // Replace with actual swahili client slug
+      'beach': ['swahili-client-slug'], // Beach might be associated with swahili client
+    };
+    
+    for (const [keyword, allowedSlugs] of Object.entries(searchKeywordMapping)) {
+      if (query.includes(keyword)) {
+        return allowedSlugs.includes(client.slug);
+      }
+    }
+    
+    return true;
   };
 
   const fuse = useMemo(() => new Fuse(clients, {
@@ -73,7 +121,11 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
   const clientResults = useMemo(() => {
     const q = query.trim();
     if (q.length < 5) return [];
-    return fuse.search(q).map(r => r.item).filter(c => c.active).slice(0, 8);
+    
+    return fuse.search(q)
+      .map(r => r.item)
+      .filter(c => c.active && isSearchAllowed(c, q)) // Add isolation filter
+      .slice(0, 8);
   }, [query, fuse]);
 
   const terminalResults = useMemo(() => {
