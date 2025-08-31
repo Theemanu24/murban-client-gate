@@ -25,9 +25,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 80px;
-  font-size: 14px;
-  padding: 0.8rem 1.6rem;
+    min-width: 70px;
+    font-size: 12px;
+    padding: 0.5rem 1rem;
   cursor: pointer;
   font-weight: 600;
   letter-spacing: 0.3px;
@@ -49,7 +49,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  width: calc(100% / 2);
+  width: calc(100% / 3);
   border-radius: 1rem;
   z-index: 1;
   transition:
@@ -58,20 +58,29 @@
     box-shadow 0.4s ease-in-out;
 }
 
-/* Silver / Home Page */
-#glass-silver:checked ~ .glass-glider {
+/* Home Page */
+#glass-gold:checked ~ .glass-glider {
   transform: translateX(0%);
+  background: linear-gradient(135deg, #ffd70055, #ffcc00);
+  box-shadow:
+    0 0 18px rgba(255, 215, 0, 0.5),
+    0 0 10px rgba(255, 235, 150, 0.4) inset;
+}
+
+/* Murban Client Portal */
+#glass-silver:checked ~ .glass-glider {
+  transform: translateX(100%);
   background: linear-gradient(135deg, #c0c0c055, #e0e0e0);
   box-shadow:
     0 0 18px rgba(192, 192, 192, 0.5),
     0 0 10px rgba(255, 255, 255, 0.4) inset;
 }
 
-/* Gold / Contact Us */
-#glass-gold:checked ~ .glass-glider {
-  transform: translateX(100%);
-  background: linear-gradient(135deg, #ffd70055, #ffcc00);
+/* Contact Information */
+#glass-platinum:checked ~ .glass-glider {
+  transform: translateX(200%);
+  background: linear-gradient(135deg, #d0e7ff55, #a0d8ff);
   box-shadow:
-    0 0 18px rgba(255, 215, 0, 0.5),
-    0 0 10px rgba(255, 235, 150, 0.4) inset;
+    0 0 18px rgba(160, 216, 255, 0.5),
+    0 0 10px rgba(200, 240, 255, 0.4) inset;
 }
