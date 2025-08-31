@@ -1,70 +1,47 @@
-/* From Uiverse.io by deamelo */
-.main {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-}
+/* From Uiverse.io by satyamchaudharydev */
 
-.up {
-  display: flex;
-  flex-direction: row;
-  gap: 0.5em;
-}
-
-.down {
-  display: flex;
-  flex-direction: row;
-  gap: 0.5em;
-}
-
-
-.card1,
-.card2,
-.card3,
-.card4 {
-  width: 90px;
-  height: 90px;
-  outline: none;
+/* === removing default button style === */
+.button {
+  margin: 0;
+  height: auto;
+  background: transparent;
+  padding: 0;
   border: none;
-  background: #000814;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: #FFD60A;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  transition: 0.2s ease-in-out;
-}
-
-.card1 {
-  border-radius: 90px 5px 5px 5px;
-}
-
-.card2 {
-  border-radius: 5px 90px 5px 5px;
-}
-
-.card3 {
-  border-radius: 5px 5px 5px 90px;
-}
-
-.card4 {
-  border-radius: 5px 5px 90px 5px;
-}
-
-.card-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-align: center;
-}
-
-.card1:hover,
-.card2:hover,
-.card3:hover,
-.card4:hover {
   cursor: pointer;
-  scale: 1.1;
-  background-color: #000814;
-  color: #FFD60A;
 }
+
+/* button styling */
+.button {
+  --border-right: 6px;
+  --text-stroke-color: rgba(255, 255, 255, 0.6);
+  --animation-color: #37FF8B;
+  --fs-size: 2em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Arial";
+  position: relative;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+}
+
+/* text revealed on hover */
+.hover-text {
+  position: absolute;
+  box-sizing: border-box;
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+
+/* hover effect */
+.button:hover .hover-text {
+  width: 100%;
+  filter: drop-shadow(0 0 23px var(--animation-color));
+}
+

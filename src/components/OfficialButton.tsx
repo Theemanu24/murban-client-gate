@@ -1,34 +1,25 @@
 import { Link } from "react-router-dom";
 
 const OfficialButton = () => (
-  <div className="main">
-    <div className="up">
-      <Link to="/resources" className="card1">
-        <span className="card-label">Portal</span>
-      </Link>
-      <a
-        href="https://murban-eng.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="card2"
-      >
-        <span className="card-label">Official Website</span>
-      </a>
-    </div>
-    <div className="down">
-      <a
-        href="https://www.linkedin.com/company/murban-engineering/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="card3"
-      >
-        <span className="card-label">LinkedIn</span>
-      </a>
-      <Link to="/contact" className="card4">
-        <span className="card-label">Contact Us</span>
-      </Link>
-    </div>
+  <div className="flex flex-col sm:flex-row gap-4">
+    <Link to="/resources" className="button" data-text="Portal">
+      <span className="actual-text">&nbsp;Portal&nbsp;</span>
+      <span aria-hidden="true" className="hover-text">&nbsp;Portal&nbsp;</span>
+    </Link>
+    <a
+      href="https://murban-eng.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="button"
+      data-text="Official Website"
+    >
+      <span className="actual-text">&nbsp;Official Website&nbsp;</span>
+      <span aria-hidden="true" className="hover-text">
+        &nbsp;Official Website&nbsp;
+      </span>
+    </a>
   </div>
 );
 
 export default OfficialButton;
+
