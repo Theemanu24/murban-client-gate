@@ -45,18 +45,6 @@ const Navbar = () => {
           <input
             type="radio"
             name="nav"
-            id="glass-silver"
-            checked={active === "portal"}
-            onChange={() => {
-              setActive("portal");
-              navigate("/resources");
-            }}
-          />
-          <label htmlFor="glass-silver">MURBAN CLIENT PORTAL</label>
-
-          <input
-            type="radio"
-            name="nav"
             id="glass-gold"
             checked={active === "home"}
             onChange={() => {
@@ -65,6 +53,18 @@ const Navbar = () => {
             }}
           />
           <label htmlFor="glass-gold">HOME PAGE</label>
+
+          <input
+            type="radio"
+            name="nav"
+            id="glass-silver"
+            checked={active === "portal"}
+            onChange={() => {
+              setActive("portal");
+              navigate("/resources");
+            }}
+          />
+          <label htmlFor="glass-silver">MURBAN CLIENT PORTAL</label>
 
           <input
             type="radio"
