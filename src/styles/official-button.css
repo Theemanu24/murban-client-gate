@@ -71,7 +71,7 @@
 }
 
 .learn-more .button-text.official-website {
-  font-size: 0.75rem;
+  font-size: inherit;
 }
 
 .learn-more:hover .circle {
@@ -96,5 +96,9 @@
   .learn-more .circle {
     width: 3.5rem;
     height: 3.5rem;
+  }
+
+  .learn-more .button-text.official-website {
+    font-size: 0.75rem;
   }
 }
