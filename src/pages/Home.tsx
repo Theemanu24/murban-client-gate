@@ -75,9 +75,9 @@ const Home = () => {
         }}
       />
       
-      {/* Animated Background Gradient - also fixed to cover entire viewport */}
+      {/* Animated Background Gradient - made transparent to reveal the background image */}
       <div
-        className="fixed inset-0 bg-gradient-to-r from-black/30 via-black/15 to-black/30 animate-gradient-shift"
+        className="fixed inset-0 bg-gradient-to-r from-transparent via-transparent to-transparent animate-gradient-shift"
         style={{ zIndex: -1 }}
       />
       
