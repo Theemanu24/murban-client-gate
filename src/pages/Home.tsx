@@ -97,9 +97,9 @@ const Home = () => {
         ))}
       </div>
 
-      <main className="relative min-h-screen flex items-center justify-center">        
+      <main className="relative min-h-screen flex items-start justify-center pt-24 sm:pt-32">
         {/* Content */}
-        <div className="relative z-10 text-center px-4 sm:px-6 flex flex-col justify-center min-h-screen py-8">
+        <div className="relative z-10 text-center px-4 sm:px-6 flex flex-col py-8">
           <div className="max-w-4xl mx-auto flex flex-col justify-center">
             <motion.div
               variants={containerVariants}
