@@ -1,0 +1,39 @@
+/* Animated square loader background */
+.loader {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
+  justify-items: center;
+  align-items: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.loader-square {
+  width: 1rem;
+  height: 1rem;
+  background-color: rgba(255, 255, 255, 0.15);
+  animation: loader-blink 1.6s ease-in-out infinite;
+}
+
+.loader-square:nth-child(1) { animation-delay: 0s; }
+.loader-square:nth-child(2) { animation-delay: 0.2s; }
+.loader-square:nth-child(3) { animation-delay: 0.4s; }
+.loader-square:nth-child(4) { animation-delay: 0.6s; }
+.loader-square:nth-child(5) { animation-delay: 0.8s; }
+.loader-square:nth-child(6) { animation-delay: 1s; }
+.loader-square:nth-child(7) { animation-delay: 1.2s; }
+
+@keyframes loader-blink {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.8);
+  }
+}
