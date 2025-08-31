@@ -17,7 +17,7 @@ const OfficialButton = () => (
       <span className="circle" aria-hidden="true">
         <span className="icon arrow"></span>
       </span>
-      <span className="button-text">Official Website</span>
+      <span className="button-text official-website">Official Website</span>
     </a>
   </div>
 );
