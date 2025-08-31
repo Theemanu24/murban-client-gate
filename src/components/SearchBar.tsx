@@ -171,20 +171,11 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
     onClear?: () => void;
     icon?: React.ComponentType<any>;
   }) => (
-    <div className="relative">
-      {/* Background Grid */}
-      <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-gray-100 to-transparent opacity-20 pointer-events-none" 
-           style={{
-             backgroundImage: 'linear-gradient(to right, #0f0f10 1px, transparent 1px), linear-gradient(to bottom, #0f0f10 1px, transparent 1px)',
-             backgroundSize: '1rem 1rem',
-             filter: 'blur(1px)',
-             zIndex: -1
-           }} />
-      
-      {/* Animated Container */}
-      <div className="relative group">
+    <div className="relative w-full">
+      {/* Animated Border Container - Behind everything */}
+      <div className="absolute -inset-1 rounded-xl pointer-events-none">
         {/* Glow Effect */}
-        <div className="absolute inset-0 rounded-xl overflow-hidden opacity-40 blur-[30px] pointer-events-none z-[1]">
+        <div className="absolute inset-0 rounded-xl overflow-hidden opacity-40 blur-[30px]">
           <div className="absolute inset-0 w-[999px] h-[999px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin-slow"
                style={{
                  backgroundImage: 'conic-gradient(#000, #402fb5 5%, #000 15%, #000 35%, #cf30aa 45%, #000 55%, #000 75%, #402fb5 85%, #000 100%)',
@@ -195,7 +186,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
         </div>
 
         {/* Dark Border Background */}
-        <div className="absolute inset-0 rounded-xl overflow-hidden pointer-events-none z-[2]">
+        <div className="absolute inset-0 rounded-xl overflow-hidden">
           <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin-slow"
                style={{
                  backgroundImage: 'conic-gradient(rgba(0, 0, 0, 0), #18116a 5%, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0) 35%, #6e1b60 45%, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0) 75%, #18116a 85%, rgba(0, 0, 0, 0) 100%)',
@@ -206,7 +197,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
         </div>
 
         {/* White Layer */}
-        <div className="absolute inset-0 rounded-xl overflow-hidden blur-[2px] pointer-events-none z-[3]">
+        <div className="absolute inset-0 rounded-xl overflow-hidden blur-[2px]">
           <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin-slow brightness-[1.4]"
                style={{
                  backgroundImage: 'conic-gradient(rgba(0, 0, 0, 0) 0%, #a099d8 8%, rgba(0, 0, 0, 0) 18%, rgba(0, 0, 0, 0) 40%, #dfa2da 50%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 80%, #a099d8 90%, rgba(0, 0, 0, 0) 100%)',
@@ -217,7 +208,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
         </div>
 
         {/* Border Layer */}
-        <div className="absolute inset-0 rounded-xl overflow-hidden blur-[0.5px] pointer-events-none z-[4]">
+        <div className="absolute inset-0 rounded-xl overflow-hidden blur-[0.5px]">
           <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin-slow brightness-[1.3]"
                style={{
                  backgroundImage: 'conic-gradient(#1c191c, #402fb5 8%, #1c191c 18%, #1c191c 38%, #cf30aa 48%, #1c191c 58%, #1c191c 78%, #402fb5 88%, #1c191c 100%)',
@@ -226,47 +217,46 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
                  animationDuration: '5s'
                }} />
         </div>
+      </div>
 
-        {/* Input Field */}
-        <div className="relative z-50">
-          <input
-            value={value}
-            onChange={onChange}
-            onKeyDown={onKeyDown}
-            placeholder={placeholder}
-            disabled={disabled}
-            className="w-full h-14 px-12 bg-black/90 border-none rounded-xl text-white text-lg placeholder-gray-400 focus:outline-none relative z-50 cursor-text"
-            style={{ backgroundColor: '#010201', position: 'relative', zIndex: 50 }}
-          />
-          
-          {/* Icon */}
-          {IconComponent && (
-            <IconComponent className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400 z-[60] pointer-events-none" />
-          )}
+      {/* Input Container - On top */}
+      <div className="relative bg-black rounded-xl" style={{ backgroundColor: '#010201' }}>
+        <input
+          value={value}
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          placeholder={placeholder}
+          disabled={disabled}
+          className="w-full h-14 px-12 bg-transparent border-none rounded-xl text-white text-lg placeholder-gray-400 focus:outline-none"
+        />
+        
+        {/* Icon */}
+        {IconComponent && (
+          <IconComponent className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400 pointer-events-none" />
+        )}
 
-          {/* Clear Button */}
-          {value && onClear && (
-            <button 
-              onClick={onClear}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white z-[60] cursor-pointer"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          )}
+        {/* Clear Button */}
+        {value && onClear && (
+          <button 
+            onClick={onClear}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white cursor-pointer"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        )}
 
-          {/* Input Mask Effect */}
-          <div 
-            className={`absolute top-1/2 left-16 w-24 h-5 -translate-y-1/2 pointer-events-none transition-opacity duration-200 z-[45] ${value ? 'opacity-0' : 'opacity-100'}`}
-            style={{
-              background: 'linear-gradient(90deg, transparent, black)'
-            }} 
-          />
+        {/* Input Mask Effect */}
+        <div 
+          className={`absolute top-1/2 left-16 w-24 h-5 -translate-y-1/2 pointer-events-none transition-opacity duration-200 ${value ? 'opacity-0' : 'opacity-100'}`}
+          style={{
+            background: 'linear-gradient(90deg, transparent, #010201)'
+          }} 
+        />
 
-          {/* Pink Mask Effect */}
-          <div 
-            className="absolute top-2 left-1 w-8 h-5 bg-pink-500 blur-[20px] opacity-80 pointer-events-none transition-opacity duration-[2000ms] group-hover:opacity-0 z-[45]"
-          />
-        </div>
+        {/* Pink Mask Effect */}
+        <div 
+          className="absolute top-2 left-1 w-8 h-5 bg-pink-500 blur-[20px] opacity-80 pointer-events-none transition-opacity duration-[2000ms] hover:opacity-0"
+        />
       </div>
     </div>
   );
