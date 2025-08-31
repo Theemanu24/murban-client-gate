@@ -27,7 +27,7 @@ Note: This project uses React + Vite + Tailwind + shadcn/ui. To enable authentic
 ## Environments (.env.example)
 Copy .env.example to .env and adjust:
 - SESSION_SECRET=generate_32_bytes_random
-- APP_ORIGIN_ALLOWLIST=https://swahili-beach-tank-calculator.vercel.app,https://tank-volume-genesis.vercel.app
+- APP_ORIGIN_ALLOWLIST=https://swahili-beach.vercel.app,https://tank-volume-genesis.vercel.app
 - ENABLE_CAPTCHA=false
 - MURBAN_PORTAL_ADMIN_PASS=change-me
 - DATABASE_URL=postgres://... (prod)
