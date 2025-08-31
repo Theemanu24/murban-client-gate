@@ -78,7 +78,10 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
 
   const terminalResults = useMemo(() => {
     const q = terminalQuery.trim();
-    if (q.length < 2 || !selectedClient) return terminals.slice(0, 6);
+    // Only show terminals after user starts typing (at least 1 character)
+    if (q.length < 1 || !selectedClient) return [];
+    
+    if (q.length < 2) return terminals.slice(0, 6);
     return terminalFuse.search(q).map(r => r.item).slice(0, 6);
   }, [terminalQuery, terminalFuse, terminals, selectedClient]);
 
@@ -136,68 +139,67 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
   return (
     <div className="w-full max-w-2xl mx-auto animate-fade-in">
       {/* Client Search */}
-      <div className="relative mb-4 search-container">
-        <div className="relative floating-container">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="none"
-            className="search-icon absolute left-3 top-1/2 -translate-y-1/2"
+      <div className="relative mb-4 search-container animated-container">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+          className="search-icon absolute left-3 top-1/2 -translate-y-1/2"
+        >
+          <circle cx="11" cy="11" r="8" stroke="url(#searchGradient)" />
+          <line x1="22" y1="22" x2="16.65" y2="16.65" stroke="url(#searchLineGradient)" />
+          <defs>
+            <linearGradient id="searchGradient" gradientTransform="rotate(50)">
+              <stop offset="0%" stopColor="#f8e7f8" />
+              <stop offset="50%" stopColor="#b6a9b7" />
+            </linearGradient>
+            <linearGradient id="searchLineGradient">
+              <stop offset="0%" stopColor="#b6a9b7" />
+              <stop offset="50%" stopColor="#837484" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <Input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(e) => handleKeyDown(e, false)}
+          placeholder="Type your company name..."
+          aria-label="Search company"
+          autoComplete="off"
+          className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black !bg-white !border-gray-300 hover:!border-gray-400 focus:!border-blue-500 focus:!ring-blue-500"
+          style={{ 
+            backgroundColor: 'white !important', 
+            borderColor: '#d1d5db !important',
+            '--tw-ring-color': '#3b82f6'
+          }}
+          disabled={!!selectedClient}
+        />
+        {query && (
+          <button 
+            aria-label="Clear" 
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700" 
+            onClick={resetSearch}
           >
-            <circle cx="11" cy="11" r="8" stroke="url(#searchGradient)" />
-            <line x1="22" y1="22" x2="16.65" y2="16.65" stroke="url(#searchLineGradient)" />
-            <defs>
-              <linearGradient id="searchGradient" gradientTransform="rotate(50)">
-                <stop offset="0%" stopColor="#f8e7f8" />
-                <stop offset="50%" stopColor="#b6a9b7" />
-              </linearGradient>
-              <linearGradient id="searchLineGradient">
-                <stop offset="0%" stopColor="#b6a9b7" />
-                <stop offset="50%" stopColor="#837484" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <Input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={(e) => handleKeyDown(e, false)}
-            placeholder="Type your company name..."
-            aria-label="Search company"
-            autoComplete="off"
-            className="pl-10 h-12 text-base bg-white/95 backdrop-blur-sm border-0 text-black placeholder:text-gray-500 focus:ring-0 focus:border-0 focus:text-black shadow-[0_0_30px_rgba(59,130,246,0.3),0_0_60px_rgba(147,51,234,0.2),0_8px_32px_rgba(0,0,0,0.1)] rounded-xl floating-glow"
-            style={{ 
-              backgroundColor: 'rgba(255, 255, 255, 0.95)',
-              boxShadow: '0 0 30px rgba(59, 130, 246, 0.3), 0 0 60px rgba(147, 51, 234, 0.2), 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5)'
-            }}
-            disabled={!!selectedClient}
-          />
-          {query && (
-            <button 
-              aria-label="Clear" 
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700" 
-              onClick={resetSearch}
-            >
-              <X />
-            </button>
-          )}
-        </div>
+            <X />
+          </button>
+        )}
       </div>
 
       {/* Client Results */}
       {!selectedClient && clientResults.length > 0 && (
-        <Command className="mb-4 border-0 rounded-xl bg-white/95 backdrop-blur-sm floating-container shadow-[0_0_20px_rgba(59,130,246,0.2),0_0_40px_rgba(147,51,234,0.15),0_6px_24px_rgba(0,0,0,0.1)]">
+        <Command className="mb-4 border rounded-xl !bg-white !border-gray-200 animated-container">
           <CommandList>
             <CommandGroup heading="Companies">
               {clientResults.map((client, idx) => (
                 <CommandItem
                   key={client.slug}
                   onSelect={() => handleClientSelect(client)}
-                  className={`${idx === activeIndex ? "bg-accent/60" : ""} bg-transparent hover:bg-white/60 backdrop-blur-sm`}
+                  className={`${idx === activeIndex ? "bg-accent/60" : ""} !bg-white hover:!bg-gray-50`}
                 >
                   <span className="font-medium text-gray-900">{client.name}</span>
                 </CommandItem>
@@ -208,13 +210,13 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
       )}
 
       {!selectedClient && query.trim().length > 0 && query.trim().length < 5 && (
-        <div className="p-4 text-gray-700 rounded-xl bg-white/95 backdrop-blur-sm floating-container shadow-[0_0_20px_rgba(59,130,246,0.2),0_0_40px_rgba(147,51,234,0.15),0_6px_24px_rgba(0,0,0,0.1)]">
+        <div className="p-4 text-gray-700 border rounded-xl bg-gray-50 animated-container">
           Type at least 5 letters to search your company.
         </div>
       )}
 
       {!selectedClient && query.trim().length >= 5 && clientResults.length === 0 && (
-        <div className="p-4 text-gray-700 rounded-xl bg-white/95 backdrop-blur-sm floating-container shadow-[0_0_20px_rgba(59,130,246,0.2),0_0_40px_rgba(147,51,234,0.15),0_6px_24px_rgba(0,0,0,0.1)]">
+        <div className="p-4 text-gray-700 border rounded-xl bg-gray-50 animated-container">
           No matches. Contact support.
         </div>
       )}
@@ -222,44 +224,43 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
       {/* Terminal Search - Only shown after client is selected */}
       {selectedClient && terminals.length > 0 && (
         <>
-          <div className="relative">
-            <div className="relative floating-container">
-              <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 z-10" />
-              <Input
-                value={terminalQuery}
-                onChange={(e) => setTerminalQuery(e.target.value)}
-                onKeyDown={(e) => handleKeyDown(e, true)}
-                placeholder="Select terminal location..."
-                aria-label="Search terminal"
-                autoComplete="off"
-                className="pl-10 h-12 text-base bg-white/95 backdrop-blur-sm border-0 text-black placeholder:text-gray-500 focus:ring-0 focus:border-0 focus:text-black shadow-[0_0_30px_rgba(59,130,246,0.3),0_0_60px_rgba(147,51,234,0.2),0_8px_32px_rgba(0,0,0,0.1)] rounded-xl floating-glow"
-                style={{ 
-                  backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                  boxShadow: '0 0 30px rgba(59, 130, 246, 0.3), 0 0 60px rgba(147, 51, 234, 0.2), 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5)'
-                }}
-              />
-              {terminalQuery && (
-                <button 
-                  aria-label="Clear terminal" 
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 z-10" 
-                  onClick={() => setTerminalQuery("")}
-                >
-                  <X />
-                </button>
-              )}
-            </div>
+          <div className="relative animated-container">
+            <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+            <Input
+              value={terminalQuery}
+              onChange={(e) => setTerminalQuery(e.target.value)}
+              onKeyDown={(e) => handleKeyDown(e, true)}
+              placeholder="Select terminal location..."
+              aria-label="Search terminal"
+              autoComplete="off"
+              className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black !bg-white !border-gray-300 hover:!border-gray-400 focus:!border-blue-500 focus:!ring-blue-500"
+              style={{ 
+                backgroundColor: 'white !important', 
+                borderColor: '#d1d5db !important',
+                '--tw-ring-color': '#3b82f6'
+              }}
+            />
+            {terminalQuery && (
+              <button 
+                aria-label="Clear terminal" 
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700" 
+                onClick={() => setTerminalQuery("")}
+              >
+                <X />
+              </button>
+            )}
           </div>
 
           {/* Terminal Results */}
           {terminalResults.length > 0 && (
-            <Command className="mt-3 border-0 rounded-xl bg-white/95 backdrop-blur-sm floating-container shadow-[0_0_20px_rgba(59,130,246,0.2),0_0_40px_rgba(147,51,234,0.15),0_6px_24px_rgba(0,0,0,0.1)]">
+            <Command className="mt-3 border rounded-xl !bg-white !border-gray-200 animated-container">
               <CommandList>
                 <CommandGroup heading={`${selectedClient.name} Terminals`}>
                   {terminalResults.map((terminal, idx) => (
                     <CommandItem
                       key={terminal.name}
                       onSelect={() => handleTerminalSelect(terminal)}
-                      className={`${idx === activeIndex ? "bg-accent/60" : ""} flex items-center justify-between bg-transparent hover:bg-white/60 backdrop-blur-sm`}
+                      className={`${idx === activeIndex ? "bg-accent/60" : ""} flex items-center justify-between !bg-white hover:!bg-gray-50`}
                     >
                       <div className="flex items-center">
                         <MapPin className="w-4 h-4 mr-2 text-gray-500" />
@@ -292,113 +293,42 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
 
       {/* No terminals available - proceed directly */}
       {selectedClient && terminals.length === 0 && (
-        <div className="p-4 text-gray-700 rounded-xl bg-white/95 backdrop-blur-sm floating-container shadow-[0_0_20px_rgba(59,130,246,0.2),0_0_40px_rgba(147,51,234,0.15),0_6px_24px_rgba(0,0,0,0.1)]">
+        <div className="p-4 text-gray-700 border rounded-xl bg-gray-50 animated-container">
           No terminals configured for {selectedClient.name}. Proceeding with company access...
         </div>
       )}
 
-      <style jsx>{`
-        .floating-container {
-          animation: float 6s ease-in-out infinite;
-          position: relative;
-        }
-        
-        .floating-glow {
-          position: relative;
-        }
-        
-        .floating-glow::before {
-          content: '';
-          position: absolute;
-          top: -2px;
-          left: -2px;
-          right: -2px;
-          bottom: -2px;
-          background: linear-gradient(45deg, 
-            rgba(59, 130, 246, 0.6),
-            rgba(147, 51, 234, 0.6),
-            rgba(236, 72, 153, 0.6),
-            rgba(59, 130, 246, 0.6)
-          );
-          background-size: 300% 300%;
-          border-radius: 14px;
-          z-index: -1;
-          animation: shimmer 4s ease-in-out infinite, pulse-glow 3s ease-in-out infinite alternate;
-          filter: blur(1px);
-        }
-        
-        .floating-glow::after {
-          content: '';
-          position: absolute;
-          top: -6px;
-          left: -6px;
-          right: -6px;
-          bottom: -6px;
-          background: linear-gradient(45deg,
-            rgba(59, 130, 246, 0.3),
-            rgba(147, 51, 234, 0.3),
-            rgba(236, 72, 153, 0.3),
-            rgba(59, 130, 246, 0.3)
-          );
-          background-size: 400% 400%;
-          border-radius: 18px;
-          z-index: -2;
-          animation: shimmer 6s ease-in-out infinite reverse, outer-glow 4s ease-in-out infinite alternate;
-          filter: blur(3px);
-          opacity: 0.8;
-        }
-        
-        @keyframes float {
-          0%, 100% { 
-            transform: translateY(0px) rotate(0deg); 
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes float {
+            0%, 100% {
+              transform: translateY(0px);
+            }
+            50% {
+              transform: translateY(-3px);
+            }
           }
-          25% { 
-            transform: translateY(-3px) rotate(0.5deg); 
+
+          @keyframes glow-pulse {
+            0%, 100% {
+              box-shadow: 0 0 5px rgba(59, 130, 246, 0.1);
+            }
+            50% {
+              box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+            }
           }
-          50% { 
-            transform: translateY(-6px) rotate(0deg); 
+
+          .animated-container {
+            animation: float 4s ease-in-out infinite, glow-pulse 3s ease-in-out infinite;
+            transition: all 0.3s ease;
           }
-          75% { 
-            transform: translateY(-3px) rotate(-0.5deg); 
+
+          .animated-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
           }
-        }
-        
-        @keyframes shimmer {
-          0% { 
-            background-position: 0% 50%; 
-          }
-          50% { 
-            background-position: 100% 50%; 
-          }
-          100% { 
-            background-position: 0% 50%; 
-          }
-        }
-        
-        @keyframes pulse-glow {
-          0% { 
-            opacity: 0.8;
-            filter: blur(1px) brightness(1);
-          }
-          100% { 
-            opacity: 1;
-            filter: blur(2px) brightness(1.2);
-          }
-        }
-        
-        @keyframes outer-glow {
-          0% { 
-            opacity: 0.6;
-            transform: scale(1);
-            filter: blur(3px);
-          }
-          100% { 
-            opacity: 0.9;
-            transform: scale(1.02);
-            filter: blur(4px);
-          }
-        }
-      `}</style>
+        `
+      }} />
     </div>
   );
 };
