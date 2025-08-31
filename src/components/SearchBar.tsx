@@ -151,19 +151,42 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
     icon?: React.ComponentType<any>;
   }) => (
     <div className="relative w-full">
-      {/* Animated Border - Simple two-color rotating gradient */}
-      <div className="absolute -inset-0.5 rounded-xl overflow-hidden">
+      {/* Animated Border - Scattered light effect */}
+      <div className="absolute -inset-1 rounded-xl overflow-hidden pointer-events-none">
+        {/* Main rotating gradient with scattered effect */}
         <div 
-          className="absolute inset-0 w-full h-full animate-spin"
+          className="absolute inset-0 w-[200%] h-[200%] -top-1/2 -left-1/2 animate-spin"
           style={{
-            background: 'linear-gradient(90deg, #6366f1 50%, #ec4899 50%)',
-            animationDuration: '3s',
+            background: `
+              radial-gradient(ellipse 100px 50px at 20% 50%, #6366f1 0%, transparent 50%),
+              radial-gradient(ellipse 80px 40px at 80% 50%, #ec4899 0%, transparent 50%),
+              radial-gradient(ellipse 60px 30px at 50% 20%, #8b5cf6 0%, transparent 50%),
+              radial-gradient(ellipse 70px 35px at 50% 80%, #f97316 0%, transparent 50%),
+              radial-gradient(ellipse 90px 45px at 10% 20%, #10b981 0%, transparent 50%),
+              radial-gradient(ellipse 85px 42px at 90% 80%, #06b6d4 0%, transparent 50%)
+            `,
+            animationDuration: '8s',
+          }}
+        />
+        
+        {/* Secondary slower scattered lights */}
+        <div 
+          className="absolute inset-0 w-[150%] h-[150%] -top-1/4 -left-1/4 animate-spin"
+          style={{
+            background: `
+              radial-gradient(ellipse 40px 20px at 30% 30%, rgba(99, 102, 241, 0.6) 0%, transparent 60%),
+              radial-gradient(ellipse 50px 25px at 70% 70%, rgba(236, 72, 153, 0.6) 0%, transparent 60%),
+              radial-gradient(ellipse 35px 18px at 60% 40%, rgba(139, 92, 246, 0.6) 0%, transparent 60%),
+              radial-gradient(ellipse 45px 22px at 40% 60%, rgba(249, 115, 22, 0.6) 0%, transparent 60%)
+            `,
+            animationDuration: '12s',
+            animationDirection: 'reverse',
           }}
         />
       </div>
 
-      {/* Input Container */}
-      <div className="relative bg-gray-900 rounded-xl">
+      {/* Solid background container to isolate input */}
+      <div className="relative bg-gray-900 rounded-xl border border-gray-800">
         <input
           value={value}
           onChange={onChange}
@@ -172,23 +195,31 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
           disabled={disabled}
           autoComplete="off"
           spellCheck={false}
-          className="w-full h-14 px-12 bg-gray-900 border-none rounded-xl text-white text-lg placeholder-gray-400 focus:outline-none focus:ring-0 relative z-10"
+          style={{
+            caretColor: 'white',
+            cursor: 'text',
+          }}
+          className="w-full h-14 px-12 bg-transparent border-none rounded-xl text-white text-lg placeholder-gray-400 focus:outline-none focus:ring-0"
+          onFocus={(e) => {
+            e.target.style.cursor = 'text';
+          }}
         />
         
         {/* Icon */}
         {IconComponent && (
-          <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none z-20">
+          <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
             <IconComponent className="w-6 h-6 text-gray-400" />
           </div>
         )}
 
         {/* Clear Button */}
         {value && onClear && (
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 z-20">
+          <div className="absolute right-4 top-1/2 -translate-y-1/2">
             <button 
               onClick={onClear}
-              className="text-gray-400 hover:text-white cursor-pointer p-1"
+              className="text-gray-400 hover:text-white p-1 hover:bg-gray-800 rounded transition-colors"
               type="button"
+              style={{ cursor: 'pointer' }}
             >
               <X className="w-5 h-5" />
             </button>
