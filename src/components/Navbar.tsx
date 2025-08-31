@@ -1,10 +1,19 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "@/styles/glass-radio.css";
 
 const Navbar = () => {
   const [active, setActive] = useState<"home" | "contact">("home");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/contact") {
+      setActive("contact");
+    } else {
+      setActive("home");
+    }
+  }, [location.pathname]);
 
   return (
     <header
@@ -46,11 +55,7 @@ const Navbar = () => {
             checked={active === "contact"}
             onChange={() => {
               setActive("contact");
-              window.open(
-                "https://murban-eng.com/contact-us/",
-                "_blank",
-                "noopener,noreferrer"
-              );
+              navigate("/contact");
             }}
           />
           <label htmlFor="glass-gold">Contact Us</label>
