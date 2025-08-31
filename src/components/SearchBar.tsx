@@ -295,35 +295,37 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
         </div>
       )}
 
-      <style jsx>{`
-        .animated-container {
-          animation: float 4s ease-in-out infinite, glow-pulse 3s ease-in-out infinite;
-          transition: all 0.3s ease;
-        }
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes float {
+            0%, 100% {
+              transform: translateY(0px);
+            }
+            50% {
+              transform: translateY(-3px);
+            }
+          }
 
-        .animated-container:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
+          @keyframes glow-pulse {
+            0%, 100% {
+              box-shadow: 0 0 5px rgba(59, 130, 246, 0.1);
+            }
+            50% {
+              box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+            }
+          }
 
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
+          .animated-container {
+            animation: float 4s ease-in-out infinite, glow-pulse 3s ease-in-out infinite;
+            transition: all 0.3s ease;
           }
-          50% {
-            transform: translateY(-3px);
-          }
-        }
 
-        @keyframes glow-pulse {
-          0%, 100% {
-            box-shadow: 0 0 5px rgba(59, 130, 246, 0.1);
+          .animated-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
           }
-          50% {
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
-          }
-        }
-      `}</style>
+        `
+      }} />
     </div>
   );
 };
