@@ -80,7 +80,13 @@ const Home = () => {
         className="fixed inset-0 bg-gradient-to-r from-transparent via-transparent to-transparent animate-gradient-shift"
         style={{ zIndex: -1 }}
       />
-      
+
+      {/* Transparent dark bluish overlay */}
+      <div
+        className="fixed inset-0 bg-blue-950/60"
+        style={{ zIndex: -1 }}
+      />
+
       {/* Floating Particles - also fixed to cover entire viewport */}
       <div className="fixed inset-0" style={{ zIndex: -1 }}>
         {[...Array(20)].map((_, i) => (
