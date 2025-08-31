@@ -27,7 +27,7 @@ const Navbar = () => {
         fontSize: "90%", // Navbar font reduced for less crowding
       }}
     >
-      <nav className="container mx-auto flex h-16 items-center justify-between px-4 relative">
+      <nav className="container mx-auto flex h-14 sm:h-16 items-center px-4 relative">
         <Link
           to="/"
           className="flex items-center gap-1 sm:gap-3 hover:scale-105 transition-transform duration-300"
@@ -45,7 +45,7 @@ const Navbar = () => {
             <span className="block sm:inline sm:ml-1">Engineering</span>
           </div>
         </Link>
-        <div className="glass-radio-group">
+        <div className="ml-auto glass-radio-group">
           <input
             type="radio"
             name="nav"
