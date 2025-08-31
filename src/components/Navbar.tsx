@@ -49,7 +49,7 @@ const Navbar = () => {
               navigate("/");
             }}
           />
-          <label htmlFor="glass-gold">HOME PAGE</label>
+          <label htmlFor="glass-gold">Home</label>
 
           <input
             type="radio"
@@ -61,7 +61,7 @@ const Navbar = () => {
               navigate("/resources");
             }}
           />
-          <label htmlFor="glass-silver">MURBAN CLIENT PORTAL</label>
+          <label htmlFor="glass-silver">Portal</label>
 
           <input
             type="radio"
@@ -73,7 +73,7 @@ const Navbar = () => {
               navigate("/contact");
             }}
           />
-          <label htmlFor="glass-platinum">CONTACT INFORMATION</label>
+          <label htmlFor="glass-platinum">Contact Us</label>
 
           <div className="glass-glider"></div>
         </div>
