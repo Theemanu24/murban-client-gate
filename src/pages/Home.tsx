@@ -66,25 +66,10 @@ const Home = () => {
 
   return (
     <>
-      {/* Full Screen Background - positioned fixed to cover entire viewport */}
-      <div 
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/lovable-uploads/076c0e82-43a2-43e9-b835-48b5f384368f.png')",
-          zIndex: -1
-        }}
-      />
-      
-      {/* Animated Background Gradient - made transparent to reveal the background image */}
+      {/* Solid background color */}
       <div
-        className="fixed inset-0 bg-gradient-to-r from-transparent via-transparent to-transparent animate-gradient-shift"
-        style={{ zIndex: -1 }}
-      />
-
-      {/* Translucent dark overlay using #0F0F0F */}
-      <div
-        className="fixed inset-0 bg-[#0F0F0F]/60"
-        style={{ zIndex: -1 }}
+        className="fixed inset-0"
+        style={{ backgroundColor: "#353839", zIndex: -1 }}
       />
 
       {/* Floating Particles - also fixed to cover entire viewport */}
