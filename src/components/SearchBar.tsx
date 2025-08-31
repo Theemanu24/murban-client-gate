@@ -31,14 +31,32 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
     .animate-spin-slow {
       animation: spin-slow linear infinite;
     }
+    
+    /* Ensure input field always works properly */
+    .search-input {
+      position: relative !important;
+      z-index: 999 !important;
+      pointer-events: auto !important;
+      cursor: text !important;
+    }
+    
+    .search-input:focus {
+      cursor: text !important;
+    }
   `;
 
-  // Insert styles into document head
-  if (typeof document !== 'undefined') {
-    const styleElement = document.createElement('style');
-    styleElement.textContent = customStyles;
-    document.head.appendChild(styleElement);
-  }
+  // Insert styles into document head only once
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      const existingStyle = document.getElementById('animated-search-styles');
+      if (!existingStyle) {
+        const styleElement = document.createElement('style');
+        styleElement.id = 'animated-search-styles';
+        styleElement.textContent = customStyles;
+        document.head.appendChild(styleElement);
+      }
+    }
+  }, []);
   const [query, setQuery] = useState("");
   const [terminalQuery, setTerminalQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
@@ -172,91 +190,110 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
     icon?: React.ComponentType<any>;
   }) => (
     <div className="relative w-full">
-      {/* Animated Border Container - Behind everything */}
+      {/* Animated Border Container - Much slower animations */}
       <div className="absolute -inset-1 rounded-xl pointer-events-none">
-        {/* Glow Effect */}
-        <div className="absolute inset-0 rounded-xl overflow-hidden opacity-40 blur-[30px]">
-          <div className="absolute inset-0 w-[999px] h-[999px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin-slow"
+        {/* Glow Effect - Very slow */}
+        <div className="absolute inset-0 rounded-xl overflow-hidden opacity-30 blur-[25px]">
+          <div className="absolute inset-0 w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin-slow"
                style={{
-                 backgroundImage: 'conic-gradient(#000, #402fb5 5%, #000 15%, #000 35%, #cf30aa 45%, #000 55%, #000 75%, #402fb5 85%, #000 100%)',
+                 backgroundImage: 'conic-gradient(#000, #402fb5 8%, #000 20%, #000 30%, #cf30aa 38%, #000 50%, #000 62%, #402fb5 70%, #000 80%, #000 92%, #cf30aa 100%)',
                  backgroundRepeat: 'no-repeat',
                  backgroundPosition: '0 0',
-                 animationDuration: '6s'
+                 animationDuration: '20s'
                }} />
         </div>
 
-        {/* Dark Border Background */}
+        {/* Dark Border Background - Slower */}
         <div className="absolute inset-0 rounded-xl overflow-hidden">
           <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin-slow"
                style={{
-                 backgroundImage: 'conic-gradient(rgba(0, 0, 0, 0), #18116a 5%, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0) 35%, #6e1b60 45%, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0) 75%, #18116a 85%, rgba(0, 0, 0, 0) 100%)',
+                 backgroundImage: 'conic-gradient(rgba(0, 0, 0, 0), #18116a 10%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 35%, #6e1b60 45%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 75%, #18116a 85%, rgba(0, 0, 0, 0) 100%)',
                  backgroundRepeat: 'no-repeat',
                  backgroundPosition: '0 0',
-                 animationDuration: '8s'
+                 animationDuration: '25s'
                }} />
         </div>
 
-        {/* White Layer */}
-        <div className="absolute inset-0 rounded-xl overflow-hidden blur-[2px]">
-          <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin-slow brightness-[1.4]"
+        {/* White Layer - Medium speed */}
+        <div className="absolute inset-0 rounded-xl overflow-hidden blur-[1px]">
+          <div className="absolute inset-0 w-[500px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin-slow brightness-[1.2]"
                style={{
-                 backgroundImage: 'conic-gradient(rgba(0, 0, 0, 0) 0%, #a099d8 8%, rgba(0, 0, 0, 0) 18%, rgba(0, 0, 0, 0) 40%, #dfa2da 50%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 80%, #a099d8 90%, rgba(0, 0, 0, 0) 100%)',
+                 backgroundImage: 'conic-gradient(rgba(0, 0, 0, 0) 0%, #a099d8 12%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 40%, #dfa2da 52%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 0) 80%, #a099d8 92%, rgba(0, 0, 0, 0) 100%)',
                  backgroundRepeat: 'no-repeat',
                  backgroundPosition: '0 0',
-                 animationDuration: '7s'
+                 animationDuration: '18s'
                }} />
         </div>
 
-        {/* Border Layer */}
-        <div className="absolute inset-0 rounded-xl overflow-hidden blur-[0.5px]">
-          <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin-slow brightness-[1.3]"
+        {/* Border Layer - Slowest */}
+        <div className="absolute inset-0 rounded-xl overflow-hidden blur-[0.3px]">
+          <div className="absolute inset-0 w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin-slow brightness-[1.1]"
                style={{
-                 backgroundImage: 'conic-gradient(#1c191c, #402fb5 8%, #1c191c 18%, #1c191c 38%, #cf30aa 48%, #1c191c 58%, #1c191c 78%, #402fb5 88%, #1c191c 100%)',
+                 backgroundImage: 'conic-gradient(#1c191c, #402fb5 15%, #1c191c 30%, #1c191c 40%, #cf30aa 55%, #1c191c 70%, #1c191c 85%, #402fb5 100%)',
                  backgroundRepeat: 'no-repeat',
                  backgroundPosition: '0 0',
-                 animationDuration: '5s'
+                 animationDuration: '15s'
                }} />
         </div>
       </div>
 
-      {/* Input Container - On top */}
-      <div className="relative bg-black rounded-xl" style={{ backgroundColor: '#010201' }}>
-        <input
-          value={value}
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          placeholder={placeholder}
-          disabled={disabled}
-          className="w-full h-14 px-12 bg-transparent border-none rounded-xl text-white text-lg placeholder-gray-400 focus:outline-none"
-        />
+      {/* Completely isolated input container */}
+      <div className="relative" style={{ zIndex: 1000 }}>
+        <div className="relative bg-black rounded-xl border border-gray-800" style={{ backgroundColor: '#010201' }}>
+          <input
+            value={value}
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+            placeholder={placeholder}
+            disabled={disabled}
+            autoComplete="off"
+            spellCheck={false}
+            className="search-input w-full h-14 px-12 bg-transparent border-none rounded-xl text-white text-lg placeholder-gray-400 focus:outline-none focus:ring-0"
+            style={{
+              position: 'relative',
+              zIndex: 1001,
+              pointerEvents: 'auto',
+              cursor: 'text'
+            }}
+          />
+          
+          {/* Icon - completely separated */}
+          {IconComponent && (
+            <div 
+              className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"
+              style={{ zIndex: 1002 }}
+            >
+              <IconComponent className="w-6 h-6 text-gray-400" />
+            </div>
+          )}
+
+          {/* Clear Button - completely separated */}
+          {value && onClear && (
+            <div 
+              className="absolute right-4 top-1/2 -translate-y-1/2"
+              style={{ zIndex: 1002 }}
+            >
+              <button 
+                onClick={onClear}
+                className="text-gray-400 hover:text-white cursor-pointer p-1"
+                type="button"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          )}
+        </div>
         
-        {/* Icon */}
-        {IconComponent && (
-          <IconComponent className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400 pointer-events-none" />
+        {/* Subtle effects outside the input area */}
+        {!value && (
+          <div 
+            className="absolute top-1/2 left-16 w-20 h-4 -translate-y-1/2 pointer-events-none transition-opacity duration-300 opacity-60"
+            style={{
+              background: 'linear-gradient(90deg, transparent, rgba(1, 2, 1, 0.8))',
+              zIndex: 999
+            }} 
+          />
         )}
-
-        {/* Clear Button */}
-        {value && onClear && (
-          <button 
-            onClick={onClear}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white cursor-pointer"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        )}
-
-        {/* Input Mask Effect */}
-        <div 
-          className={`absolute top-1/2 left-16 w-24 h-5 -translate-y-1/2 pointer-events-none transition-opacity duration-200 ${value ? 'opacity-0' : 'opacity-100'}`}
-          style={{
-            background: 'linear-gradient(90deg, transparent, #010201)'
-          }} 
-        />
-
-        {/* Pink Mask Effect */}
-        <div 
-          className="absolute top-2 left-1 w-8 h-5 bg-pink-500 blur-[20px] opacity-80 pointer-events-none transition-opacity duration-[2000ms] hover:opacity-0"
-        />
       </div>
     </div>
   );
