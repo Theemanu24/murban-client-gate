@@ -37,7 +37,7 @@ const Navbar = () => {
             style={{ background: "transparent", mixBlendMode: "screen", filter: "brightness(1.1)" }}
             loading="lazy"
           />
-          <span className="text-[0.55rem] sm:text-sm md:text-xl lg:text-2xl font-semibold text-white whitespace-nowrap">
+          <span className="text-sm sm:text-base md:text-xl lg:text-2xl font-semibold text-white whitespace-nowrap">
             Murban Engineering
           </span>
         </Link>
