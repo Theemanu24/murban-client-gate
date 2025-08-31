@@ -89,8 +89,7 @@ const Home = () => {
       </div>
 
       <main
-        className="relative min-h-screen flex items-start justify-center pt-16 sm:pt-24"
-        style={{ marginTop: "-1.2cm" }}
+        className="relative min-h-screen flex items-center sm:items-start justify-center pt-16 sm:pt-24 sm:-mt-12"
       >
         {/* Content */}
         <div className="relative z-10 text-center px-4 sm:px-6 flex flex-col py-8">
@@ -106,7 +105,7 @@ const Home = () => {
                   <motion.span
                     key={index}
                     variants={wordVariants}
-                    className="inline-block mr-2 sm:mr-4 md:mr-6 relative cinematic-text overflow-visible"
+                    className="block sm:inline-block sm:mr-4 md:mr-6 relative cinematic-text overflow-visible"
                     style={{ paddingBottom: '0.1em' }}
                   >
                     {word}
