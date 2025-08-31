@@ -1,17 +1,33 @@
+import { Link } from "react-router-dom";
+
 const OfficialButton = () => (
-  <div className="official-button-container">
-    <a
-      href="https://murban-eng.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="official-button type--C"
-    >
-      <div className="official-button__line"></div>
-      <div className="official-button__line"></div>
-      <span className="official-button__text">Official Website</span>
-      <div className="official-button__drow1"></div>
-      <div className="official-button__drow2"></div>
-    </a>
+  <div className="main">
+    <div className="up">
+      <Link to="/resources" className="card1">
+        <span className="card-label">Portal</span>
+      </Link>
+      <a
+        href="https://murban-eng.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="card2"
+      >
+        <span className="card-label">Official Website</span>
+      </a>
+    </div>
+    <div className="down">
+      <a
+        href="https://www.linkedin.com/company/murban-engineering/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="card3"
+      >
+        <span className="card-label">LinkedIn</span>
+      </a>
+      <Link to="/contact" className="card4">
+        <span className="card-label">Contact Us</span>
+      </Link>
+    </div>
   </div>
 );
 
