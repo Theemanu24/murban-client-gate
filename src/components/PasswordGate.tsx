@@ -61,11 +61,15 @@ export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGatePr
       const sessionKey = terminal ? `session:${clientSlug}:${terminal}` : `session:${clientSlug}`;
       localStorage.setItem(sessionKey, "active");
       
-      const successMessage = terminal 
+      const successMessage = terminal
         ? `Successfully authenticated for ${terminal} terminal.`
         : "Successfully authenticated.";
-      
-      toast({ title: "Access Granted", description: successMessage });
+
+      toast({
+        title: "Access Granted",
+        description: successMessage,
+        duration: 2000,
+      });
       onSuccess();
     } catch (err) {
       console.error('Password verification failed:', err);
