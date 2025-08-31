@@ -18,6 +18,27 @@ interface SearchBarProps {
 }
 
 export const SearchBar = ({ onSelect }: SearchBarProps) => {
+  // Add custom CSS for smooth animations
+  const customStyles = `
+    @keyframes spin-slow {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+    .animate-spin-slow {
+      animation: spin-slow linear infinite;
+    }
+  `;
+
+  // Insert styles into document head
+  if (typeof document !== 'undefined') {
+    const styleElement = document.createElement('style');
+    styleElement.textContent = customStyles;
+    document.head.appendChild(styleElement);
+  }
   const [query, setQuery] = useState("");
   const [terminalQuery, setTerminalQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
@@ -164,41 +185,45 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
       <div className="relative group">
         {/* Glow Effect */}
         <div className="absolute inset-0 rounded-xl overflow-hidden opacity-40 blur-[30px] pointer-events-none">
-          <div className="absolute inset-0 w-[999px] h-[999px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[60deg] transition-transform duration-[2000ms] group-hover:-rotate-[120deg] group-focus-within:rotate-[420deg]"
+          <div className="absolute inset-0 w-[999px] h-[999px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin-slow"
                style={{
-                 backgroundImage: 'conic-gradient(#000, #402fb5 5%, #000 38%, #000 50%, #cf30aa 60%, #000 87%)',
+                 backgroundImage: 'conic-gradient(#000, #402fb5 5%, #000 15%, #000 35%, #cf30aa 45%, #000 55%, #000 75%, #402fb5 85%, #000 100%)',
                  backgroundRepeat: 'no-repeat',
-                 backgroundPosition: '0 0'
+                 backgroundPosition: '0 0',
+                 animationDuration: '6s'
                }} />
         </div>
 
         {/* Dark Border Background */}
         <div className="absolute inset-0 rounded-xl overflow-hidden pointer-events-none">
-          <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[82deg] transition-transform duration-[2000ms] group-hover:-rotate-[98deg] group-focus-within:rotate-[442deg]"
+          <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin-slow"
                style={{
-                 backgroundImage: 'conic-gradient(rgba(0, 0, 0, 0), #18116a, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0) 50%, #6e1b60, rgba(0, 0, 0, 0) 60%)',
+                 backgroundImage: 'conic-gradient(rgba(0, 0, 0, 0), #18116a 5%, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0) 35%, #6e1b60 45%, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0) 75%, #18116a 85%, rgba(0, 0, 0, 0) 100%)',
                  backgroundRepeat: 'no-repeat',
-                 backgroundPosition: '0 0'
+                 backgroundPosition: '0 0',
+                 animationDuration: '8s'
                }} />
         </div>
 
         {/* White Layer */}
         <div className="absolute inset-0 rounded-xl overflow-hidden blur-[2px] pointer-events-none">
-          <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[83deg] transition-transform duration-[2000ms] group-hover:-rotate-[97deg] group-focus-within:rotate-[443deg] brightness-[1.4]"
+          <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin-slow brightness-[1.4]"
                style={{
-                 backgroundImage: 'conic-gradient(rgba(0, 0, 0, 0) 0%, #a099d8, rgba(0, 0, 0, 0) 8%, rgba(0, 0, 0, 0) 50%, #dfa2da, rgba(0, 0, 0, 0) 58%)',
+                 backgroundImage: 'conic-gradient(rgba(0, 0, 0, 0) 0%, #a099d8 8%, rgba(0, 0, 0, 0) 18%, rgba(0, 0, 0, 0) 40%, #dfa2da 50%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 80%, #a099d8 90%, rgba(0, 0, 0, 0) 100%)',
                  backgroundRepeat: 'no-repeat',
-                 backgroundPosition: '0 0'
+                 backgroundPosition: '0 0',
+                 animationDuration: '7s'
                }} />
         </div>
 
         {/* Border Layer */}
         <div className="absolute inset-0 rounded-xl overflow-hidden blur-[0.5px] pointer-events-none">
-          <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[70deg] transition-transform duration-[2000ms] group-hover:-rotate-[110deg] group-focus-within:rotate-[430deg] brightness-[1.3]"
+          <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin-slow brightness-[1.3]"
                style={{
-                 backgroundImage: 'conic-gradient(#1c191c, #402fb5 5%, #1c191c 14%, #1c191c 50%, #cf30aa 60%, #1c191c 64%)',
+                 backgroundImage: 'conic-gradient(#1c191c, #402fb5 8%, #1c191c 18%, #1c191c 38%, #cf30aa 48%, #1c191c 58%, #1c191c 78%, #402fb5 88%, #1c191c 100%)',
                  backgroundRepeat: 'no-repeat',
-                 backgroundPosition: '0 0'
+                 backgroundPosition: '0 0',
+                 animationDuration: '5s'
                }} />
         </div>
 
