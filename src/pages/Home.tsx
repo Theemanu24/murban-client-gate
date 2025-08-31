@@ -66,11 +66,8 @@ const Home = () => {
 
   return (
     <>
-      {/* Solid background color */}
-      <div
-        className="fixed inset-0"
-        style={{ backgroundColor: "#FFD700", zIndex: -1 }}
-      />
+      {/* Dark translucent overlay to dim background image */}
+      <div className="fixed inset-0 bg-black/60" style={{ zIndex: -1 }} />
 
       {/* Floating Particles - also fixed to cover entire viewport */}
       <div className="fixed inset-0" style={{ zIndex: -1 }}>
