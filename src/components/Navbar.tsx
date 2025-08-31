@@ -37,9 +37,10 @@ const Navbar = () => {
             style={{ background: "transparent", mixBlendMode: "screen", filter: "brightness(1.1)" }}
             loading="lazy"
           />
-          <span className="text-sm sm:text-base md:text-xl lg:text-2xl font-semibold text-white whitespace-nowrap">
-            Murban Engineering
-          </span>
+          <div className="text-sm sm:text-base md:text-xl lg:text-2xl font-semibold text-white leading-tight sm:whitespace-nowrap">
+            <span className="block sm:inline">Murban</span>
+            <span className="block sm:inline sm:ml-1">Engineering</span>
+          </div>
         </Link>
         <div className="glass-radio-group">
           <input
