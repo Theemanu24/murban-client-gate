@@ -6,6 +6,7 @@ const Navbar = () => {
   const [active, setActive] = useState<"portal" | "home" | "contact">("home");
   const navigate = useNavigate();
   const location = useLocation();
+  const isClientPage = location.pathname.startsWith("/c/");
 
   useEffect(() => {
     if (location.pathname === "/resources") {
@@ -19,7 +20,9 @@ const Navbar = () => {
 
   return (
     <header
-      className="fixed top-0 z-50 w-full bg-transparent backdrop-blur-sm shadow-lg transition-all duration-500"
+      className={`fixed top-0 z-50 w-full backdrop-blur-sm shadow-lg transition-all duration-500 ${
+        isClientPage ? "bg-black md:bg-transparent" : "bg-transparent"
+      }`}
       style={{
         fontSize: "90%", // Navbar font reduced for less crowding
       }}
