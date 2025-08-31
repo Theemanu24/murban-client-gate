@@ -81,9 +81,9 @@ const Home = () => {
         style={{ zIndex: -1 }}
       />
 
-      {/* Transparent dark bluish overlay */}
+      {/* Translucent dark overlay using #0F0F0F */}
       <div
-        className="fixed inset-0 bg-blue-950/60"
+        className="fixed inset-0 bg-[#0F0F0F]/60"
         style={{ zIndex: -1 }}
       />
 
