@@ -66,14 +66,12 @@ const Home = () => {
 
   return (
     <main className="relative min-h-screen flex items-center justify-center">
-      {/* Background Video */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover"
-        src="/FINALHOMEPAGE.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
+      {/* Background Image with Animated Overlay */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/lovable-uploads/076c0e82-43a2-43e9-b835-48b5f384368f.png')"
+        }}
       />
       
       {/* Animated Background Gradient */}

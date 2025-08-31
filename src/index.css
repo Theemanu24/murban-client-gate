@@ -71,9 +71,3 @@ All colors MUST be HSL.
 
   /* Cinematic Animations */
 }
-
-@layer components {
-  .glass {
-    @apply rounded-2xl border border-white/20 bg-white/10 backdrop-blur-lg shadow-lg shadow-white/10;
-  }
-}
