@@ -76,8 +76,8 @@ const Home = () => {
       />
       
       {/* Animated Background Gradient - also fixed to cover entire viewport */}
-      <div 
-        className="fixed inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60 animate-gradient-shift"
+      <div
+        className="fixed inset-0 bg-gradient-to-r from-black/30 via-black/15 to-black/30 animate-gradient-shift"
         style={{ zIndex: -1 }}
       />
       
@@ -86,7 +86,7 @@ const Home = () => {
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-white/20 rounded-full animate-float"
+            className="absolute w-1 h-1 bg-white/10 rounded-full animate-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
