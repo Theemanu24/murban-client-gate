@@ -1,254 +1,84 @@
-/* From Uiverse.io by himanshu9682 */
-.type--A {
-  --line_color: #555555;
-  --back_color: #ffecf6;
-}
-.type--B {
-  --line_color: #1b1919;
-  --back_color: #e9ecff;
-}
-.type--C {
-  --line_color: oklch(0.646 0.222 41.116);
-  --back_color: oklch(0.588 0.158 241.966);
-}
-.official-button {
-  position: relative;
-  z-index: 0;
-  width: 240px;
-  height: 56px;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: bold;
-  color: var(--line_color);
-  letter-spacing: 2px;
-  transition: all 0.3s ease;
-}
-.official-button__text {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-.official-button::before,
-.official-button::after,
-.official-button__text::before,
-.official-button__text::after {
-  content: "";
-  position: absolute;
-  height: 3px;
-  border-radius: 2px;
-  background: var(--line_color);
-  transition: all 0.5s ease;
-}
-.official-button::before {
-  top: 0;
-  left: 54px;
-  width: calc(100% - 56px * 2 - 16px);
-}
-.official-button::after {
-  top: 0;
-  right: 54px;
-  width: 8px;
-}
-.official-button__text::before {
-  bottom: 0;
-  right: 54px;
-  width: calc(100% - 56px * 2 - 16px);
-}
-.official-button__text::after {
-  bottom: 0;
-  left: 54px;
-  width: 8px;
-}
-.official-button__line {
-  position: absolute;
-  top: 0;
-  width: 56px;
-  height: 100%;
-  overflow: hidden;
-}
-.official-button__line::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 150%;
-  height: 100%;
-  box-sizing: border-box;
-  border-radius: 300px;
-  border: solid 3px var(--line_color);
-}
-.official-button__line:nth-child(1),
-.official-button__line:nth-child(1)::before {
-  left: 0;
-}
-.official-button__line:nth-child(2),
-.official-button__line:nth-child(2)::before {
-  right: 0;
-}
-.official-button:hover {
-  letter-spacing: 6px;
-}
-.official-button:hover::before,
-.official-button:hover .official-button__text::before {
-  width: 8px;
-}
-.official-button:hover::after,
-.official-button:hover .official-button__text::after {
-  width: calc(100% - 56px * 2 - 16px);
-}
-.official-button__drow1,
-.official-button__drow2 {
-  position: absolute;
-  z-index: -1;
-  border-radius: 16px;
-  transform-origin: 16px 16px;
-}
-.official-button__drow1 {
-  top: -16px;
-  left: 40px;
-  width: 32px;
-  height: 0;
-  transform: rotate(30deg);
-}
-.official-button__drow2 {
-  top: 44px;
-  left: 77px;
-  width: 32px;
-  height: 0;
-  transform: rotate(-127deg);
-}
-.official-button__drow1::before,
-.official-button__drow1::after,
-.official-button__drow2::before,
-.official-button__drow2::after {
-  content: "";
-  position: absolute;
-}
-.official-button__drow1::before {
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 32px;
-  border-radius: 16px;
-  transform-origin: 16px 16px;
-  transform: rotate(-60deg);
-}
-.official-button__drow1::after {
-  top: -10px;
-  left: 45px;
-  width: 0;
-  height: 32px;
-  border-radius: 16px;
-  transform-origin: 16px 16px;
-  transform: rotate(69deg);
-}
-.official-button__drow2::before {
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 32px;
-  border-radius: 16px;
-  transform-origin: 16px 16px;
-  transform: rotate(-146deg);
-}
-.official-button__drow2::after {
-  bottom: 26px;
-  left: -40px;
-  width: 0;
-  height: 32px;
-  border-radius: 16px;
-  transform-origin: 16px 16px;
-  transform: rotate(-262deg);
-}
-.official-button__drow1,
-.official-button__drow1::before,
-.official-button__drow1::after,
-.official-button__drow2,
-.official-button__drow2::before,
-.official-button__drow2::after {
-  background: var(--back_color);
-}
-.official-button:hover .official-button__drow1 {
-  animation: drow1 ease-in 0.06s;
-  animation-fill-mode: forwards;
-}
-.official-button:hover .official-button__drow1::before {
-  animation: drow2 linear 0.08s 0.06s;
-  animation-fill-mode: forwards;
-}
-.official-button:hover .official-button__drow1::after {
-  animation: drow3 linear 0.03s 0.14s;
-  animation-fill-mode: forwards;
-}
-.official-button:hover .official-button__drow2 {
-  animation: drow4 linear 0.06s 0.2s;
-  animation-fill-mode: forwards;
-}
-.official-button:hover .official-button__drow2::before {
-  animation: drow3 linear 0.03s 0.26s;
-  animation-fill-mode: forwards;
-}
-.official-button:hover .official-button__drow2::after {
-  animation: drow5 linear 0.06s 0.32s;
-  animation-fill-mode: forwards;
-}
-@keyframes drow1 {
-  0% {
-    height: 0;
-  }
-  100% {
-    height: 100px;
-  }
-}
-@keyframes drow2 {
-  0% {
-    width: 0;
-    opacity: 0;
-  }
-  10% {
-    opacity: 0;
-  }
-  11% {
-    opacity: 1;
-  }
-  100% {
-    width: 120px;
-  }
-}
-@keyframes drow3 {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 80px;
-  }
-}
-@keyframes drow4 {
-  0% {
-    height: 0;
-  }
-  100% {
-    height: 120px;
-  }
-}
-@keyframes drow5 {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 124px;
-  }
-}
-
-.official-button-container {
-  width: 100%;
-  height: 200px;
+/* From Uiverse.io by deamelo */
+.main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  gap: 0.5em;
 }
-.official-button:not(:last-child) {
-  margin-bottom: 64px;
+
+.up {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+}
+
+.down {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+}
+
+.card1,
+.card2,
+.card3,
+.card4 {
+  width: 90px;
+  height: 90px;
+  outline: none;
+  border: none;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  transition: 0.2s ease-in-out;
+}
+
+.card1 {
+  border-radius: 90px 5px 5px 5px;
+}
+
+.card2 {
+  border-radius: 5px 90px 5px 5px;
+}
+
+.card3 {
+  border-radius: 5px 5px 5px 90px;
+}
+
+.card4 {
+  border-radius: 5px 5px 90px 5px;
+}
+
+.card-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.card1:hover,
+.card2:hover,
+.card3:hover,
+.card4:hover {
+  cursor: pointer;
+  scale: 1.1;
+  color: white;
+}
+
+.card1:hover {
+  background-color: #00ff00;
+}
+
+.card2:hover {
+  background-color: #0077b5;
+}
+
+.card3:hover {
+  background-color: black;
+}
+
+.card4:hover {
+  background-color: #8c9eff;
 }
