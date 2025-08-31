@@ -150,81 +150,98 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
     onClear?: () => void;
     icon?: React.ComponentType<any>;
   }) => (
-    <div className="relative w-full">
-      {/* Animated Border - Scattered light effect */}
-      <div className="absolute -inset-1 rounded-xl overflow-hidden pointer-events-none">
-        {/* Main rotating gradient with scattered effect */}
-        <div 
-          className="absolute inset-0 w-[200%] h-[200%] -top-1/2 -left-1/2 animate-spin"
-          style={{
-            background: `
-              radial-gradient(ellipse 100px 50px at 20% 50%, #6366f1 0%, transparent 50%),
-              radial-gradient(ellipse 80px 40px at 80% 50%, #ec4899 0%, transparent 50%),
-              radial-gradient(ellipse 60px 30px at 50% 20%, #8b5cf6 0%, transparent 50%),
-              radial-gradient(ellipse 70px 35px at 50% 80%, #f97316 0%, transparent 50%),
-              radial-gradient(ellipse 90px 45px at 10% 20%, #10b981 0%, transparent 50%),
-              radial-gradient(ellipse 85px 42px at 90% 80%, #06b6d4 0%, transparent 50%)
-            `,
-            animationDuration: '8s',
-          }}
-        />
-        
-        {/* Secondary slower scattered lights */}
-        <div 
-          className="absolute inset-0 w-[150%] h-[150%] -top-1/4 -left-1/4 animate-spin"
-          style={{
-            background: `
-              radial-gradient(ellipse 40px 20px at 30% 30%, rgba(99, 102, 241, 0.6) 0%, transparent 60%),
-              radial-gradient(ellipse 50px 25px at 70% 70%, rgba(236, 72, 153, 0.6) 0%, transparent 60%),
-              radial-gradient(ellipse 35px 18px at 60% 40%, rgba(139, 92, 246, 0.6) 0%, transparent 60%),
-              radial-gradient(ellipse 45px 22px at 40% 60%, rgba(249, 115, 22, 0.6) 0%, transparent 60%)
-            `,
-            animationDuration: '12s',
-            animationDirection: 'reverse',
-          }}
-        />
-      </div>
+    <div className="relative">
+      {/* Background Grid */}
+      <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-gray-100 to-transparent opacity-20 pointer-events-none" 
+           style={{
+             backgroundImage: 'linear-gradient(to right, #0f0f10 1px, transparent 1px), linear-gradient(to bottom, #0f0f10 1px, transparent 1px)',
+             backgroundSize: '1rem 1rem',
+             filter: 'blur(1px)',
+             zIndex: -1
+           }} />
+      
+      {/* Animated Container */}
+      <div className="relative group">
+        {/* Glow Effect */}
+        <div className="absolute inset-0 rounded-xl overflow-hidden opacity-40 blur-[30px] pointer-events-none">
+          <div className="absolute inset-0 w-[999px] h-[999px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[60deg] transition-transform duration-[2000ms] group-hover:-rotate-[120deg] group-focus-within:rotate-[420deg]"
+               style={{
+                 backgroundImage: 'conic-gradient(#000, #402fb5 5%, #000 38%, #000 50%, #cf30aa 60%, #000 87%)',
+                 backgroundRepeat: 'no-repeat',
+                 backgroundPosition: '0 0'
+               }} />
+        </div>
 
-      {/* Solid background container to isolate input */}
-      <div className="relative bg-gray-900 rounded-xl border border-gray-800">
-        <input
-          value={value}
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          placeholder={placeholder}
-          disabled={disabled}
-          autoComplete="off"
-          spellCheck={false}
-          style={{
-            caretColor: 'white',
-            cursor: 'text',
-          }}
-          className="w-full h-14 px-12 bg-transparent border-none rounded-xl text-white text-lg placeholder-gray-400 focus:outline-none focus:ring-0"
-          onFocus={(e) => {
-            e.target.style.cursor = 'text';
-          }}
-        />
-        
-        {/* Icon */}
-        {IconComponent && (
-          <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
-            <IconComponent className="w-6 h-6 text-gray-400" />
-          </div>
-        )}
+        {/* Dark Border Background */}
+        <div className="absolute inset-0 rounded-xl overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[82deg] transition-transform duration-[2000ms] group-hover:-rotate-[98deg] group-focus-within:rotate-[442deg]"
+               style={{
+                 backgroundImage: 'conic-gradient(rgba(0, 0, 0, 0), #18116a, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0) 50%, #6e1b60, rgba(0, 0, 0, 0) 60%)',
+                 backgroundRepeat: 'no-repeat',
+                 backgroundPosition: '0 0'
+               }} />
+        </div>
 
-        {/* Clear Button */}
-        {value && onClear && (
-          <div className="absolute right-4 top-1/2 -translate-y-1/2">
+        {/* White Layer */}
+        <div className="absolute inset-0 rounded-xl overflow-hidden blur-[2px] pointer-events-none">
+          <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[83deg] transition-transform duration-[2000ms] group-hover:-rotate-[97deg] group-focus-within:rotate-[443deg] brightness-[1.4]"
+               style={{
+                 backgroundImage: 'conic-gradient(rgba(0, 0, 0, 0) 0%, #a099d8, rgba(0, 0, 0, 0) 8%, rgba(0, 0, 0, 0) 50%, #dfa2da, rgba(0, 0, 0, 0) 58%)',
+                 backgroundRepeat: 'no-repeat',
+                 backgroundPosition: '0 0'
+               }} />
+        </div>
+
+        {/* Border Layer */}
+        <div className="absolute inset-0 rounded-xl overflow-hidden blur-[0.5px] pointer-events-none">
+          <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[70deg] transition-transform duration-[2000ms] group-hover:-rotate-[110deg] group-focus-within:rotate-[430deg] brightness-[1.3]"
+               style={{
+                 backgroundImage: 'conic-gradient(#1c191c, #402fb5 5%, #1c191c 14%, #1c191c 50%, #cf30aa 60%, #1c191c 64%)',
+                 backgroundRepeat: 'no-repeat',
+                 backgroundPosition: '0 0'
+               }} />
+        </div>
+
+        {/* Input Field */}
+        <div className="relative">
+          <input
+            value={value}
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+            placeholder={placeholder}
+            disabled={disabled}
+            className="w-full h-14 px-12 bg-black/90 border-none rounded-xl text-white text-lg placeholder-gray-400 focus:outline-none relative z-10"
+            style={{ backgroundColor: '#010201' }}
+          />
+          
+          {/* Icon */}
+          {IconComponent && (
+            <IconComponent className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400 z-20" />
+          )}
+
+          {/* Clear Button */}
+          {value && onClear && (
             <button 
               onClick={onClear}
-              className="text-gray-400 hover:text-white p-1 hover:bg-gray-800 rounded transition-colors"
-              type="button"
-              style={{ cursor: 'pointer' }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white z-20"
             >
               <X className="w-5 h-5" />
             </button>
-          </div>
-        )}
+          )}
+
+          {/* Input Mask Effect */}
+          <div 
+            className={`absolute top-1/2 left-16 w-24 h-5 -translate-y-1/2 pointer-events-none transition-opacity duration-200 ${value ? 'opacity-0' : 'opacity-100'}`}
+            style={{
+              background: 'linear-gradient(90deg, transparent, black)'
+            }} 
+          />
+
+          {/* Pink Mask Effect */}
+          <div 
+            className="absolute top-2 left-1 w-8 h-5 bg-pink-500 blur-[20px] opacity-80 pointer-events-none transition-opacity duration-[2000ms] group-hover:opacity-0"
+          />
+        </div>
       </div>
     </div>
   );
@@ -239,16 +256,25 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
       strokeLinecap="round"
       strokeLinejoin="round"
       fill="none"
-      stroke="currentColor"
       {...props}
     >
-      <circle cx="11" cy="11" r="8" />
-      <line x1="22" y1="22" x2="16.65" y2="16.65" />
+      <circle cx="11" cy="11" r="8" stroke="url(#searchGradient)" />
+      <line x1="22" y1="22" x2="16.65" y2="16.65" stroke="url(#searchLineGradient)" />
+      <defs>
+        <linearGradient id="searchGradient" gradientTransform="rotate(50)">
+          <stop offset="0%" stopColor="#f8e7f8" />
+          <stop offset="50%" stopColor="#b6a9b7" />
+        </linearGradient>
+        <linearGradient id="searchLineGradient">
+          <stop offset="0%" stopColor="#b6a9b7" />
+          <stop offset="50%" stopColor="#837484" />
+        </linearGradient>
+      </defs>
     </svg>
   );
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
+    <div className="w-full max-w-2xl mx-auto animate-fade-in">
       {/* Client Search */}
       <div className="relative mb-4">
         <AnimatedInput
