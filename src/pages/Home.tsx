@@ -65,20 +65,20 @@ const Home = () => {
   };
 
   return (
-    <main className="relative min-h-screen flex items-center justify-center">
-      {/* Background Image with Animated Overlay */}
+    <>
+      {/* Full Screen Background - positioned fixed to cover entire viewport */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat -z-10"
         style={{
           backgroundImage: "url('/lovable-uploads/076c0e82-43a2-43e9-b835-48b5f384368f.png')"
         }}
       />
       
-      {/* Animated Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60 animate-gradient-shift" />
+      {/* Animated Background Gradient - also fixed to cover entire viewport */}
+      <div className="fixed inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60 animate-gradient-shift -z-10" />
       
-      {/* Floating Particles */}
-      <div className="absolute inset-0">
+      {/* Floating Particles - also fixed to cover entire viewport */}
+      <div className="fixed inset-0 -z-10">
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
@@ -92,73 +92,75 @@ const Home = () => {
           />
         ))}
       </div>
-      
-      {/* Content */}
-      <div className="relative z-10 text-center px-4 sm:px-6 flex flex-col justify-center min-h-screen py-8">
-        <div className="max-w-4xl mx-auto flex flex-col justify-center">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="mb-4 sm:mb-6 overflow-visible"
-          >
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight relative" style={{ lineHeight: '1.3', paddingBottom: '0.25em' }}>
-              {titleWords.map((word, index) => (
-                <motion.span
-                  key={index}
-                  variants={wordVariants}
-                  className="inline-block mr-2 sm:mr-4 md:mr-6 relative cinematic-text overflow-visible"
-                  style={{ paddingBottom: '0.1em' }}
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </h1>
-          </motion.div>
-          
-          <motion.p
-            variants={subtitleVariants}
-            initial="hidden"
-            animate="visible"
-            className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed py-1"
-          >
-            Industrial Engineering Solutions & Client Resources Portal
-          </motion.p>
-          
-          <motion.div
-            variants={buttonsVariants}
-            initial="hidden"
-            animate="visible"
-            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center"
-          >
-            <Button 
-              asChild 
-              size="lg" 
-              className="cinematic-button bg-slate-800/90 hover:bg-slate-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl shadow-2xl transition-all duration-500 transform hover:scale-110 hover:shadow-glow active:scale-95 w-full sm:w-auto"
+
+      <main className="relative min-h-screen flex items-center justify-center">        
+        {/* Content */}
+        <div className="relative z-10 text-center px-4 sm:px-6 flex flex-col justify-center min-h-screen py-8">
+          <div className="max-w-4xl mx-auto flex flex-col justify-center">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="mb-4 sm:mb-6 overflow-visible"
             >
-              <Link to="/resources">
-                Access Resources
-              </Link>
-            </Button>
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight relative" style={{ lineHeight: '1.3', paddingBottom: '0.25em' }}>
+                {titleWords.map((word, index) => (
+                  <motion.span
+                    key={index}
+                    variants={wordVariants}
+                    className="inline-block mr-2 sm:mr-4 md:mr-6 relative cinematic-text overflow-visible"
+                    style={{ paddingBottom: '0.1em' }}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </h1>
+            </motion.div>
             
-            <Button 
-              asChild 
-              variant="outline" 
-              size="lg"
-              className="cinematic-button border-2 border-white/30 bg-white/10 hover:bg-white/25 hover:border-white/50 text-white hover:text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-500 transform hover:scale-110 hover:shadow-glow-white active:scale-95 w-full sm:w-auto"
+            <motion.p
+              variants={subtitleVariants}
+              initial="hidden"
+              animate="visible"
+              className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed py-1"
             >
-              <a 
-                href="https://murban-eng.com/" 
-                target="_blank" 
-                rel="noopener noreferrer"
+              Industrial Engineering Solutions & Client Resources Portal
+            </motion.p>
+            
+            <motion.div
+              variants={buttonsVariants}
+              initial="hidden"
+              animate="visible"
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center"
+            >
+              <Button 
+                asChild 
+                size="lg" 
+                className="cinematic-button bg-slate-800/90 hover:bg-slate-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl shadow-2xl transition-all duration-500 transform hover:scale-110 hover:shadow-glow active:scale-95 w-full sm:w-auto"
               >
-                Visit Website
-              </a>
-            </Button>
-          </motion.div>
+                <Link to="/resources">
+                  Access Resources
+                </Link>
+              </Button>
+              
+              <Button 
+                asChild 
+                variant="outline" 
+                size="lg"
+                className="cinematic-button border-2 border-white/30 bg-white/10 hover:bg-white/25 hover:border-white/50 text-white hover:text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-500 transform hover:scale-110 hover:shadow-glow-white active:scale-95 w-full sm:w-auto"
+              >
+                <a 
+                  href="https://murban-eng.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  Visit Website
+                </a>
+              </Button>
+            </motion.div>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 };
 
