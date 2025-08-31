@@ -130,37 +130,44 @@ const Home = () => {
               Industrial Engineering Solutions & Client Resources Portal
             </motion.p>
             
-            <motion.div
-              variants={buttonsVariants}
-              initial="hidden"
-              animate="visible"
-              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center"
-            >
-              <Button 
-                asChild 
-                size="lg" 
-                className="cinematic-button bg-slate-800/90 hover:bg-slate-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl shadow-2xl transition-all duration-500 transform hover:scale-110 hover:shadow-glow active:scale-95 w-full sm:w-auto"
+              <motion.div
+                variants={buttonsVariants}
+                initial="hidden"
+                animate="visible"
+                className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center"
               >
-                <Link to="/resources">
-                  Access Resources
-                </Link>
-              </Button>
-              
-              <Button 
-                asChild 
-                variant="outline" 
-                size="lg"
-                className="cinematic-button border-2 border-white/30 bg-white/10 hover:bg-white/25 hover:border-white/50 text-white hover:text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-500 transform hover:scale-110 hover:shadow-glow-white active:scale-95 w-full sm:w-auto"
-              >
-                <a 
-                  href="https://murban-eng.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                <Button
+                  asChild
+                  size="sm"
+                  className="cinematic-button bg-slate-800/90 hover:bg-slate-700 text-white px-4 sm:px-5 py-2 sm:py-3 text-sm sm:text-base font-semibold rounded-xl shadow-2xl transition-all duration-500 transform hover:scale-105 hover:shadow-glow active:scale-95 w-full sm:w-auto"
                 >
-                  Visit Website
-                </a>
-              </Button>
-            </motion.div>
+                  <Link to="/">
+                    Home
+                  </Link>
+                </Button>
+
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="cinematic-button border-2 border-white/30 bg-white/10 hover:bg-white/25 hover:border-white/50 text-white hover:text-white px-4 sm:px-5 py-2 sm:py-3 text-sm sm:text-base font-semibold rounded-xl backdrop-blur-sm transition-all duration-500 transform hover:scale-105 hover:shadow-glow-white active:scale-95 w-full sm:w-auto"
+                >
+                  <Link to="/resources">
+                    Portal
+                  </Link>
+                </Button>
+
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="cinematic-button border-2 border-white/30 bg-white/10 hover:bg-white/25 hover:border-white/50 text-white hover:text-white px-4 sm:px-5 py-2 sm:py-3 text-sm sm:text-base font-semibold rounded-xl backdrop-blur-sm transition-all duration-500 transform hover:scale-105 hover:shadow-glow-white active:scale-95 w-full sm:w-auto"
+                >
+                  <Link to="/contact">
+                    Contact Us
+                  </Link>
+                </Button>
+              </motion.div>
           </div>
         </div>
       </main>
