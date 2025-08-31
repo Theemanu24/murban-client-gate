@@ -20,7 +20,7 @@ const AppRoutes = () => {
 
   return (
     <div
-      className={`min-h-screen flex flex-col overflow-x-hidden ${
+      className={`min-h-screen flex flex-col overflow-x-hidden pt-16 ${
         isHome ? "" : "bg-background"
       }`}
     >

@@ -19,7 +19,7 @@ const Navbar = () => {
 
   return (
     <header
-      className="sticky top-0 z-40 w-full bg-transparent backdrop-blur-sm transition-all duration-500"
+      className="fixed top-0 z-50 w-full bg-transparent backdrop-blur-sm transition-all duration-500"
       style={{
         fontSize: "90%", // Navbar font reduced for less crowding
       }}
