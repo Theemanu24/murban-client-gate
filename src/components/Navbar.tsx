@@ -6,9 +6,8 @@ const Navbar = () => {
 
   return (
     <header
-      className="sticky top-0 z-40 w-full backdrop-blur-sm transition-all duration-500"
+      className="sticky top-0 z-40 w-full border-b border-white/20 bg-white/10 backdrop-blur-md backdrop-saturate-150 shadow-lg transition-all duration-500"
       style={{
-        backgroundColor: "#304259",
         fontSize: "90%", // Navbar font reduced for less crowding
       }}
     >
