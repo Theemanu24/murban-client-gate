@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hero Overlay Example</title>
+  <style>
+    :root {
+      --overlay-color: #000;
+      --overlay-opacity: 0.5;
+    }
+
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      font-family: sans-serif;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--overlay-color);
+      opacity: var(--overlay-opacity);
+      pointer-events: none;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <h1>Welcome to the Hero</h1>
+  </section>
+</body>
+</html>
