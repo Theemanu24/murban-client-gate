@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 import { Input } from "@/components/ui/input";
 import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";
-import { Search, X, MapPin, Clock, CheckCircle } from "lucide-react";
+import { X, MapPin, CheckCircle } from "lucide-react";
 
 type Client = Database['public']['Tables']['clients']['Row'];
 
@@ -136,8 +136,31 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
   return (
     <div className="w-full max-w-2xl mx-auto animate-fade-in">
       {/* Client Search */}
-      <div className="relative mb-4">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+      <div className="relative mb-4 search-container">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+          className="search-icon absolute left-3 top-1/2 -translate-y-1/2"
+        >
+          <circle cx="11" cy="11" r="8" stroke="url(#searchGradient)" />
+          <line x1="22" y1="22" x2="16.65" y2="16.65" stroke="url(#searchLineGradient)" />
+          <defs>
+            <linearGradient id="searchGradient" gradientTransform="rotate(50)">
+              <stop offset="0%" stopColor="#f8e7f8" />
+              <stop offset="50%" stopColor="#b6a9b7" />
+            </linearGradient>
+            <linearGradient id="searchLineGradient">
+              <stop offset="0%" stopColor="#b6a9b7" />
+              <stop offset="50%" stopColor="#837484" />
+            </linearGradient>
+          </defs>
+        </svg>
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}

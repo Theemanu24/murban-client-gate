@@ -71,3 +71,16 @@ All colors MUST be HSL.
 
   /* Cinematic Animations */
 }
+
+@layer components {
+  .search-container:hover .search-icon,
+  .search-container:focus-within .search-icon {
+    animation: search-rotate 4s linear infinite;
+  }
+}
+
+@keyframes search-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
