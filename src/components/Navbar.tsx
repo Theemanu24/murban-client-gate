@@ -19,12 +19,12 @@ const Navbar = () => {
 
   return (
     <header
-      className="fixed top-0 z-50 w-full bg-transparent backdrop-blur-sm transition-all duration-500"
+      className="fixed top-0 z-50 w-full bg-transparent backdrop-blur-sm shadow-lg transition-all duration-500"
       style={{
         fontSize: "90%", // Navbar font reduced for less crowding
       }}
     >
-      <nav className="container mx-auto flex h-16 items-center justify-between px-4 relative">
+      <nav className="container mx-auto flex h-12 items-center justify-between px-4 relative">
         <Link
           to="/"
           className="flex items-center gap-1 sm:gap-3 hover:scale-105 transition-transform duration-300"
@@ -33,7 +33,7 @@ const Navbar = () => {
           <img
             src="/murban_logo_final-removebg-preview.png"
             alt="Murban Engineering logo"
-            className="h-10 w-10 object-contain"
+            className="h-8 w-8 object-contain"
             style={{ background: "transparent", mixBlendMode: "screen", filter: "brightness(1.1)" }}
             loading="lazy"
           />
