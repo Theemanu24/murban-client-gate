@@ -101,7 +101,7 @@ const Home = () => {
               animate="visible"
               className="mb-4 sm:mb-6 overflow-visible"
             >
-              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-[#353839] tracking-tight relative" style={{ lineHeight: '1.3', paddingBottom: '0.25em' }}>
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight relative" style={{ lineHeight: '1.3', paddingBottom: '0.25em' }}>
                 {titleWords.map((word, index) => (
                   <motion.span
                     key={index}
@@ -119,7 +119,7 @@ const Home = () => {
               variants={subtitleVariants}
               initial="hidden"
               animate="visible"
-              className="text-lg sm:text-xl md:text-2xl font-bold text-[#353839] mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed py-1"
+              className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed py-1"
             >
               Industrial Engineering Solutions & Client Resources Portal
             </motion.p>
