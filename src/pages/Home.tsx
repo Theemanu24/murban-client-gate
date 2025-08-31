@@ -68,17 +68,17 @@ const Home = () => {
     <>
       {/* Full Screen Background - positioned fixed to cover entire viewport */}
       <div 
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat -z-10"
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat z-0"
         style={{
           backgroundImage: "url('/lovable-uploads/076c0e82-43a2-43e9-b835-48b5f384368f.png')"
         }}
       />
       
       {/* Animated Background Gradient - also fixed to cover entire viewport */}
-      <div className="fixed inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60 animate-gradient-shift -z-10" />
+      <div className="fixed inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60 animate-gradient-shift z-0" />
       
       {/* Floating Particles - also fixed to cover entire viewport */}
-      <div className="fixed inset-0 -z-10">
+      <div className="fixed inset-0 z-0">
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
@@ -93,9 +93,9 @@ const Home = () => {
         ))}
       </div>
 
-      <main className="relative min-h-screen flex items-center justify-center">        
+      <main className="relative min-h-screen flex items-center justify-center z-10">        
         {/* Content */}
-        <div className="relative z-10 text-center px-4 sm:px-6 flex flex-col justify-center min-h-screen py-8">
+        <div className="relative z-20 text-center px-4 sm:px-6 flex flex-col justify-center min-h-screen py-8">
           <div className="max-w-4xl mx-auto flex flex-col justify-center">
             <motion.div
               variants={containerVariants}
