@@ -27,7 +27,7 @@ const Navbar = () => {
       <nav className="container mx-auto flex h-16 items-center justify-end px-4 relative">
         <Link
           to="/"
-          className="absolute left-4 flex items-center gap-3 hover:scale-105 transition-transform duration-300"
+          className="absolute left-4 flex items-center gap-2 sm:gap-3 hover:scale-105 transition-transform duration-300"
           aria-label="Go home"
         >
           <img
@@ -37,6 +37,9 @@ const Navbar = () => {
             style={{ background: "transparent", mixBlendMode: "screen", filter: "brightness(1.1)" }}
             loading="lazy"
           />
+          <span className="text-xs sm:text-sm md:text-xl lg:text-2xl font-semibold text-white whitespace-nowrap">
+            Murban Engineering
+          </span>
         </Link>
         <div className="glass-radio-group">
           <input
