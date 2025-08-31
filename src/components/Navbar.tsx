@@ -22,8 +22,12 @@ const Navbar = () => {
         fontSize: "90%", // Navbar font reduced for less crowding
       }}
     >
-      <nav className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link to="/" className="flex items-center gap-3 hover:scale-105 transition-transform duration-300" aria-label="Go home">
+      <nav className="container mx-auto flex h-16 items-center px-4">
+        <Link
+          to="/"
+          className="flex items-center gap-3 hover:scale-105 transition-transform duration-300"
+          aria-label="Go home"
+        >
           <img
             src="/murban_logo_final-removebg-preview.png"
             alt="Murban Engineering logo"
@@ -35,7 +39,7 @@ const Navbar = () => {
             Murban Engineering
           </span>
         </Link>
-        <div className="glass-radio-group">
+        <div className="glass-radio-group ml-auto">
           <input
             type="radio"
             name="nav"
