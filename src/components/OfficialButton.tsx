@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const OfficialButton = () => (
-  <div className="flex flex-col items-center gap-4 sm:flex-row">
+  <div className="flex flex-row items-center gap-4">
     <Link to="/resources" className="learn-more">
       <span className="circle" aria-hidden="true">
         <span className="icon arrow"></span>
