@@ -86,3 +86,15 @@
 .learn-more:hover .button-text {
   color: #fff;
 }
+
+@media (max-width: 640px) {
+  .learn-more {
+    width: 10rem;
+    height: 3.5rem;
+  }
+
+  .learn-more .circle {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
