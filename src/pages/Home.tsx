@@ -97,7 +97,10 @@ const Home = () => {
         ))}
       </div>
 
-      <main className="relative min-h-screen flex items-start justify-center pt-24 sm:pt-32">
+      <main
+        className="relative min-h-screen flex items-start justify-center pt-24 sm:pt-32"
+        style={{ marginTop: "-0.8cm" }}
+      >
         {/* Content */}
         <div className="relative z-10 text-center px-4 sm:px-6 flex flex-col py-8">
           <div className="max-w-4xl mx-auto flex flex-col justify-center">
