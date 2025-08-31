@@ -1,8 +1,10 @@
-import { Link, useLocation } from "react-router-dom";
-import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "@/styles/glass-radio.css";
 
 const Navbar = () => {
-  const location = useLocation();
+  const [active, setActive] = useState<"home" | "contact">("home");
+  const navigate = useNavigate();
 
   return (
     <header
@@ -25,24 +27,36 @@ const Navbar = () => {
             Murban Engineering
           </span>
         </Link>
-        <div className="flex items-center gap-2 sm:gap-4">
-          <Link
-            to="/"
-            className={cn(
-              "px-3 py-2 sm:px-4 sm:py-2 text-xs sm:text-sm rounded-lg border border-white/20 bg-white/10 text-white/90 hover:text-white hover:bg-white/25 hover:border-white/30 hover:scale-105 hover:shadow-lg hover:shadow-white/10 transition-all duration-300 backdrop-blur-sm transform whitespace-nowrap",
-              location.pathname === "/" && "ring-2 ring-white/50"
-            )}
-          >
-            Home
-          </Link>
-          <a
-            href="https://murban-eng.com/contact-us/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-3 py-2 sm:px-4 sm:py-2 text-xs sm:text-sm rounded-lg border border-white/20 bg-white/10 text-white/90 hover:text-white hover:bg-white/25 hover:border-white/30 hover:scale-105 hover:shadow-lg hover:shadow-white/10 transition-all duration-300 backdrop-blur-sm transform whitespace-nowrap"
-          >
-            Contact Us
-          </a>
+        <div className="glass-radio-group">
+          <input
+            type="radio"
+            name="nav"
+            id="glass-silver"
+            checked={active === "home"}
+            onChange={() => {
+              setActive("home");
+              navigate("/");
+            }}
+          />
+          <label htmlFor="glass-silver">Home Page</label>
+
+          <input
+            type="radio"
+            name="nav"
+            id="glass-gold"
+            checked={active === "contact"}
+            onChange={() => {
+              setActive("contact");
+              window.open(
+                "https://murban-eng.com/contact-us/",
+                "_blank",
+                "noopener,noreferrer"
+              );
+            }}
+          />
+          <label htmlFor="glass-gold">Contact Us</label>
+
+          <div className="glass-glider"></div>
         </div>
       </nav>
     </header>
