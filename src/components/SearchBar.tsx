@@ -133,58 +133,159 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
     setActiveIndex(0);
   };
 
+  const AnimatedInput = ({ 
+    value, 
+    onChange, 
+    onKeyDown, 
+    placeholder, 
+    disabled, 
+    onClear,
+    icon: IconComponent 
+  }: {
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+    placeholder: string;
+    disabled?: boolean;
+    onClear?: () => void;
+    icon?: React.ComponentType<any>;
+  }) => (
+    <div className="relative">
+      {/* Background Grid */}
+      <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-gray-100 to-transparent opacity-20 pointer-events-none" 
+           style={{
+             backgroundImage: 'linear-gradient(to right, #0f0f10 1px, transparent 1px), linear-gradient(to bottom, #0f0f10 1px, transparent 1px)',
+             backgroundSize: '1rem 1rem',
+             filter: 'blur(1px)',
+             zIndex: -1
+           }} />
+      
+      {/* Animated Container */}
+      <div className="relative group">
+        {/* Glow Effect */}
+        <div className="absolute inset-0 rounded-xl overflow-hidden opacity-40 blur-[30px] pointer-events-none">
+          <div className="absolute inset-0 w-[999px] h-[999px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[60deg] transition-transform duration-[2000ms] group-hover:-rotate-[120deg] group-focus-within:rotate-[420deg]"
+               style={{
+                 backgroundImage: 'conic-gradient(#000, #402fb5 5%, #000 38%, #000 50%, #cf30aa 60%, #000 87%)',
+                 backgroundRepeat: 'no-repeat',
+                 backgroundPosition: '0 0'
+               }} />
+        </div>
+
+        {/* Dark Border Background */}
+        <div className="absolute inset-0 rounded-xl overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[82deg] transition-transform duration-[2000ms] group-hover:-rotate-[98deg] group-focus-within:rotate-[442deg]"
+               style={{
+                 backgroundImage: 'conic-gradient(rgba(0, 0, 0, 0), #18116a, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0) 50%, #6e1b60, rgba(0, 0, 0, 0) 60%)',
+                 backgroundRepeat: 'no-repeat',
+                 backgroundPosition: '0 0'
+               }} />
+        </div>
+
+        {/* White Layer */}
+        <div className="absolute inset-0 rounded-xl overflow-hidden blur-[2px] pointer-events-none">
+          <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[83deg] transition-transform duration-[2000ms] group-hover:-rotate-[97deg] group-focus-within:rotate-[443deg] brightness-[1.4]"
+               style={{
+                 backgroundImage: 'conic-gradient(rgba(0, 0, 0, 0) 0%, #a099d8, rgba(0, 0, 0, 0) 8%, rgba(0, 0, 0, 0) 50%, #dfa2da, rgba(0, 0, 0, 0) 58%)',
+                 backgroundRepeat: 'no-repeat',
+                 backgroundPosition: '0 0'
+               }} />
+        </div>
+
+        {/* Border Layer */}
+        <div className="absolute inset-0 rounded-xl overflow-hidden blur-[0.5px] pointer-events-none">
+          <div className="absolute inset-0 w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[70deg] transition-transform duration-[2000ms] group-hover:-rotate-[110deg] group-focus-within:rotate-[430deg] brightness-[1.3]"
+               style={{
+                 backgroundImage: 'conic-gradient(#1c191c, #402fb5 5%, #1c191c 14%, #1c191c 50%, #cf30aa 60%, #1c191c 64%)',
+                 backgroundRepeat: 'no-repeat',
+                 backgroundPosition: '0 0'
+               }} />
+        </div>
+
+        {/* Input Field */}
+        <div className="relative">
+          <input
+            value={value}
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+            placeholder={placeholder}
+            disabled={disabled}
+            className="w-full h-14 px-12 bg-black/90 border-none rounded-xl text-white text-lg placeholder-gray-400 focus:outline-none relative z-10"
+            style={{ backgroundColor: '#010201' }}
+          />
+          
+          {/* Icon */}
+          {IconComponent && (
+            <IconComponent className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400 z-20" />
+          )}
+
+          {/* Clear Button */}
+          {value && onClear && (
+            <button 
+              onClick={onClear}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white z-20"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          )}
+
+          {/* Input Mask Effect */}
+          <div 
+            className={`absolute top-1/2 left-16 w-24 h-5 -translate-y-1/2 pointer-events-none transition-opacity duration-200 ${value ? 'opacity-0' : 'opacity-100'}`}
+            style={{
+              background: 'linear-gradient(90deg, transparent, black)'
+            }} 
+          />
+
+          {/* Pink Mask Effect */}
+          <div 
+            className="absolute top-2 left-1 w-8 h-5 bg-pink-500 blur-[20px] opacity-80 pointer-events-none transition-opacity duration-[2000ms] group-hover:opacity-0"
+          />
+        </div>
+      </div>
+    </div>
+  );
+
+  const SearchIcon = (props: any) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="none"
+      {...props}
+    >
+      <circle cx="11" cy="11" r="8" stroke="url(#searchGradient)" />
+      <line x1="22" y1="22" x2="16.65" y2="16.65" stroke="url(#searchLineGradient)" />
+      <defs>
+        <linearGradient id="searchGradient" gradientTransform="rotate(50)">
+          <stop offset="0%" stopColor="#f8e7f8" />
+          <stop offset="50%" stopColor="#b6a9b7" />
+        </linearGradient>
+        <linearGradient id="searchLineGradient">
+          <stop offset="0%" stopColor="#b6a9b7" />
+          <stop offset="50%" stopColor="#837484" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+
   return (
     <div className="w-full max-w-2xl mx-auto animate-fade-in">
       {/* Client Search */}
-      <div className="relative mb-4 search-container">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-          className="search-icon absolute left-3 top-1/2 -translate-y-1/2"
-        >
-          <circle cx="11" cy="11" r="8" stroke="url(#searchGradient)" />
-          <line x1="22" y1="22" x2="16.65" y2="16.65" stroke="url(#searchLineGradient)" />
-          <defs>
-            <linearGradient id="searchGradient" gradientTransform="rotate(50)">
-              <stop offset="0%" stopColor="#f8e7f8" />
-              <stop offset="50%" stopColor="#b6a9b7" />
-            </linearGradient>
-            <linearGradient id="searchLineGradient">
-              <stop offset="0%" stopColor="#b6a9b7" />
-              <stop offset="50%" stopColor="#837484" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <Input
+      <div className="relative mb-4">
+        <AnimatedInput
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => handleKeyDown(e, false)}
           placeholder="Type your company name..."
-          aria-label="Search company"
-          autoComplete="off"
-          className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black !bg-white !border-gray-300 hover:!border-gray-400 focus:!border-blue-500 focus:!ring-blue-500"
-          style={{ 
-            backgroundColor: 'white !important', 
-            borderColor: '#d1d5db !important',
-            '--tw-ring-color': '#3b82f6'
-          }}
           disabled={!!selectedClient}
+          onClear={resetSearch}
+          icon={SearchIcon}
         />
-        {query && (
-          <button 
-            aria-label="Clear" 
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700" 
-            onClick={resetSearch}
-          >
-            <X />
-          </button>
-        )}
       </div>
 
       {/* Client Results */}
@@ -221,31 +322,15 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
       {/* Terminal Search - Only shown after client is selected */}
       {selectedClient && terminals.length > 0 && (
         <>
-          <div className="relative">
-            <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
-            <Input
+          <div className="relative mb-4">
+            <AnimatedInput
               value={terminalQuery}
               onChange={(e) => setTerminalQuery(e.target.value)}
               onKeyDown={(e) => handleKeyDown(e, true)}
               placeholder="Select terminal location..."
-              aria-label="Search terminal"
-              autoComplete="off"
-              className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black !bg-white !border-gray-300 hover:!border-gray-400 focus:!border-blue-500 focus:!ring-blue-500"
-              style={{ 
-                backgroundColor: 'white !important', 
-                borderColor: '#d1d5db !important',
-                '--tw-ring-color': '#3b82f6'
-              }}
+              onClear={() => setTerminalQuery("")}
+              icon={MapPin}
             />
-            {terminalQuery && (
-              <button 
-                aria-label="Clear terminal" 
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700" 
-                onClick={() => setTerminalQuery("")}
-              >
-                <X />
-              </button>
-            )}
           </div>
 
           {/* Terminal Results */}
