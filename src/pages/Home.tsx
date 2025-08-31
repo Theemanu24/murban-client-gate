@@ -82,7 +82,7 @@ const Home = () => {
       />
       
       {/* Floating Particles - also fixed to cover entire viewport */}
-      <div className="fixed inset-0" style={{ zIndex: -1 }}
+      <div className="fixed inset-0" style={{ zIndex: -1 }}>
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
