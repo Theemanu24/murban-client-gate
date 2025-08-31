@@ -115,7 +115,7 @@ END $$;
 
 -- Insert client data with new password format
 INSERT INTO public.clients (name, slug, description, app_url, password_hash, active) VALUES
-('Swahili Beach Tank Calculator', 'swahili-tank', 'Advanced tank volume calculations for marine applications', 'https://swahili-beach-tank-calculator.vercel.app', public.hash_password('Swahili@2025'), true),
+('Swahili Beach', 'swahili-beach', 'Advanced tank volume calculations for marine applications', 'https://swahili-beach.vercel.app', public.hash_password('Swahili@2025'), true),
 ('Tank Volume Genesis', 'tank-genesis', 'Professional tank volume calculation system', 'https://tank-volume-genesis.vercel.app', public.hash_password('Genesis@2025'), true),
 ('TotalUganda', 'totaluganda', 'Comprehensive energy solutions platform', 'https://totaluganda.vercel.app', public.hash_password('Total@2025'), true),
 ('Rubis Zambia', 'rubis-zambia', 'Tank calculation system for Rubis operations', 'https://rubis-tank-calc.vercel.app', public.hash_password('Rubis@2025'), true);
