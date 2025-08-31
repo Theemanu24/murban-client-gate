@@ -24,7 +24,7 @@ const Navbar = () => {
         fontSize: "90%", // Navbar font reduced for less crowding
       }}
     >
-      <nav className="container mx-auto flex h-16 items-center justify-center px-4 relative">
+      <nav className="container mx-auto flex h-16 items-center justify-end px-4 relative">
         <Link
           to="/"
           className="absolute left-4 flex items-center gap-3 hover:scale-105 transition-transform duration-300"
