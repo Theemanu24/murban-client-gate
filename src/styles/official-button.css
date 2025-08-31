@@ -13,8 +13,8 @@
 /* button styling */
 .button {
   --border-right: 6px;
-  --text-stroke-color: rgba(255, 255, 255, 0.6);
-  --animation-color: #37FF8B;
+  --text-stroke-color: #FFD700;
+  --animation-color: #FFD700;
   --fs-size: 2em;
   letter-spacing: 3px;
   text-decoration: none;
@@ -22,8 +22,9 @@
   font-family: "Arial";
   position: relative;
   text-transform: uppercase;
-  color: transparent;
+  color: var(--text-stroke-color);
   -webkit-text-stroke: 1px var(--text-stroke-color);
+  font-weight: 700;
 }
 
 /* text revealed on hover */
@@ -37,6 +38,7 @@
   overflow: hidden;
   transition: 0.5s;
   -webkit-text-stroke: 1px var(--animation-color);
+  font-weight: 700;
 }
 
 /* hover effect */
