@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { cn } from "@/lib/utils";
 import "@/styles/glass-radio.css";
 
 const Navbar = () => {
@@ -17,9 +18,14 @@ const Navbar = () => {
     }
   }, [location.pathname]);
 
+  const isClientRoute = location.pathname.startsWith("/c/");
+
   return (
     <header
-      className="fixed top-0 z-50 w-full bg-transparent backdrop-blur-sm transition-all duration-500"
+      className={cn(
+        "fixed top-0 z-50 w-full backdrop-blur-sm transition-all duration-500",
+        isClientRoute ? "bg-slate-900" : "bg-transparent"
+      )}
       style={{
         fontSize: "90%", // Navbar font reduced for less crowding
       }}
