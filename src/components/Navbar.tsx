@@ -37,9 +37,6 @@ const Navbar = () => {
             style={{ background: "transparent", mixBlendMode: "screen", filter: "brightness(1.1)" }}
             loading="lazy"
           />
-          <span className="font-display font-semibold text-lg tracking-tight text-white drop-shadow-sm">
-            Murban Engineering
-          </span>
         </Link>
         <div className="glass-radio-group">
           <input
