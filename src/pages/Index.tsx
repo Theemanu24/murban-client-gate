@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { SearchBar } from "@/components/SearchBar";
+import type { Database } from "@/integrations/supabase/types";
+
+type Client = Database['public']['Tables']['clients']['Row'];
 
 const Index = () => {
   const navigate = useNavigate();
 
-  const handleSelection = (client: any, terminal?: string) => {
+  const handleSelection = (client: Client, terminal?: string) => {
     if (terminal) {
       // Navigate to client page with terminal parameter
       navigate(`/c/${client.slug}?terminal=${encodeURIComponent(terminal)}`);

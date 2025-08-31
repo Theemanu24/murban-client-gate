@@ -1,10 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { SearchBar } from "@/components/SearchBar";
+import type { Database } from "@/integrations/supabase/types";
+import "@/styles/loader.css";
+
+type Client = Database['public']['Tables']['clients']['Row'];
 
 const Resources = () => {
   const navigate = useNavigate();
   
-  const handleSelection = (client: any, terminal?: string) => {
+  const handleSelection = (client: Client, terminal?: string) => {
     if (terminal) {
       // Navigate to client page with terminal parameter
       navigate(`/c/${client.slug}?terminal=${encodeURIComponent(terminal)}`);
@@ -15,13 +19,22 @@ const Resources = () => {
   };
   
   return (
-    <main 
-      className="relative flex-1 overflow-y-auto bg-cover bg-center bg-no-repeat min-h-screen" 
-      style={{ 
+    <main
+      className="relative flex-1 overflow-y-auto bg-cover bg-center bg-no-repeat min-h-screen"
+      style={{
         fontSize: '1rem',
         backgroundImage: "linear-gradient(to bottom, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9)), linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent, rgba(0, 0, 0, 0.3)), url('/lovable-uploads/d56c7b58-bae5-4c68-a39d-ca9a6576e652.png')"
       }}
     >
+      <div className="loader">
+        <div className="loader-square"></div>
+        <div className="loader-square"></div>
+        <div className="loader-square"></div>
+        <div className="loader-square"></div>
+        <div className="loader-square"></div>
+        <div className="loader-square"></div>
+        <div className="loader-square"></div>
+      </div>
       <section className="relative py-20 text-center">
         <div className="relative z-10 container mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-white drop-shadow-2xl">
