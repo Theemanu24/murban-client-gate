@@ -51,36 +51,51 @@ const Navbar = () => {
             name="nav"
             id="glass-gold"
             checked={active === "home"}
-            onChange={() => {
+            readOnly
+          />
+          <label
+            htmlFor="glass-gold"
+            onClick={() => {
               setActive("home");
               navigate("/");
             }}
-          />
-          <label htmlFor="glass-gold">Home</label>
+          >
+            Home
+          </label>
 
           <input
             type="radio"
             name="nav"
             id="glass-silver"
             checked={active === "portal"}
-            onChange={() => {
+            readOnly
+          />
+          <label
+            htmlFor="glass-silver"
+            onClick={() => {
               setActive("portal");
               navigate("/resources");
             }}
-          />
-          <label htmlFor="glass-silver">Portal</label>
+          >
+            Portal
+          </label>
 
           <input
             type="radio"
             name="nav"
             id="glass-platinum"
             checked={active === "contact"}
-            onChange={() => {
+            readOnly
+          />
+          <label
+            htmlFor="glass-platinum"
+            onClick={() => {
               setActive("contact");
               navigate("/contact");
             }}
-          />
-          <label htmlFor="glass-platinum">Contact Us</label>
+          >
+            Contact Us
+          </label>
 
           <div className="glass-glider"></div>
         </div>
