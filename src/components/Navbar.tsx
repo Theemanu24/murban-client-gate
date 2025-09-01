@@ -9,7 +9,7 @@ const Navbar = () => {
   const isClientPage = location.pathname.startsWith("/c/");
 
   useEffect(() => {
-    if (location.pathname === "/resources") {
+    if (location.pathname === "/resources" || location.pathname.startsWith("/c/")) {
       setActive("portal");
     } else if (location.pathname === "/contact") {
       setActive("contact");
@@ -52,16 +52,12 @@ const Navbar = () => {
             id="glass-gold"
             checked={active === "home"}
             readOnly
-          />
-          <label
-            htmlFor="glass-gold"
             onClick={() => {
               setActive("home");
               navigate("/");
             }}
-          >
-            Home
-          </label>
+          />
+          <label htmlFor="glass-gold">Home</label>
 
           <input
             type="radio"
@@ -69,16 +65,12 @@ const Navbar = () => {
             id="glass-silver"
             checked={active === "portal"}
             readOnly
-          />
-          <label
-            htmlFor="glass-silver"
             onClick={() => {
               setActive("portal");
               navigate("/resources");
             }}
-          >
-            Portal
-          </label>
+          />
+          <label htmlFor="glass-silver">Portal</label>
 
           <input
             type="radio"
@@ -86,16 +78,12 @@ const Navbar = () => {
             id="glass-platinum"
             checked={active === "contact"}
             readOnly
-          />
-          <label
-            htmlFor="glass-platinum"
             onClick={() => {
               setActive("contact");
               navigate("/contact");
             }}
-          >
-            Contact Us
-          </label>
+          />
+          <label htmlFor="glass-platinum">Contact Us</label>
 
           <div className="glass-glider"></div>
         </div>
