@@ -88,7 +88,16 @@ export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGatePr
   };
 
   return (
-    <div className="flip-card-container max-w-md w-full mx-auto h-[400px]">
+    <div 
+      className="fixed inset-0 bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url('/lovable-uploads/e81e94b1-120b-46c0-bec2-9dc6b2b3521a.png')` }}
+    >
+      {/* Dark overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/40"></div>
+      
+      {/* Content container */}
+      <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
+        <div className="flip-card-container max-w-md w-full mx-auto h-[400px]">
       <div 
         className={`flip-card-inner relative w-full h-full transition-transform duration-700 ease-in-out ${isFlipped ? 'flipped' : ''}`}
       >
@@ -259,6 +268,8 @@ export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGatePr
           pointer-events: none;
         }
       `}</style>
+        </div>
+      </div>
     </div>
   );
 };
