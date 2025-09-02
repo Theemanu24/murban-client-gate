@@ -70,10 +70,6 @@
   text-transform: uppercase;
 }
 
-.learn-more .button-text.official-website {
-  font-size: inherit;
-}
-
 .learn-more:hover .circle {
   width: 100%;
 }
@@ -98,7 +94,7 @@
     height: 3.5rem;
   }
 
-  .learn-more .button-text.official-website {
+  .learn-more .button-text {
     font-size: 0.75rem;
   }
 }
