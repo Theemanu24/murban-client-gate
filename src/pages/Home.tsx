@@ -111,15 +111,15 @@ const Home = () => {
               animate="visible"
               className="mb-4 sm:mb-6 overflow-visible"
             >
-              <h1
-                className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight relative animate-textGradient bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 bg-clip-text text-transparent"
-                style={{ lineHeight: '1.3', paddingBottom: '0.25em' }}
-              >
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight relative" style={{ lineHeight: '1.3', paddingBottom: '0.25em' }}>
                 {titleWords.map((word, index) => (
                   <motion.span
                     key={index}
                     variants={wordVariants}
-                    className="block sm:inline-block sm:mr-4 md:mr-6 relative cinematic-text overflow-visible"
+                    className={
+                      "block sm:inline-block sm:mr-4 md:mr-6 relative cinematic-text overflow-visible" +
+                      (index === 0 ? " text-white" : "")
+                    }
                     style={{ paddingBottom: "0.1em" }}
                   >
                     {word}
