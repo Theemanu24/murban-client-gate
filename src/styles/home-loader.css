@@ -34,10 +34,8 @@
   height: 28px;
   margin: 2px;
   border-radius: 0px;
-  background: linear-gradient(to bottom right, #4A2D26, #14E37C);
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  /* Use solid white color for the squares */
+  background-color: #ffffff;
   animation: home-square-animation 10s ease-in-out infinite both;
 }
 
