@@ -118,7 +118,7 @@ const Home = () => {
                     variants={wordVariants}
                     className={
                       "block sm:inline-block sm:mr-4 md:mr-6 relative cinematic-text overflow-visible" +
-                      (index === 0 ? " text-[#0D47A1]" : "")
+                      (index === 0 ? " text-white" : "")
                     }
                     style={{ paddingBottom: "0.1em" }}
                   >
