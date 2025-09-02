@@ -14,16 +14,16 @@ const TextRotate = () => {
   }, []);
 
   return (
-    <div className="relative flex w-[12ch] items-center justify-center overflow-hidden text-xs sm:text-base md:text-xl lg:text-2xl font-semibold">
-      <AnimatePresence mode="wait">
+    <div className="relative flex w-full items-center justify-center py-4 text-center">
+      <AnimatePresence>
         <motion.div
           key={index}
+          className="absolute cursor-pointer text-3xl font-semibold tracking-tight text-red-500"
           initial={{ y: 20, opacity: 0, scale: 0.8 }}
           animate={{ y: 0, opacity: 1, scale: 1 }}
           exit={{ y: -20, opacity: 0, scale: 0.8 }}
           transition={{ ease: "easeInOut", delay: 0.2, duration: 0.5 }}
           whileHover={{ scale: 1.1 }}
-          className="absolute w-full cursor-pointer bg-[radial-gradient(circle_at_left,_var(--tw-gradient-stops))] from-[#e5cf73] via-[#c56d09] to-[#faff00] bg-clip-text text-center text-transparent"
         >
           {text[index]}
         </motion.div>
