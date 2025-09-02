@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const text = ["Murban", "Engineering"];
+const colors = ["text-[#D62D06]", "text-blue-600"];
 
 const TextRotate = () => {
   const [index, setIndex] = useState(0);
@@ -25,7 +26,7 @@ const TextRotate = () => {
           animate={{ y: 0, opacity: 1, scale: 1 }}
           exit={{ y: -20, opacity: 0, scale: 0.8 }}
           transition={{ ease: "easeInOut", delay: 0.2, duration: 0.5 }}
-          className="block sm:inline"
+          className={`block sm:inline ${colors[index]}`}
         >
           {text[index]}
         </motion.span>
