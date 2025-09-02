@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import "@/styles/glass-radio.css";
+import TextRotate from "@/components/TextRotate";
 
 const Navbar = () => {
   const [active, setActive] = useState<"portal" | "home" | "contact">("home");
@@ -42,8 +43,7 @@ const Navbar = () => {
             loading="lazy"
           />
           <div className="text-sm sm:text-base md:text-xl lg:text-2xl font-semibold text-white leading-tight sm:whitespace-nowrap">
-            <span className="block sm:inline">Murban</span>
-            <span className="block sm:inline sm:ml-1">Engineering</span>
+            <TextRotate />
           </div>
         </Link>
         <div className="ml-auto glass-radio-group">
