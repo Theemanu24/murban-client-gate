@@ -3,15 +3,12 @@ import { useEffect, useState } from "react";
 
 const text = ["Murban", "Engineering"];
 
-const TextRotate = () => {
+const TextFlip = () => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const id = setInterval(() => {
-      setIndex((state) => {
-        if (state >= text.length - 1) return 0;
-        return state + 1;
-      });
+      setIndex((state) => (state >= text.length - 1 ? 0 : state + 1));
     }, 2000);
     return () => clearInterval(id);
   }, []);
@@ -21,10 +18,10 @@ const TextRotate = () => {
       <AnimatePresence mode="wait">
         <motion.span
           key={index}
-          initial={{ y: 20, opacity: 0, scale: 0.8 }}
-          animate={{ y: 0, opacity: 1, scale: 1 }}
-          exit={{ y: -20, opacity: 0, scale: 0.8 }}
-          transition={{ ease: "easeInOut", delay: 0.2, duration: 0.5 }}
+          initial={{ rotateX: 90, opacity: 0 }}
+          animate={{ rotateX: 0, opacity: 1 }}
+          exit={{ rotateX: -90, opacity: 0 }}
+          transition={{ duration: 0.2 }}
           className="block sm:inline"
         >
           {text[index]}
@@ -34,4 +31,5 @@ const TextRotate = () => {
   );
 };
 
-export default TextRotate;
+export default TextFlip;
+
