@@ -198,7 +198,7 @@ export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGatePr
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .flip-card-container {
           perspective: 1000px;
         }

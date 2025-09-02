@@ -22,6 +22,7 @@ export default {
 			fontFamily: {
 				'sans': ['Manrope', 'Inter', 'system-ui', 'sans-serif'],
 				'display': ['Manrope', 'Inter', 'system-ui', 'sans-serif'],
+				'elegant': ['Playfair Display', 'serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

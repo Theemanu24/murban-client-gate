@@ -178,9 +178,8 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
           className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black !bg-white !border-gray-300 hover:!border-gray-400 focus:!border-blue-500 focus:!ring-blue-500"
           style={{ 
             backgroundColor: 'white !important', 
-            borderColor: '#d1d5db !important',
-            '--tw-ring-color': '#3b82f6'
-          }}
+            borderColor: '#d1d5db !important'
+          } as React.CSSProperties}
           disabled={!!selectedClient}
         />
         {query && (
@@ -240,9 +239,8 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
               className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black !bg-white !border-gray-300 hover:!border-gray-400 focus:!border-blue-500 focus:!ring-blue-500"
               style={{ 
                 backgroundColor: 'white !important', 
-                borderColor: '#d1d5db !important',
-                '--tw-ring-color': '#3b82f6'
-              }}
+                borderColor: '#d1d5db !important'
+              } as React.CSSProperties}
             />
             {terminalQuery && (
               <button 
