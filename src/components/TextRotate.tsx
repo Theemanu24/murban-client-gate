@@ -14,8 +14,8 @@ const TextRotate = () => {
   }, []);
 
   return (
-    <div className="relative flex items-center">
-      <AnimatePresence>
+    <div className="relative flex w-[12ch] items-center justify-center overflow-hidden text-xs sm:text-base md:text-xl lg:text-2xl font-semibold">
+      <AnimatePresence mode="wait">
         <motion.div
           key={index}
           initial={{ y: 20, opacity: 0, scale: 0.8 }}
@@ -23,7 +23,7 @@ const TextRotate = () => {
           exit={{ y: -20, opacity: 0, scale: 0.8 }}
           transition={{ ease: "easeInOut", delay: 0.2, duration: 0.5 }}
           whileHover={{ scale: 1.1 }}
-          className="cursor-pointer bg-[radial-gradient(circle_at_left,_var(--tw-gradient-stops))] from-[#e5cf73] via-[#c56d09] to-[#faff00] bg-clip-text text-transparent"
+          className="absolute w-full cursor-pointer bg-[radial-gradient(circle_at_left,_var(--tw-gradient-stops))] from-[#e5cf73] via-[#c56d09] to-[#faff00] bg-clip-text text-center text-transparent"
         >
           {text[index]}
         </motion.div>
