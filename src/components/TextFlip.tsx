@@ -22,7 +22,7 @@ const TextFlip = () => {
           animate={{ rotateX: 0, opacity: 1 }}
           exit={{ rotateX: -90, opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="block sm:inline"
+          className="block sm:inline bg-[radial-gradient(circle_at_left,_var(--tw-gradient-stops))] from-[#3744bf] to-[#8d2542] bg-clip-text text-transparent"
         >
           {text[index]}
         </motion.span>
