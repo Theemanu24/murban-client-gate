@@ -117,7 +117,7 @@ const Home = () => {
                     key={index}
                     variants={wordVariants}
                     className={
-                      "block sm:inline-block sm:mr-4 md:mr-6 relative cinematic-text overflow-visible font-cinzel font-semibold tracking-wider text-white"
+                      "inline-block mr-4 md:mr-6 relative cinematic-text overflow-visible font-cinzel font-semibold tracking-wider text-white"
                     }
                     style={{ paddingBottom: "0.1em" }}
                   >
