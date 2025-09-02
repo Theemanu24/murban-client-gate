@@ -17,7 +17,8 @@ const OfficialButton = () => (
       <span className="circle" aria-hidden="true">
         <span className="icon arrow"></span>
       </span>
-      <span className="button-text official-website">Official Website</span>
+      <span className="button-text official-website hidden sm:inline">Official Website</span>
+      <span className="button-text official-website sm:hidden">Website</span>
     </a>
   </div>
 );
