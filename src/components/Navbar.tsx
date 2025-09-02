@@ -42,7 +42,7 @@ const Navbar = () => {
             style={{ background: "transparent", mixBlendMode: "screen", filter: "brightness(1.1)" }}
             loading="lazy"
           />
-          <div className="text-white leading-tight sm:whitespace-nowrap">
+          <div className="leading-tight sm:whitespace-nowrap">
             <TextRotate />
           </div>
         </Link>
