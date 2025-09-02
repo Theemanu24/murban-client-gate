@@ -18,7 +18,7 @@ const TextRotate = () => {
       <AnimatePresence mode="wait">
         <motion.span
           key={index}
-          className="cursor-pointer bg-[radial-gradient(circle_at_left,_var(--tw-gradient-stops))] from-[#e5cf73] via-[#c56d09] to-[#faff00] bg-clip-text text-transparent text-3xl font-semibold tracking-tight"
+          className="cursor-pointer bg-[radial-gradient(circle_at_left,_var(--tw-gradient-stops))] from-[#e5cf73] via-[#c56d09] to-[#faff00] bg-clip-text text-transparent text-xl sm:text-3xl font-semibold tracking-tight"
           initial={{ y: 20, opacity: 0, scale: 0.8 }}
           animate={{ y: 0, opacity: 1, scale: 1 }}
           exit={{ y: -20, opacity: 0, scale: 0.8 }}
