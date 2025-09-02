@@ -122,7 +122,10 @@ const Home = () => {
                     }
                     style={{ paddingBottom: "0.1em" }}
                   >
-                    {word}
+                    <span className="inline-block mr-1 text-transparent bg-clip-text bg-[radial-gradient(circle_at_left,_var(--tw-gradient-stops))] from-[#e5cf73] via-[#3d2d1c] to-[#d7da45] font-display text-6xl sm:text-8xl md:text-9xl">
+                      {word[0]}
+                    </span>
+                    {word.slice(1)}
                   </motion.span>
                 ))}
               </h1>
