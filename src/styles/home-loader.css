@@ -34,7 +34,7 @@
   height: 28px;
   margin: 2px;
   border-radius: 0px;
-  background: white;
+  background: linear-gradient(to bottom right, #4A2D26, #14E37C);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
