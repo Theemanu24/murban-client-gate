@@ -116,8 +116,11 @@ const Home = () => {
                   <motion.span
                     key={index}
                     variants={wordVariants}
-                    className="block sm:inline-block sm:mr-4 md:mr-6 relative cinematic-text overflow-visible"
-                    style={{ paddingBottom: '0.1em' }}
+                    className={
+                      "block sm:inline-block sm:mr-4 md:mr-6 relative cinematic-text overflow-visible" +
+                      (index === 0 ? " text-[#0D47A1]" : "")
+                    }
+                    style={{ paddingBottom: "0.1em" }}
                   >
                     {word}
                   </motion.span>
