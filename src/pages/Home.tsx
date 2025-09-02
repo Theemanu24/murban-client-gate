@@ -117,8 +117,7 @@ const Home = () => {
                     key={index}
                     variants={wordVariants}
                     className={
-                      "block sm:inline-block sm:mr-4 md:mr-6 relative cinematic-text overflow-visible" +
-                      (index === 0 ? " font-cinzel font-semibold tracking-wider text-white" : " font-cormorant italic font-medium tracking-wide")
+                      "block sm:inline-block sm:mr-4 md:mr-6 relative cinematic-text overflow-visible font-cinzel font-semibold tracking-wider text-white"
                     }
                     style={{ paddingBottom: "0.1em" }}
                   >
@@ -132,7 +131,7 @@ const Home = () => {
               variants={subtitleVariants}
               initial="hidden"
               animate="visible"
-              className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed py-1"
+              className="text-lg sm:text-xl md:text-2xl font-cinzel font-medium text-white mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed py-1 tracking-wide"
             >
               Industrial Engineering Solutions & Client Resources Portal
             </motion.p>
