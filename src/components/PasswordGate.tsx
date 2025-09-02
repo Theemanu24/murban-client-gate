@@ -88,19 +88,10 @@ export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGatePr
   };
 
   return (
-    <div className="relative">
-      {/* Background overlay with image - positioned behind content */}
+    <div className="flip-card-container max-w-md w-full mx-auto h-[400px]">
       <div 
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat -z-10"
-        style={{ backgroundImage: `url('/lovable-uploads/e81e94b1-120b-46c0-bec2-9dc6b2b3521a.png')` }}
+        className={`flip-card-inner relative w-full h-full transition-transform duration-700 ease-in-out ${isFlipped ? 'flipped' : ''}`}
       >
-        <div className="absolute inset-0 bg-black/50"></div>
-      </div>
-      
-      <div className="flip-card-container max-w-md w-full mx-auto h-[400px]">
-        <div 
-          className={`flip-card-inner relative w-full h-full transition-transform duration-700 ease-in-out ${isFlipped ? 'flipped' : ''}`}
-        >
         {/* Front side - "Click me" card */}
         <div 
           className={`flip-card-side flip-card-front absolute inset-0 rounded-2xl cursor-pointer transition-all duration-500 group ${isFlipped ? 'hidden' : 'block'}`}
@@ -204,7 +195,6 @@ export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGatePr
               </button>
             </form>
           </div>
-        </div>
         </div>
       </div>
 

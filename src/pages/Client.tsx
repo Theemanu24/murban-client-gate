@@ -76,7 +76,13 @@ const ClientPage = () => {
   }
 
   return (
-    <main className="flex-1 overflow-hidden bg-gradient-to-br from-[#304259] via-[#2a3b4f] to-[#1e2a3a] relative">
+    <main 
+      className="flex-1 overflow-hidden relative bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url('/lovable-uploads/e81e94b1-120b-46c0-bec2-9dc6b2b3521a.png')` }}
+    >
+      {/* Background overlay */}
+      <div className="absolute inset-0 bg-black/50"></div>
+      
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-32 h-32 bg-white/5 rounded-full animate-pulse" style={{ animationDelay: '0s', animationDuration: '4s' }}></div>
