@@ -111,7 +111,7 @@ const Home = () => {
               animate="visible"
               className="mb-4 sm:mb-6 overflow-visible"
             >
-              <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight relative" style={{ lineHeight: '1.3', paddingBottom: '0.25em' }}>
+              <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight relative" style={{ lineHeight: '1.3', paddingBottom: '0.25em' }}>
                 {titleWords.map((word, index) => (
                   <motion.span
                     key={index}
