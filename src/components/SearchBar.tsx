@@ -65,11 +65,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
     ignoreLocation: true,
   }), [clients]);
 
-  const terminalFuse = useMemo(() => new Fuse(terminals.map(t => ({ name: t.name, available: t.available })), {
-    keys: ["name"],
-    threshold: 0.3,
-    ignoreLocation: true,
-  }), [terminals]);
+  // No fuzzy search needed for terminals – we'll match from the start of the name
 
   const clientResults = useMemo(() => {
     const q = query.trim();
@@ -84,13 +80,14 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
   }, [query, clients]);
 
   const terminalResults = useMemo(() => {
-    const q = terminalQuery.trim();
-    // Only show terminals after user starts typing (at least 1 character)
-    if (q.length < 1 || !selectedClient) return [];
-    
-    if (q.length < 2) return terminals.slice(0, 6);
-    return terminalFuse.search(q).map(r => r.item).slice(0, 6);
-  }, [terminalQuery, terminalFuse, terminals, selectedClient]);
+    const q = terminalQuery.trim().toLowerCase();
+    // Only show terminals after user enters at least 2 characters
+    if (!selectedClient || q.length < 2) return [];
+
+    return terminals
+      .filter(t => t.name.toLowerCase().startsWith(q))
+      .slice(0, 6);
+  }, [terminalQuery, terminals, selectedClient]);
 
   useEffect(() => { setActiveIndex(0); }, [query, terminalQuery]);
 
