@@ -53,9 +53,9 @@ export const ClientHub = ({ appUrl, terminal }: { appUrl: string; terminal?: str
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-black animate-fade-in">
+    <div className="fixed top-16 left-0 right-0 bottom-0 z-40 bg-black animate-fade-in">
       {!loaded && (
-        <div className="absolute inset-0 grid place-content-center text-white/60 animate-pulse bg-gradient-to-br from-[#304259] via-[#2a3b4f] to-[#1e2a3a]">
+        <div className="absolute inset-0 grid place-content-center text-white/60 animate-pulse bg-black">
           <div className="text-center">
             <div className="w-8 h-8 border-2 border-white/40 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
             Loading app…
