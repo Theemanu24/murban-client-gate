@@ -3,7 +3,7 @@ import "@/styles/official-button.css";
 import OfficialButton from "@/components/OfficialButton";
 
 const Home = () => {
-  const titleWords = ["Murban", "Engineering"];
+  const titleWords = ["MURBAN", "ENGINEERING"];
   
   const containerVariants = {
     hidden: { opacity: 0 },
