@@ -42,7 +42,7 @@ const Navbar = () => {
             loading="lazy"
           />
           <div className="leading-tight sm:whitespace-nowrap">
-            <span className="text-white">
+            <span className="text-white text-xs sm:text-xl md:text-2xl font-semibold tracking-tight">
               Murban Engineering
             </span>
           </div>
