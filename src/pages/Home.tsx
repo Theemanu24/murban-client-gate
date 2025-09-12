@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import "@/styles/official-button.css";
-import "@/styles/home-loader.css";
 import OfficialButton from "@/components/OfficialButton";
 
 const Home = () => {
@@ -89,18 +88,6 @@ const Home = () => {
       <main
         className="relative min-h-screen flex items-center sm:items-start justify-center pt-16 sm:pt-24 sm:-mt-12"
       >
-        {/* Decorative loader animation */}
-        <div className="absolute bottom-8 right-8" aria-hidden="true">
-          <div className="home-loader">
-            <div className="home-loader-square"></div>
-            <div className="home-loader-square"></div>
-            <div className="home-loader-square"></div>
-            <div className="home-loader-square"></div>
-            <div className="home-loader-square"></div>
-            <div className="home-loader-square"></div>
-            <div className="home-loader-square"></div>
-          </div>
-        </div>
 
         {/* Content */}
         <div className="relative z-20 text-center px-4 sm:px-6 flex flex-col py-8">
