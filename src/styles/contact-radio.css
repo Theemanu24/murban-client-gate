@@ -1,7 +1,7 @@
 /* From Uiverse.io by Smit-Prajapati */
 .radio-container {
-  --main-color: #f7e479;
-  --main-color-opacity: #f7e4791c;
+  --main-color: #9ca3af;
+  --main-color-opacity: #9ca3af1c;
 
   /* change this according inputs count */
   --total-radio: 3;
