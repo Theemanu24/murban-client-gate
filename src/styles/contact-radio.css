@@ -70,10 +70,6 @@
   transition: all 0.3s ease-in-out;
 }
 
-.radio-container input:checked + label {
-  color: var(--main-color);
-}
-
 .radio-container input:nth-of-type(1):checked ~ .glider-container .glider {
   transform: translateY(0);
 }
