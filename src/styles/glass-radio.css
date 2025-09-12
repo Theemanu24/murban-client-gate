@@ -77,10 +77,8 @@
 /* Home Page */
 #glass-gold:checked ~ .glass-glider {
   transform: translateX(0%);
-  background: linear-gradient(135deg, #ffd70055, #ffcc00);
-  box-shadow:
-    0 0 18px rgba(255, 215, 0, 0.5),
-    0 0 10px rgba(255, 235, 150, 0.4) inset;
+  background: var(--bg);
+  box-shadow: none;
 }
 
 /* Murban Client Portal */
