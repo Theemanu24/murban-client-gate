@@ -11,12 +11,24 @@ import Admin from "./pages/Admin";
 import Contact from "./pages/Contact";
 import Navbar from "@/components/Navbar";
 
-
 const queryClient = new QueryClient();
 
 const AppRoutes = () => {
   const location = useLocation();
   const isHome = location.pathname === "/";
+  
+  // Set to true to disable the portal
+  const PORTAL_DISABLED = true;
+  
+  // If portal is disabled, always show 404
+  if (PORTAL_DISABLED) {
+    return (
+      <div className="min-h-screen flex flex-col overflow-x-hidden pt-16 bg-background">
+        <Navbar />
+        <NotFound />
+      </div>
+    );
+  }
 
   return (
     <div
