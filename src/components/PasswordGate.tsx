@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Eye, EyeOff, ShieldCheck, MapPin } from "lucide-react";
+import { Eye, EyeOff, ShieldCheck, MapPin, User } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -12,8 +12,9 @@ interface PasswordGateProps {
 }
 
 export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGateProps) => {
-  const [passkey, setPasskey] = useState("");
-  const [show, setShow] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const submit = async (e: React.FormEvent) => {
@@ -21,43 +22,44 @@ export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGatePr
     setLoading(true);
     
     try {
-      if (!passkey.trim()) {
-        toast({ title: "Passkey required", description: "Please enter your passkey to continue." });
+      if (!username.trim() || !password.trim()) {
+        toast({ 
+          title: "Credentials required", 
+          description: "Please enter your username and password to continue." 
+        });
         return;
       }
 
-      console.log('Verifying password for client:', clientSlug, 'terminal:', terminal, 'with password:', passkey);
-
-      // Verify password using Supabase RPC function
-      // You can extend this later to include terminal-specific password verification
-      const { data: isValid, error } = await supabase.rpc('verify_client_password', {
-        client_slug: clientSlug,
-        password: passkey
+      // Verify credentials using new username-based function
+      const { data, error } = await supabase.rpc('verify_client_username_password', {
+        client_username: username.trim(),
+        password: password
       });
       
-      console.log('Password verification result:', { isValid, error });
-      
       if (error) {
-        console.error('Error verifying password:', error);
+        console.error('Error verifying credentials:', error);
         toast({
           title: "Error",
-          description: "Failed to verify password. Please try again.",
+          description: "Failed to verify credentials. Please try again.",
           variant: "destructive",
         });
         return;
       }
 
-      if (!isValid) {
+      if (!data || data.length === 0) {
         toast({ 
-          title: "Invalid Passkey", 
-          description: "The passkey you entered is incorrect.",
+          title: "Invalid credentials", 
+          description: "The username or password you entered is incorrect.",
           variant: "destructive"
         });
         return;
       }
 
+      // Get the client data from the response
+      const clientData = data[0];
+      
       // Create secure session with terminal info
-      const sessionKey = terminal ? `session:${clientSlug}:${terminal}` : `session:${clientSlug}`;
+      const sessionKey = terminal ? `session:${clientData.slug}:${terminal}` : `session:${clientData.slug}`;
       localStorage.setItem(sessionKey, "active");
       
       const successMessage = terminal
@@ -71,10 +73,10 @@ export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGatePr
       });
       onSuccess();
     } catch (err) {
-      console.error('Password verification failed:', err);
+      console.error('Authentication failed:', err);
       toast({
         title: "Error",
-        description: "Failed to verify password. Please try again.",
+        description: "Failed to verify credentials. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -89,34 +91,49 @@ export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGatePr
           <div className="flex items-center gap-2 mb-6 animate-fade-in">
             <ShieldCheck className="text-white/80 animate-pulse transition-colors duration-300" />
             <h2 className="text-xl font-semibold tracking-tight text-white transition-colors duration-300">
-              Enter passkey
+              Client Login
             </h2>
           </div>
           
           {terminal && (
-            <div className="flex items-center gap-2 mb-6 animate-fade-in bg-white/5 rounded-lg p-3 border border-white/10">
+            <div className="flex items-center gap-2 mb-4 animate-fade-in bg-white/5 rounded-lg p-3 border border-white/10">
               <MapPin className="w-4 h-4 text-white/60" />
               <span className="text-sm text-white/80">Terminal: <strong className="text-white">{terminal}</strong></span>
             </div>
           )}
           
+          <div className="relative animate-fade-in mb-4">
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/60">
+              <User className="w-5 h-5" />
+            </div>
+            <Input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              aria-label="Username"
+              className="pl-11 h-12 bg-white/10 border-white/30 text-white font-medium placeholder:text-white/60 focus:bg-white/20 focus:border-white/50 transition-all duration-300 hover:bg-white/15 focus:scale-[1.02] focus:shadow-lg focus:shadow-white/10"
+              autoComplete="username"
+            />
+          </div>
+          
           <div className="relative animate-fade-in mb-6">
             <Input
-              type={show ? "text" : "password"}
-              placeholder="Your passkey"
-              value={passkey}
-              onChange={(e) => setPasskey(e.target.value)}
-              aria-label="Passkey"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              aria-label="Password"
               className="pr-12 h-12 bg-white/10 border-white/30 text-white font-medium placeholder:text-white/60 focus:bg-white/20 focus:border-white/50 transition-all duration-300 hover:bg-white/15 focus:scale-[1.02] focus:shadow-lg focus:shadow-white/10"
-              autoComplete="one-time-code"
+              autoComplete="current-password"
             />
             <button
               type="button"
-              aria-label={show ? "Hide passkey" : "Show passkey"}
-              onClick={() => setShow((s) => !s)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+              onClick={() => setShowPassword((s) => !s)}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white/80 transition-all duration-200 hover:scale-125 active:scale-95"
             >
-              {show ? <EyeOff className="animate-pulse" /> : <Eye />}
+              {showPassword ? <EyeOff className="animate-pulse" /> : <Eye />}
             </button>
           </div>
 
@@ -136,7 +153,7 @@ export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGatePr
           </Button>
 
           <p className="text-sm text-white/60 animate-fade-in transition-colors duration-300 text-center">
-            Secure authentication with Blowfish password hashing and database verification.
+            Secure authentication with encrypted password storage.
           </p>
         </form>
       </div>

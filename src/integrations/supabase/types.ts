@@ -26,6 +26,7 @@ export type Database = {
           password_hash: string
           slug: string
           updated_at: string
+          username: string | null
         }
         Insert: {
           active?: boolean
@@ -38,6 +39,7 @@ export type Database = {
           password_hash: string
           slug: string
           updated_at?: string
+          username?: string | null
         }
         Update: {
           active?: boolean
@@ -50,6 +52,7 @@ export type Database = {
           password_hash?: string
           slug?: string
           updated_at?: string
+          username?: string | null
         }
         Relationships: []
       }
@@ -98,6 +101,14 @@ export type Database = {
       verify_client_password: {
         Args: { client_slug: string; password: string }
         Returns: boolean
+      }
+      verify_client_username_password: {
+        Args: { client_username: string; password: string }
+        Returns: {
+          app_url: string
+          name: string
+          slug: string
+        }[]
       }
     }
     Enums: {
