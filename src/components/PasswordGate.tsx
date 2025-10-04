@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Eye, EyeOff, ShieldCheck, MapPin, User } from "lucide-react";
+import { Eye, EyeOff, ShieldCheck, MapPin } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -12,7 +12,6 @@ interface PasswordGateProps {
 }
 
 export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGateProps) => {
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -22,44 +21,41 @@ export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGatePr
     setLoading(true);
     
     try {
-      if (!username.trim() || !password.trim()) {
+      if (!password.trim()) {
         toast({ 
-          title: "Credentials required", 
-          description: "Please enter your username and password to continue." 
+          title: "Password required", 
+          description: "Please enter your password to continue." 
         });
         return;
       }
 
-      // Verify credentials using new username-based function
-      const { data, error } = await supabase.rpc('verify_client_username_password', {
-        client_username: username.trim(),
+      // Verify credentials using slug-based function
+      const { data, error } = await supabase.rpc('verify_client_password', {
+        client_slug: clientSlug,
         password: password
       });
       
       if (error) {
-        console.error('Error verifying credentials:', error);
+        console.error('Error verifying password:', error);
         toast({
           title: "Error",
-          description: "Failed to verify credentials. Please try again.",
+          description: "Failed to verify password. Please try again.",
           variant: "destructive",
         });
         return;
       }
 
-      if (!data || data.length === 0) {
+      if (!data) {
         toast({ 
-          title: "Invalid credentials", 
-          description: "The username or password you entered is incorrect.",
+          title: "Invalid password", 
+          description: "The password you entered is incorrect.",
           variant: "destructive"
         });
         return;
       }
-
-      // Get the client data from the response
-      const clientData = data[0];
       
       // Create secure session with terminal info
-      const sessionKey = terminal ? `session:${clientData.slug}:${terminal}` : `session:${clientData.slug}`;
+      const sessionKey = terminal ? `session:${clientSlug}:${terminal}` : `session:${clientSlug}`;
       localStorage.setItem(sessionKey, "active");
       
       const successMessage = terminal
@@ -76,7 +72,7 @@ export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGatePr
       console.error('Authentication failed:', err);
       toast({
         title: "Error",
-        description: "Failed to verify credentials. Please try again.",
+        description: "Failed to verify password. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -91,7 +87,7 @@ export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGatePr
           <div className="flex items-center gap-2 mb-6 animate-fade-in">
             <ShieldCheck className="text-white/80 animate-pulse transition-colors duration-300" />
             <h2 className="text-xl font-semibold tracking-tight text-white transition-colors duration-300">
-              Client Login
+              Enter Password
             </h2>
           </div>
           
@@ -101,21 +97,6 @@ export const PasswordGate = ({ clientSlug, terminal, onSuccess }: PasswordGatePr
               <span className="text-sm text-white/80">Terminal: <strong className="text-white">{terminal}</strong></span>
             </div>
           )}
-          
-          <div className="relative animate-fade-in mb-4">
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/60">
-              <User className="w-5 h-5" />
-            </div>
-            <Input
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              aria-label="Username"
-              className="pl-11 h-12 bg-white/10 border-white/30 text-white font-medium placeholder:text-white/60 focus:bg-white/20 focus:border-white/50 transition-all duration-300 hover:bg-white/15 focus:scale-[1.02] focus:shadow-lg focus:shadow-white/10"
-              autoComplete="username"
-            />
-          </div>
           
           <div className="relative animate-fade-in mb-6">
             <Input
