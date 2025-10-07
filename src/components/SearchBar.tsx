@@ -172,7 +172,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => handleKeyDown(e, false)}
-          placeholder="Type your company name..."
+          placeholder="Enter your username"
           aria-label="Search company"
           autoComplete="off"
           className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black !bg-white !border-gray-300 hover:!border-gray-400 focus:!border-blue-500 focus:!ring-blue-500"
