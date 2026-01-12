@@ -52,6 +52,9 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
       ],
       'totaluganda': [
         { name: 'Jinja', available: true }
+      ],
+      'mabati-rolling-mills': [
+        { name: 'mabati rolling mills', available: true }
       ]
       // Other clients will have no terminals (empty array) until they're ready
     };
@@ -175,7 +178,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
           placeholder="Enter your username"
           aria-label="Search company"
           autoComplete="off"
-          className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black !bg-white !border-gray-300 hover:!border-gray-400 focus:!border-blue-500 focus:!ring-blue-500"
+          className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black !bg-white !border-g[...]"
           style={{ 
             backgroundColor: 'white !important', 
             borderColor: '#d1d5db !important'
@@ -236,7 +239,7 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
               placeholder="Select terminal location..."
               aria-label="Search terminal"
               autoComplete="off"
-              className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black !bg-white !border-gray-300 hover:!border-gray-400 focus:!border-blue-500 focus:!ring-blue-500"
+              className="pl-10 h-12 text-base bg-white border-gray-300 text-black placeholder:text-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:text-black !bg-white !bord[...]"
               style={{ 
                 backgroundColor: 'white !important', 
                 borderColor: '#d1d5db !important'
