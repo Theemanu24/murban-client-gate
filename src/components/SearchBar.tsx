@@ -71,14 +71,15 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
   // No fuzzy search needed for terminals – we'll match from the start of the name
 
   const clientResults = useMemo(() => {
-    const q = query.trim();
-    if (q.length < 5) return [];
-    
-    // Simple approach: Only show clients whose NAME contains the search query
-    // This prevents keyword-based searches from showing unrelated clients
-    return clients.filter(client => 
-      client.active && 
-      client.name.toLowerCase().includes(q.toLowerCase())
+    const q = (query || "").trim().toLowerCase();
+    if (q.length < 3) return [];
+
+    return clients.filter(client =>
+      client.active && (
+        ((client.name || "").toLowerCase().includes(q)) ||
+        ((client.username || "").toLowerCase().includes(q)) ||
+        ((client.slug || "").toLowerCase().includes(q))
+      )
     ).slice(0, 8);
   }, [query, clients]);
 
@@ -215,13 +216,13 @@ export const SearchBar = ({ onSelect }: SearchBarProps) => {
         </Command>
       )}
 
-      {!selectedClient && query.trim().length > 0 && query.trim().length < 5 && (
+      {!selectedClient && query.trim().length > 0 && query.trim().length < 3 && (
         <div className="p-4 text-gray-700 border rounded-xl bg-gray-50 animated-container">
-          Type at least 5 letters to search your company.
+          Type at least 3 letters to search your company.
         </div>
       )}
 
-      {!selectedClient && query.trim().length >= 5 && clientResults.length === 0 && (
+      {!selectedClient && query.trim().length >= 3 && clientResults.length === 0 && (
         <div className="p-4 text-gray-700 border rounded-xl bg-gray-50 animated-container">
           No matches. Contact support.
         </div>
